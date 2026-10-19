@@ -511,3 +511,26 @@ html[data-mode="simple"] .lv[data-m="s"], html[data-mode="deep"] .lv[data-m="d"]
 @media (max-width: 899px) { .hero-sticky::before { width: auto; right: 0; bottom: auto; height: 60%; background: linear-gradient(to bottom, rgba(10, 14, 18, .9) 30%, rgba(10, 14, 18, 0)); } }
 @media (max-width: 899px) { .hero-scale { top: 16px; bottom: auto; left: auto; right: var(--gut); opacity: calc(1 - var(--copy-a, 1)); transition: opacity .3s; } .hero-steps { bottom: calc(76px + env(safe-area-inset-bottom)); } }
 .eq-l { margin: 1em 0 -.4em; font-size: .86rem; color: var(--ink-3); font-weight: 500; }
+.ctl .btn-i { align-self: flex-start; margin-top: 22px; }
+.myth-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+.myth-filter button { border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 7px 15px; cursor: pointer; font-size: .9rem; font-weight: 500; }
+.myth-filter button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.myth summary .tag { margin-right: 8px; }
+.myth summary { font-size: 1.04rem; }
+.lab-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+.lab-nav a { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); text-decoration: none; font-size: .9rem; }
+.lab-nav a:hover { border-color: var(--ink-3); }
+.gl-search { display: block; margin-top: 22px; }
+.gl-search input { width: 100%; max-width: 560px; height: 50px; border-radius: 14px; border: 1px solid var(--line); background: var(--paper); padding: 0 18px; font-size: 1rem; color: var(--ink); }
+.gl-search input:focus-visible { outline: 2px solid var(--e); outline-offset: 2px; }
+.tbl.gl { min-width: 640px; }
+.tbl.gl td:first-child, .tbl.gl td:nth-child(2) { font-weight: 600; }
+.tbl.gl td:nth-child(2) { color: var(--ink-2); }
+.refs { list-style: none; padding: 0 !important; counter-reset: none; }
+.refs li { display: grid; grid-template-columns: 46px 1fr; gap: 4px 10px; padding: 14px 0; border-bottom: 1px solid var(--line-2); margin: 0 !important; scroll-margin-top: calc(var(--hdr-h) + 20px); }
+.refs li:target { background: var(--accent-soft); border-radius: 10px; }
+.refs .rn { font-family: var(--f-disp); font-weight: 700; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.refs .rt { font-size: .95rem; line-height: 1.6; }
+.refs .ru { grid-column: 2; font-size: .86rem; color: var(--ink-3); word-break: break-word; }
+.refs .ru a { color: var(--e); }
+html .levels-demo .lv[data-m] { display: block !important; }

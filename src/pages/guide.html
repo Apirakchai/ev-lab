@@ -1,0 +1,94 @@
+<!--meta {"slug":"guide"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:1">11</span><span>[[บทที่ 11 จาก 11|Chapter 11 of 11]]</span></div>
+    <h1>[[คู่มือใช้รถไฟฟ้าในไทย|Owner's playbook for Thailand]]</h1>
+    <p class="deck">[[รวมทุกอย่างจาก 10 บทก่อนหน้าให้เป็นนิสัยที่ใช้ได้จริง พร้อมเรื่องที่คนใช้รถไฟฟ้าในไทยควรรู้: ติดตั้งที่ชาร์จบ้าน มิเตอร์ TOU ค่าไฟจริงต่อกิโล ตู้ชาร์จสาธารณะ แบต 12V และเรื่องอื่นๆ ที่มักไม่มีใครบอก|Everything from the previous ten chapters turned into habits you can actually use, plus what EV owners in Thailand should know: home charger installation, the TOU meter, real cost per kilometre, public chargers, the 12 V battery, and the things nobody tells you.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2>[[กฎการชาร์จตามชนิดแบต|Charging rules by battery type]]</h2>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th>[[สถานการณ์|Situation]]</th><th><span class="sw" style="background:#2fd0b0"></span>LFP</th><th><span class="sw" style="background:#9b8cff"></span>NMC / NCA</th></tr></thead>
+      <tbody>
+        <tr><td><b>[[ใช้ประจำวัน|Daily use]]</b></td><td>[[ตามคู่มือ (หลายยี่ห้อแนะนำ 100%)|Per the manual (many say 100%)]]</td><td>[[80–90% หรือตามคู่มือ|80–90% or per the manual]]</td></tr>
+        <tr><td><b>[[ชาร์จเต็ม 100%|Full 100% charge]]</b></td><td>[[อย่างน้อยสัปดาห์ละครั้ง เพื่อให้ % แม่น|At least weekly, to keep the gauge accurate]]</td><td>[[เมื่อต้องเดินทางไกล ออกรถไม่นานหลังเต็ม|For long trips; leave soon after it finishes]]</td></tr>
+        <tr><td><b>[[ปล่อยให้ต่ำ|Running low]]</b></td><td>[[ได้บ้าง แต่ % ช่วงท้ายอาจไม่แม่น|Occasionally; the gauge may be off near empty]]</td><td>[[ต่ำกว่า 10% ได้เมื่อจำเป็น ชาร์จต่อให้เร็ว|Below 10% when needed; recharge soon]]</td></tr>
+        <tr><td><b>[[ชาร์จเร็ว DC|DC fast charging]]</b></td><td>[[ใช้ได้ตามจำเป็น ตัดที่ ~80%|Fine when needed; stop near 80%]]</td><td>[[ใช้ได้ตามจำเป็น ตัดที่ ~80%|Fine when needed; stop near 80%]]</td></tr>
+        <tr><td><b>[[จอดนานเป็นสัปดาห์|Parked for weeks]]</b></td><td>[[~50% หรือเสียบชาร์จทิ้งไว้ตามคู่มือ|~50%, or stay plugged in per the manual]]</td><td>[[~50% หรือเสียบชาร์จทิ้งไว้ตั้งลิมิตต่ำ|~50%, or plugged in with a low limit]]</td></tr>
+        <tr><td><b>[[อากาศร้อนจัด|Very hot weather]]</b></td><td colspan="2">[[จอดในร่ม เลี่ยงจอดตากแดดนานๆ ตอนแบตสูง|Park in shade; avoid long hours in the sun while the battery is high]]</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[ติดตั้งที่ชาร์จที่บ้านในไทย|Installing a home charger in Thailand]]</h2>
+    <p>[[ทางเลือกหลักมี 3 แบบ: <b>สายชาร์จพกพา</b> เสียบเต้ารับธรรมดา (ราว 2.3 kW ช้าและสูญเสียมาก ใช้ยามฉุกเฉิน) <b>วอลล์บ็อกซ์ 7.4 kW 1 เฟส</b> (ที่นิยมที่สุด ชาร์จเต็มข้ามคืน) และ <b>11–22 kW 3 เฟส</b> (เฉพาะรถที่ OBC รองรับ)|There are three main options: a <b>portable cable</b> in an ordinary socket (about 2.3 kW, slow and lossy; for emergencies), a <b>7.4 kW single-phase wallbox</b> (the most common; full overnight), and <b>11–22 kW three-phase</b> (only if the car's OBC supports it).]]</p>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th>[[รายการ|Item]]</th><th>[[ข้อกำหนดโดยทั่วไป (2569)|Typical requirement (2026)]]</th></tr></thead>
+      <tbody>
+        <tr><td><b>[[มิเตอร์|Meter]]</b></td><td>[[ขนาด 30 A ขึ้นไป (มัก 30(100)) สำหรับ 1 เฟส หรือ 3 เฟส 45 A ขึ้นไป ตามรุ่นรถ|30 A or larger (often 30(100)) single-phase, or 45 A+ three-phase, depending on the car]]</td></tr>
+        <tr><td><b>[[สายเมน|Main feeder]]</b></td><td>[[25 ตร.มม.|25 mm²]]</td></tr>
+        <tr><td><b>RCD</b></td><td>[[พิกัดกระแสรั่ว ≤30 mA ตัดภายใน 0.04 วินาที ชนิด Type B (หรือเทียบเท่า)|≤30 mA residual current, trips within 0.04 s, Type B (or equivalent)]]</td></tr>
+        <tr><td><b>[[สายดิน|Earthing]]</b></td><td>[[แยกจากสายดินบ้าน สายหุ้มฉนวนอย่างน้อย 10 ตร.มม.|Separate from the house earth, insulated, at least 10 mm²]]</td></tr>
+        <tr><td><b>[[แพ็กเกจของ กฟน.|MEA packages]]</b></td><td>[[7.4 kW 1 เฟส 29,000 บาท / 22 kW 3 เฟส 46,000 บาท (รวม VAT สาย 20 ม. ไม่รวมเครื่องชาร์จ)|7.4 kW 1-phase 29,000 THB / 22 kW 3-phase 46,000 THB (VAT incl., 20 m cable, charger not included)]]</td></tr>
+        <tr><td><b>[[มิเตอร์ TOU|TOU meter]]</b></td><td>[[กฟน. 6,640 บาท (แรงต่ำ) · กฟภ. ตั้งแต่ 3,300 บาท (1 เฟส) ตามประกาศปี 2569|MEA 6,640 THB (low voltage) · PEA from 3,300 THB (1-phase) under its 2026 notice]]</td></tr>
+      </tbody>
+    </table></div>
+    <p class="figcap" style="margin-left:0">[[ที่มา: KTC (ปรับปรุง ม.ค. 2569) และฐานเศรษฐกิจ (มิ.ย. 2569) ราคาและข้อกำหนดอาจเปลี่ยน ควรสอบถามการไฟฟ้าในพื้นที่ และใช้ช่างที่มีใบอนุญาต|Sources: KTC (updated Jan 2026) and Thansettakij (Jun 2026). Prices and rules can change; check with your local utility and use a licensed electrician.]] <a class="cite" href="sources.html#ktc2026">[22]</a> <a class="cite" href="sources.html#thtou">[18]</a></p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[มิเตอร์ TOU คุ้มไหม|Is a TOU meter worth it?]]</h2>
+    <p>[[อัตรา TOU บ้านอยู่อาศัย (แรงดันต่ำกว่า 22 kV) ค่าพลังงาน On-Peak 5.7982 และ Off-Peak 2.6369 บาท/หน่วย บวก Ft และ VAT แล้วตกราว 6.38 และ 3.00 บาท/หน่วย ขณะที่อัตราปกติแบบก้าวหน้าเฉลี่ยราว 4.2–4.9 บาท/หน่วย ช่วง On-Peak คือ จันทร์–ศุกร์ 09:00–22:00 นอกนั้นรวมเสาร์อาทิตย์และวันหยุดเป็น Off-Peak TOU คุ้มเมื่อย้ายการใช้ไฟส่วนใหญ่ (โดยเฉพาะการชาร์จรถ) ไปหลังสี่ทุ่มได้ แต่ถ้าบ้านเปิดแอร์หนักตอนกลางวันวันธรรมดา อาจแพงขึ้น ลองคำนวณกับบ้านของคุณ:|Residential TOU (below 22 kV) charges 5.7982 on-peak and 2.6369 off-peak THB/kWh; with Ft and VAT that is about 6.38 and 3.00. The normal progressive tariff averages around 4.2–4.9. On-peak is Monday–Friday 09:00–22:00; everything else, including weekends and holidays, is off-peak. TOU pays off if you can move most use, especially car charging, to after 22:00; a home running heavy daytime A/C on weekdays may pay more. Try it with your own numbers:]] <a class="cite" href="sources.html#peatariff">[40]</a> <a class="cite" href="sources.html#thtou">[18]</a></p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="guide:tou">
+      <div class="inst-h"><span class="inst-t">[[ค่าไฟรายเดือน: อัตราปกติ vs TOU|Monthly bill: normal tariff vs TOU]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ใช้อัตราฐานของ กฟภ./กฟน. (ประเภท 1.1.2 และ TOU 1.2.2) + Ft 0.1623 บาท/หน่วย (ก.ย.–ธ.ค. 2569) + VAT 7% ไม่รวมค่ามิเตอร์ ค่าจริงอาจต่างเล็กน้อยตามรอบบิล|Uses PEA/MEA base rates (types 1.1.2 and TOU 1.2.2) + Ft 0.1623 THB/kWh (Sep–Dec 2026) + 7% VAT; meter cost excluded. Real bills may differ slightly by billing cycle.]] <a class="cite" href="sources.html#thft">[19]</a></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[ค่าใช้จ่ายต่อกิโลเมตร|Cost per kilometre]]</h2>
+    <p>[[ตัวเลขที่คนมักอยากรู้ที่สุด ลองตั้งค่าให้ตรงกับการใช้ของคุณ|The number people most want to know. Set it to match your own use.]]</p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="guide:cost">
+      <div class="inst-h"><span class="inst-t">[[บาทต่อกิโลเมตร: ชาร์จแบบต่างๆ เทียบกับรถน้ำมัน|Baht per km: ways of charging vs a petrol car]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ราคาน้ำมันแก๊สโซฮอล์ 95 ของ ปตท. วันที่ 10 ต.ค. 2569 คือ 41.44 บาท/ลิตร ราคา DC สาธารณะเฉลี่ยปี 2569 ราว 7.30–8.50 (On-Peak) และ 4.10–6.50 (Off-Peak) บาท/kWh การชาร์จบ้านรวมความสูญเสียราว 7% (วอลล์บ็อกซ์) การชาร์จ DC รวมราว 5%|PTT Gasohol 95 was 41.44 THB/L on 10 Oct 2026. Public DC averaged about 7.30–8.50 (on-peak) and 4.10–6.50 (off-peak) THB/kWh in 2026. Home charging includes ~7% wallbox losses; DC includes ~5%.]] <a class="cite" href="sources.html#thfuel">[21]</a> <a class="cite" href="sources.html#thdc">[20]</a> <a class="cite" href="sources.html#adac2026">[17]</a></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[ตู้ชาร์จสาธารณะในไทย|Public charging in Thailand]]</h2>
+    <ul>
+      <li>[[หัวชาร์จหลัก: AC = Type 2, DC = CCS2 รถส่วนใหญ่ในไทยรองรับทั้งสองแบบ|Main connectors: AC is Type 2, DC is CCS2; most cars in Thailand take both.]]</li>
+      <li>[[เครือข่ายใหญ่ เช่น PTT EV Station PluZ, EA Anywhere, EleXA (กฟผ.), PEA VOLTA และ Tesla Supercharger แต่ละเจ้ามีแอปและราคา On/Off-Peak ของตัวเอง|Big networks include PTT EV Station PluZ, EA Anywhere, EleXA (EGAT), PEA VOLTA and Tesla Superchargers, each with its own app and on/off-peak prices.]]</li>
+      <li>[[มารยาท: ชาร์จเสร็จแล้วย้ายรถ หลายเจ้าเก็บค่าจอดแช่ (idle fee) ตู้หัวคู่บางรุ่นแบ่งกำลังกัน ถ้ามีตู้ว่างแยกให้เลือกใช้ตู้ที่ไม่แบ่งกำลัง|Etiquette: move the car when done; many networks charge idle fees. Some dual-head units share power, so pick an unshared one if available.]]</li>
+      <li>[[ก่อนเดินทางไกล: เช็กสถานะตู้ในแอปและวางแผนให้ถึงตู้ตอนแบต 10–20% เพื่อได้กำลังสูงสุด|Before a road trip: check charger status in the app and plan to arrive at 10–20% for peak power.]]</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[เรื่องที่ควรรู้เพิ่มเติม|What else you should know]]</h2>
+    <details class="acc" open><summary>[[แบต 12V เล็กๆ คือสาเหตุอันดับต้นๆ ที่ทำให้รถไฟฟ้า “ตาย”|The small 12 V battery is a top reason an EV "dies"]]</summary><div class="acc-b"><p>[[รถไฟฟ้าส่วนใหญ่ยังมีแบตแรงดันต่ำ (12V หรือ 16V ในบางรุ่น) ไว้เลี้ยงคอมพิวเตอร์ ระบบล็อก และสั่งเปิดคอนแทคเตอร์ของแบตใหญ่ ถ้าแบตนี้เสีย รถจะไม่ตื่นแม้แบตใหญ่เต็ม แบตตะกั่วกรดมักอยู่ได้ไม่กี่ปีในอากาศร้อน อาการเตือนคือมีข้อความเตือนแบต 12V ระบบรวน หรือรถตื่นช้า แก้ได้ด้วยการพ่วงแบต 12V (ไม่ใช่แบตแรงสูง) แล้วเปลี่ยนแบตลูกเล็กใหม่|Most EVs still carry a low-voltage battery (12 V, or 16 V on some) that powers the computers and locks and closes the main battery's contactors. If it fails, the car won't wake even with a full pack. Lead-acid units often last only a few years in the heat. Warning signs: 12 V alerts, glitches, slow wake-up. The fix is a jump on the 12 V circuit (never the high-voltage pack) and a new small battery.]]</p></div></details>
+    <details class="acc"><summary>[[ยางสึกเร็วกว่ารถน้ำมัน|Tyres wear faster than on petrol cars]]</summary><div class="acc-b"><p>[[รถไฟฟ้าหนักกว่าและมีแรงบิดทันที ยางจึงสึกเร็วกว่า ควรเช็กลมยางทุกเดือน สลับยางตามระยะ และใช้ยางที่รองรับน้ำหนักรถไฟฟ้า (มักมีสัญลักษณ์ HL หรือ XL) ลมยางอ่อนกินไฟเพิ่มด้วย|EVs are heavier and deliver instant torque, so tyres wear faster. Check pressures monthly, rotate on schedule, and use tyres rated for the weight (often marked HL or XL). Soft tyres also cost range.]]</p></div></details>
+    <details class="acc"><summary>[[เบรกแทบไม่ได้ใช้ แต่ต้องดูแล|You rarely use the brakes, but they still need care]]</summary><div class="acc-b"><p>[[การเบรกแบบเก็บพลังงาน (regen) ทำให้ผ้าเบรกแทบไม่สึก แต่จานเบรกอาจขึ้นสนิมในอากาศชื้นของไทย ควรเหยียบเบรกแรงๆ บ้างเป็นครั้งคราว และเปลี่ยนน้ำมันเบรกตามระยะเพราะดูดความชื้น|Regenerative braking means pads barely wear, but rotors can rust in Thailand's humidity. Brake firmly now and then, and change brake fluid on schedule since it absorbs moisture.]]</p></div></details>
+    <details class="acc"><summary>[[อะไรกินระยะทาง|What eats your range]]</summary><div class="acc-b"><p>[[ความเร็วสำคัญที่สุด แรงต้านอากาศเพิ่มตามกำลังสองของความเร็ว ขับ 120 กม./ชม. กินไฟมากกว่า 90 กม./ชม. ราว 30–40% แอร์ในไทยกินราว 1–2 kW ซึ่งมีผลมากในรถติด น้ำหนักบรรทุก ลมยาง และฝนตกก็มีผล ลองเครื่องคำนวณระยะทางในหน้าห้องแล็บ|Speed matters most: aerodynamic drag grows with the square of speed, so 120 km/h uses roughly 30–40% more than 90 km/h. Air-conditioning in Thailand draws roughly 1–2 kW, which weighs heavily in traffic. Load, tyre pressure and rain also count. Try the range calculator in the lab.]]</p></div></details>
+    <details class="acc"><summary>[[ความปลอดภัยของการชาร์จที่บ้าน|Home charging safety]]</summary><div class="acc-b"><ul><li>[[อย่าใช้ปลั๊กพ่วงหรือสายต่อกับสายชาร์จพกพา กระแสสูงต่อเนื่องหลายชั่วโมงทำให้ร้อนจนไหม้ได้|Never use extension cords or power strips with a portable charger; hours of high current can overheat them.]]</li><li>[[ถ้าปลั๊กหรือเต้ารับอุ่นผิดปกติ หยุดใช้และให้ช่างตรวจ|If a plug or socket feels warm, stop and have it checked.]]</li><li>[[ตรวจว่ามี RCD ที่เหมาะสม และสายดินถูกต้อง|Make sure a suitable RCD and correct earthing are in place.]]</li></ul></div></details>
+    <details class="acc"><summary>[[ซอฟต์แวร์อัปเดตเปลี่ยนพฤติกรรมแบตได้|Software updates can change battery behaviour]]</summary><div class="acc-b"><p>[[ผู้ผลิตปรับแผนที่การชาร์จ บัฟเฟอร์ และการประเมิน % ผ่านการอัปเดตได้ บางครั้งระยะทางที่แสดงหรือความเร็วชาร์จจึงเปลี่ยนหลังอัปเดต อ่านบันทึกการอัปเดตของรถ|Makers adjust charging maps, buffers and SOC estimation through updates, so displayed range or charging speed can change afterwards. Read your car's release notes.]]</p></div></details>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+<!--meta {"slug":"lab","pager":false,"scripts":[]} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="tag">[[เครื่องมือ|Tools]]</span></div>
+    <h1>[[ห้องแล็บเครื่องคำนวณ|Calculator lab]]</h1>
+    <p class="deck">[[เครื่องคำนวณทุกตัวในเว็บรวมไว้ที่เดียว ปรับค่าให้ตรงกับรถและการใช้งานของคุณ ทุกตัวบอกที่มาของสมมติฐานไว้ใต้ภาพ|Every calculator on the site in one place. Set them to your own car and habits; each one states its assumptions underneath.]]</p>
+    <ul class="lab-nav">
+      <li><a href="#range">[[ระยะทาง|Range]]</a></li>
+      <li><a href="#charge">[[เวลาชาร์จ|Charging time]]</a></li>
+      <li><a href="#cost">[[ค่าใช้จ่าย|Running cost]]</a></li>
+      <li><a href="#tou">[[มิเตอร์ TOU|TOU meter]]</a></li>
+      <li><a href="#age">[[การเสื่อม|Ageing]]</a></li>
+      <li><a href="#v2l">V2L</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="sec" id="range" style="padding-top:0">
+  <div class="col"><h2>[[ระยะทางจริงตามความเร็วและการใช้แอร์|Real range by speed and air-conditioning]]</h2>
+  <p>[[คำนวณจากฟิสิกส์ของแรงต้าน: แรงต้านอากาศ (ตามกำลังสองของความเร็ว) แรงต้านการหมุนของยาง และไฟที่ใช้กับแอร์และระบบอื่น หารด้วยประสิทธิภาพระบบขับเคลื่อน|Computed from road-load physics: aerodynamic drag (with the square of speed), tyre rolling resistance, and power for A/C and other systems, divided by drivetrain efficiency.]]</p></div>
+  <figure class="fig"><div class="inst" data-fig="lab:range"><div class="inst-h"><span class="inst-t">[[เครื่องคำนวณระยะทาง|Range calculator]]</span></div></div>
+  <figcaption class="figcap">[[ความหนาแน่นอากาศ 1.17 kg/m³ (ราว 30°C) ประสิทธิภาพจากแบตถึงล้อ 88% ทางราบ ไม่มีลม ค่า CdA และน้ำหนักเป็นค่าทั่วไปของรถแต่ละประเภท ค่าจริงขึ้นกับรถ ยาง และสภาพถนน|Air density 1.17 kg/m³ (about 30 °C), 88% battery-to-wheel efficiency, flat road, no wind. CdA and mass are typical for each body type; real results depend on the car, tyres and road.]]</figcaption></figure>
+</section>
+
+<section class="sec" id="charge">
+  <div class="col"><h2>[[เวลาและค่าใช้จ่ายในการชาร์จเร็ว|Fast-charging time and cost]]</h2></div>
+  <figure class="fig"><div class="inst" data-fig="charging:sim"><div class="inst-h"><span class="inst-t">[[เครื่องจำลองการชาร์จเร็ว|Fast-charging simulator]]</span></div></div>
+  <figcaption class="figcap">[[รายละเอียดและสมมติฐานอยู่ในบทที่ 5|Details and assumptions in chapter 5.]] <a href="charging-curve.html">[[ไปบทที่ 5|Go to chapter 5]]</a></figcaption></figure>
+</section>
+
+<section class="sec" id="cost">
+  <div class="col"><h2>[[ค่าใช้จ่ายต่อกิโลเมตร|Cost per kilometre]]</h2></div>
+  <figure class="fig mid"><div class="inst" data-fig="guide:cost"><div class="inst-h"><span class="inst-t">[[บาทต่อกิโลเมตร|Baht per kilometre]]</span></div></div>
+  <figcaption class="figcap">[[ราคาไฟและน้ำมัน ณ ต.ค. 2569 ดูที่มาในบทที่ 11|Electricity and fuel prices as of October 2026; sources in chapter 11.]] <a href="guide.html">[[ไปบทที่ 11|Go to chapter 11]]</a></figcaption></figure>
+</section>
+
+<section class="sec" id="tou">
+  <div class="col"><h2>[[มิเตอร์ TOU คุ้มไหมสำหรับบ้านคุณ|Does a TOU meter pay off for your home?]]</h2></div>
+  <figure class="fig mid"><div class="inst" data-fig="guide:tou"><div class="inst-h"><span class="inst-t">[[ค่าไฟรายเดือน: อัตราปกติ vs TOU|Monthly bill: normal vs TOU]]</span></div></div></figure>
+</section>
+
+<section class="sec" id="age">
+  <div class="col"><h2>[[จำลองการเสื่อมของแบต|Battery ageing simulators]]</h2>
+  <p>[[สามมุมมอง: จอดเก็บที่ % ต่างๆ ช่วง % ที่ใช้ประจำวัน และนิสัยการชาร์จจากข้อมูลรถจริง|Three views: storage at different charge levels, your daily charge window, and charging habits from field data.]]</p></div>
+  <figure class="fig"><div class="inst" data-fig="highsoc:calendar"><div class="inst-h"><span class="inst-t">[[จอดเก็บที่ % และอุณหภูมิต่างกัน|Storage at different charge levels and temperatures]]</span></div></div></figure>
+  <figure class="fig"><div class="inst" data-fig="lowsoc:dod"><div class="inst-h"><span class="inst-t">[[ช่วง % ที่ใช้ประจำวัน กับสุขภาพแบตหลัง 10 ปี|Daily charge window vs health after 10 years]]</span></div></div></figure>
+  <figure class="fig"><div class="inst" data-fig="highsoc:timeline"><div class="inst-h"><span class="inst-t">[[ชาร์จทันที vs ตั้งเวลา|Charge on arrival vs scheduled]]</span></div></div></figure>
+  <figure class="fig mid"><div class="inst" data-fig="fast:mix"><div class="inst-h"><span class="inst-t">[[ประมาณการจากพฤติกรรมการชาร์จ (Geotab)|Estimate from charging habits (Geotab)]]</span></div></div></figure>
+  <figure class="fig mid"><div class="inst" data-fig="life:km"><div class="inst-h"><span class="inst-t">[[รอบชาร์จหรือเวลา อะไรหมดก่อน|Cycles or years: which runs out first]]</span></div></div>
+  <figcaption class="figcap">[[แบบจำลองการเสื่อมทั้งหมดเป็นของเซลล์ห้องแล็บ (NREL BLAST-Lite) หรือค่าเฉลี่ยของกลุ่มรถ (Geotab) ใช้เปรียบเทียบนิสัย ไม่ใช่ทำนายรถคันใดคันหนึ่ง|All ageing models are lab-cell fits (NREL BLAST-Lite) or fleet averages (Geotab). Use them to compare habits, not to predict one specific car.]] <a href="sources.html#methods">[[วิธีคำนวณ|Methods]]</a></figcaption></figure>
+</section>
+
+<section class="sec" id="v2l">
+  <div class="col"><h2>[[วางแผนใช้ไฟจากรถ (V2L)|Plan power from your car (V2L)]]</h2></div>
+  <figure class="fig"><div class="inst" data-fig="v2l:flow"><div class="inst-h"><span class="inst-t">[[เครื่องใช้ไฟฟ้ากับเวลาที่ใช้ได้|Appliances and run time]]</span></div></div></figure>
+</section>

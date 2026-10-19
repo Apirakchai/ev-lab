@@ -169,6 +169,7 @@ export function chips(parent, { label, options, value, multi = false, onChange }
     box.appendChild(b); return b;
   });
   const sync = () => btns.forEach((b) => b.setAttribute('aria-pressed', String(multi ? cur.has(b.dataset.v) : cur === b.dataset.v)));
+  if (options.length > 6) w.style.gridColumn = '1 / -1';
   sync(); w.appendChild(box); parent.appendChild(w);
   return { el: w, get value() { return multi ? [...cur] : cur; }, set(v, fire = false) { cur = multi ? new Set(v) : v; sync(); if (fire && onChange) onChange(multi ? [...cur] : cur); } };
 }

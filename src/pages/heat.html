@@ -1,0 +1,90 @@
+<!--meta {"slug":"heat"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.64">07</span><span>[[บทที่ 7 จาก 11|Chapter 7 of 11]]</span></div>
+    <h1>[[ความร้อน อากาศไทย และความปลอดภัย|Heat, Thai weather and safety]]</h1>
+    <p class="deck">[[ปฏิกิริยาเคมีที่ทำให้แบตเสื่อมเร็วขึ้นเมื่อร้อน ประเทศเขตร้อนอย่างไทยจึงต้องใส่ใจเรื่องที่จอดรถและระดับแบตตอนจอดมากกว่าประเทศหนาว บทนี้ยังอธิบายว่าแบตติดไฟได้อย่างไร เกิดบ่อยแค่ไหน และควรทำอย่างไรเมื่อรถจมน้ำ|The chemistry that ages a battery runs faster when it's hot, so in a tropical country like Thailand, where you park and how full the battery is matter more than in cold places. This chapter also covers how batteries catch fire, how often it happens, and what to do after a flood.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2>[[ร้อนขึ้น 10 องศา เสื่อมเร็วขึ้นเท่าไร|How much faster at 10 degrees hotter?]]</h2>
+    <p m-s>[[ปฏิกิริยาเคมีส่วนใหญ่เร็วขึ้นเมื่ออุณหภูมิสูงขึ้น การโตของชั้น SEI ก็เช่นกัน แบบจำลองที่ฟิตกับข้อมูลจริงของเซลล์ 3 แบบในเว็บนี้บอกว่า ถ้าอุณหภูมิแบตเฉลี่ยสูงขึ้นจาก 25°C เป็น 35°C การเสื่อมตามเวลาจะเร็วขึ้นราว 1.4–1.8 เท่า และกฎจำง่ายที่วิศวกรใช้กันคือ “ทุก 10°C เร็วขึ้นราวสองเท่า” ข้อมูลรถจริงของ Geotab พบว่ารถในพื้นที่อากาศร้อนเสื่อมเร็วกว่าพื้นที่อากาศอบอุ่นราว 0.4 จุดเปอร์เซ็นต์ต่อปี|Most chemical reactions speed up with temperature, and SEI growth is no exception. The three data-fitted cell models on this site say that raising the average battery temperature from 25 °C to 35 °C speeds calendar ageing by about 1.4–1.8×; engineers' rule of thumb is "roughly double per 10 °C". Geotab's field data found vehicles in hot climates degrading about 0.4 percentage points a year faster than in mild ones.]] <a class="cite" href="sources.html#geotab2026">[1]</a></p>
+    <p m-d>[[ความไวต่ออุณหภูมิอธิบายด้วยสมการ Arrhenius <k>k(T) = A\,e^{-E_a/RT}</k> อัตราส่วนเทียบกับ 25°C คือ <k>k(T)/k(298) = \exp\!\left[-\frac{E_a}{R}\left(\frac1T-\frac1{298.15}\right)\right]</k> แบบจำลอง BLAST-Lite มี Ea ของการเสื่อมตามเวลาราว 27.8 kJ/mol (NCA: 3340 K × R), 37 kJ/mol (NMC622) และ 43 kJ/mol สำหรับเทอมอุณหภูมิของ LFP (5210 K × R ไม่รวมผลทางศักย์ขั้วลบ) ส่วนกฎ “สองเท่าทุก 10°C” ตรงกับ Ea ราว 53 kJ/mol ข้อสังเกตจาก Waldmann et al. (2014): สำหรับการเสื่อมตามรอบ มีจุดต่ำสุดใกล้ 25°C ต่ำกว่านั้นลิเทียมเพลตติ้งกลายเป็นกลไกหลัก สูงกว่านั้น SEI โตเร็วขึ้น|Temperature sensitivity follows Arrhenius, <k>k(T) = A\,e^{-E_a/RT}</k>, so the ratio to 25 °C is <k>k(T)/k(298) = \exp\!\left[-\frac{E_a}{R}\left(\frac1T-\frac1{298.15}\right)\right]</k>. BLAST-Lite's calendar terms imply about 27.8 kJ/mol (NCA: 3340 K × R), 37 kJ/mol (NMC622) and 43 kJ/mol for LFP's temperature term (5210 K × R, excluding the anode-potential effect). "Double per 10 °C" corresponds to about 53 kJ/mol. Waldmann et al. (2014) found cycle ageing has a minimum near 25 °C: below it lithium plating dominates, above it SEI growth.]] <a class="cite" href="sources.html#waldmann2014">[27]</a> <a class="cite" href="sources.html#blast">[10]</a></p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="heat:arrhenius">
+      <div class="inst-h"><span class="inst-t">[[ความเร็วในการเสื่อมตามเวลา เทียบกับที่ 25°C|Calendar-ageing speed relative to 25 °C]]</span></div>
+    </div>
+    <figcaption class="figcap">[[เส้นทึบมาจากเทอมอุณหภูมิของแบบจำลอง NREL BLAST-Lite เส้นประคือกฎ “สองเท่าทุก 10°C” ใช้เทียบความไว ไม่ได้บอกค่าเสื่อมสัมบูรณ์|Solid lines use the temperature terms of NREL's BLAST-Lite models; the dashed line is the "double per 10 °C" rule. They compare sensitivity, not absolute loss.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[จอดรถในไทย: ร่มกับแดด|Parking in Thailand: shade versus sun]]</h2>
+    <p>[[แพ็กแบตหนักหลายร้อยกิโล อุณหภูมิจึงเปลี่ยนช้ากว่าอากาศมาก แต่ถ้าจอดตากแดดบนลานคอนกรีตทุกวัน อุณหภูมิเฉลี่ยของแบตก็สูงกว่าจอดในอาคารได้หลายองศา ลองเทียบดู โดยเลือกอุณหภูมิเฉลี่ยของแบตตามที่จอดประจำ|A pack weighs hundreds of kilograms, so its temperature swings much less than the air. Still, parking on sun-baked concrete every day can keep the average several degrees above a covered car park. Compare below by picking the average battery temperature that matches where you park.]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="heat:parking">
+      <div class="inst-h"><span class="inst-t">[[ความจุที่เหลือหลัง 8 ปี ตามที่จอดและ % ตอนจอด|Capacity after 8 years by parking spot and charge level]]</span></div>
+    </div>
+    <figcaption class="figcap">[[อุณหภูมิเฉลี่ยของแบตในแต่ละแบบเป็นค่าสมมติเพื่อเปรียบเทียบ (ในอาคาร 29°C, ร่มไม้ 31°C, ตากแดดประจำ 35°C) คำนวณเฉพาะการเสื่อมตามเวลาด้วยแบบจำลอง BLAST-Lite ของเซลล์ห้องแล็บ ค่าจริงของรถทั้งคันมักดีกว่าแต่แนวโน้มเหมือนกัน|Average battery temperatures are assumptions for comparison (indoor 29 °C, tree shade 31 °C, daily sun 35 °C). Calendar ageing only, BLAST-Lite lab-cell models; whole cars usually do better, but the trend holds.]]</figcaption>
+  </figure>
+  <div class="col">
+    <h3>[[ระบบระบายความร้อนของแบต|How packs keep cool]]</h3>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th>[[ระบบ|System]]</th><th>[[ทำงานอย่างไร|How it works]]</th><th>[[ข้อสังเกต|Notes]]</th></tr></thead>
+      <tbody>
+        <tr><td><b>[[ระบายความร้อนด้วยของเหลว|Liquid cooling]]</b></td><td>[[น้ำหล่อเย็นไหลผ่านแผ่นใต้/ข้างเซลล์ แล้วระบายผ่านหม้อน้ำ หรือผ่าน chiller ที่ใช้น้ำยาแอร์|Coolant flows through plates beside or under the cells, shedding heat via a radiator or an A/C-driven chiller]]</td><td>[[รถไฟฟ้ายุคใหม่เกือบทั้งหมดใช้ คุมอุณหภูมิได้ดีแม้ชาร์จเร็ว|Nearly all modern EVs; holds temperature even while fast charging]]</td></tr>
+        <tr><td><b>[[ระบายด้วยอากาศ/แบบพาสซีฟ|Air or passive cooling]]</b></td><td>[[อาศัยอากาศและโครงสร้างระบายความร้อน|Relies on air flow and the casing]]</td><td>[[ถูกและเบา แต่ในอากาศร้อนและชาร์จเร็วติดกัน แบตร้อนสะสม (Nissan Leaf รุ่นแรกๆ เป็นตัวอย่างที่รู้จักกันดี)|Cheap and light, but heat builds in hot weather and back-to-back fast charges (early Nissan Leafs are the well-known example)]]</td></tr>
+        <tr><td><b>[[ปั๊มความร้อน (heat pump)|Heat pump]]</b></td><td>[[ย้ายความร้อนระหว่างแบต มอเตอร์ และห้องโดยสาร|Moves heat between battery, motor and cabin]]</td><td>[[ประหยัดพลังงานมากในประเทศหนาว ในไทยช่วยประสิทธิภาพแอร์|A big saver in cold countries; in Thailand it helps A/C efficiency]]</td></tr>
+        <tr><td><b>[[การเตรียมอุณหภูมิแบต|Preconditioning]]</b></td><td>[[อุ่นหรือทำให้แบตเย็นลงก่อนชาร์จเร็ว หรือก่อนออกเดินทางขณะเสียบปลั๊ก|Warms or cools the pack ahead of fast charging, or before departure while plugged in]]</td><td>[[ใช้การนำทางไปตู้ชาร์จในรถเพื่อให้ระบบเริ่มทำงานเอง|Navigate to the charger in the car so it kicks in automatically]]</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[แบตติดไฟได้อย่างไร: Thermal runaway|How a battery catches fire: thermal runaway]]</h2>
+    <p>[[ไฟไหม้แบตลิเทียมไอออนเป็นปฏิกิริยาลูกโซ่ เมื่อเซลล์ร้อนจนถึงจุดหนึ่ง ปฏิกิริยาภายในจะปล่อยความร้อนเองมากกว่าที่ระบายออกได้ อุณหภูมิจึงพุ่งเองโดยไม่ต้องมีอะไรมาเติม เรียกว่า thermal runaway ตัวจุดชนวนมักเป็น การลัดวงจรภายใน (จากความเสียหายทางกล ชิ้นส่วนแปลกปลอมจากการผลิต หรือเดนไดรต์) การชาร์จเกิน หรือความร้อนจากภายนอก ลองเลื่อนอุณหภูมิดูว่าแต่ละช่วงเกิดอะไรขึ้น และ NMC กับ LFP ต่างกันอย่างไร|A lithium-ion fire is a chain reaction. Past a certain temperature, reactions inside the cell release heat faster than it can escape, so temperature climbs on its own: thermal runaway. Typical triggers are an internal short (crash damage, a manufacturing contaminant, dendrites), overcharge, or outside heat. Slide the temperature to see what happens at each stage, and how NMC and LFP differ.]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="heat:runaway">
+      <div class="inst-h"><span class="inst-t">[[ลำดับเหตุการณ์เมื่อเซลล์ร้อนขึ้น|What happens as a cell heats up]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ค่าอุณหภูมิของ NMC811 จากการทดสอบ ARC ของ Nguyen et al. (2019) บนเซลล์ 18650 (LG HG2) ช่วงอุณหภูมิของปฏิกิริยาจากบทความเดียวกัน ค่าของ LFP เป็นค่าโดยประมาณจากการทดสอบในอุตสาหกรรม ตัวเลขจริงขึ้นกับ % แบต ขนาดเซลล์ และวิธีทดสอบ|NMC811 temperatures from Nguyen et al.'s (2019) ARC tests on 18650 cells (LG HG2); reaction ranges from the same paper. LFP values are approximate industry test figures. Real values depend on charge level, cell size and test method.]] <a class="cite" href="sources.html#nguyen2019">[8]</a> <a class="cite" href="sources.html#aerogel">[36]</a></figcaption>
+  </figure>
+  <div class="col">
+    <p>[[สังเกตว่าแบตที่ % สูงอันตรายกว่า: ในการทดสอบเดียวกัน เซลล์ NMC811 ที่ 100% เข้าสู่ runaway เต็มรูปแบบที่ราว 190°C แต่ที่ 50% ที่ราว 222°C และอุณหภูมิสูงสุดต่ำกว่า เพราะมีพลังงานเคมีสะสมน้อยกว่า นี่เป็นอีกเหตุผลที่โกดังและเรือขนส่งมักเก็บแบตที่ % ปานกลาง|Notice that a fuller battery is more dangerous: in the same tests, NMC811 at 100% hit full runaway near 190 °C, at 50% near 222 °C, with a lower peak, because less chemical energy is stored. It is one reason warehouses and ships store batteries part-charged.]] <a class="cite" href="sources.html#nguyen2019">[8]</a></p>
+    <h3>[[รถไฟฟ้าไฟไหม้บ่อยกว่ารถน้ำมันไหม|Do EVs catch fire more often than petrol cars?]]</h3>
+    <p>[[ข้อมูลที่มีอยู่บอกว่า <b>ไม่</b> ตัวอย่างเช่น สถิติของหน่วยงานป้องกันสาธารณภัยของสวีเดนปี 2022 นับได้ไฟไหม้รถไฟฟ้า 23 ครั้งจาก 611,000 คัน (ราว 0.004%) เทียบกับรถน้ำมันและดีเซล 3,400 ครั้งจาก 4.4 ล้านคัน (ราว 0.08%) แต่เมื่อไฟไหม้แบตเกิดขึ้น จะดับยากกว่า ใช้น้ำมากกว่า ปะทุซ้ำได้ และปล่อยก๊าซพิษ จึงต้องให้เจ้าหน้าที่ที่ผ่านการฝึกจัดการ|The available data says <b>no</b>. Sweden's civil-contingencies statistics for 2022 counted 23 EV fires among 611,000 vehicles (about 0.004%) against 3,400 among 4.4 million petrol and diesel cars (about 0.08%). But when a battery fire does happen it is harder to put out, needs far more water, can reignite and gives off toxic gases, so trained crews should handle it.]] <a class="cite" href="sources.html#swinburne2023">[37]</a></p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[น้ำท่วมกับรถไฟฟ้า|Floods and electric cars]]</h2>
+    <p>[[แพ็กแบตรถไฟฟ้าถูกซีลกันน้ำและฝุ่น (ส่วนใหญ่ระดับ IP67 ขึ้นไป) ขับผ่านน้ำขังตื้นๆ ตามที่คู่มือกำหนดได้ แต่การจมน้ำนานเป็นอีกเรื่อง โดยเฉพาะ <b>น้ำเค็มหรือน้ำกร่อย</b> ซึ่งนำไฟฟ้าดีและกัดกร่อน หลังพายุเฮอริเคนเอียนในฟลอริดาปี 2022 มีรถไฟฟ้าที่จมน้ำทะเลติดไฟหลายคันในวันต่อๆ มา และบางคันปะทุซ้ำจนลามไปบ้าน|EV packs are sealed against water and dust (mostly IP67 or better), and driving through shallow standing water within the manual's limits is fine. Long submersion is another matter, especially in <b>salt or brackish water</b>, which conducts and corrodes. After Hurricane Ian in Florida in 2022, several seawater-flooded EVs caught fire in the following days, and one reignited and spread to houses.]] <a class="cite" href="sources.html#eenews2022">[38]</a></p>
+    <div class="warnbox">
+      <p class="box-h">[[ถ้ารถไฟฟ้าของคุณจมน้ำ|If your EV has been submerged]]</p>
+      <ul>
+        <li>[[อย่าสตาร์ท อย่าเสียบชาร์จ และอย่าจอดในอาคารหรือใกล้บ้าน|Don't power it on, don't plug it in, and don't park it in a garage or next to the house.]]</li>
+        <li>[[ให้รถยกลากไปศูนย์บริการเพื่อตรวจแบตแรงดันสูง|Have it towed to a service centre to inspect the high-voltage battery.]]</li>
+        <li>[[สังเกตควัน เสียงฟู่ กลิ่นแปลก หรือความร้อนจากใต้ท้องรถในวันต่อๆ มา ถ้าพบให้ถอยห่างและโทร 199|Watch for smoke, hissing, odd smells or heat from underneath in the following days; if you see any, move away and call 199 (Thai fire service).]]</li>
+        <li>[[แจ้งประกันภัยโดยระบุว่าเป็นรถไฟฟ้าที่จมน้ำ|Tell your insurer it is a flood-damaged electric vehicle.]]</li>
+      </ul>
+    </div>
+    <div class="key">
+      <p class="key-h">[[สรุปบทนี้|Chapter summary]]</p>
+      <ul>
+        <li>[[ความร้อนเร่งการเสื่อม: จอดในร่ม และอย่าจอดตากแดดนานๆ ตอนแบตสูง|Heat speeds ageing: park in the shade, and avoid long hours in the sun while the battery is high.]]</li>
+        <li>[[แบตยิ่งเต็มยิ่งมีพลังงานสะสม ทั้งเสื่อมเร็วกว่าและอันตรายกว่าเมื่อเกิดเหตุ|A fuller battery stores more energy: it ages faster and is more dangerous if things go wrong.]]</li>
+        <li>[[รถไฟฟ้าไม่ได้ไฟไหม้บ่อยกว่ารถน้ำมัน แต่ไฟไหม้แบตดับยากกว่า|EVs don't burn more often than petrol cars, but battery fires are harder to extinguish.]]</li>
+        <li>[[น้ำเค็มอันตรายที่สุด รถที่จมน้ำต้องให้ศูนย์ตรวจก่อนใช้งานเสมอ|Salt water is the worst. A submerged EV must be checked by a service centre before use.]]</li>
+      </ul>
+    </div>
+  </div>
+</section>

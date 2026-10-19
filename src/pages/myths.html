@@ -1,0 +1,77 @@
+<!--meta {"slug":"myths","pager":false} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="tag">[[ตรวจสอบข้อเท็จจริง|Fact check]]</span></div>
+    <h1>[[ความเชื่อผิดๆ เรื่องแบตรถไฟฟ้า|EV battery myths, checked]]</h1>
+    <p class="deck">[[เรื่องที่ได้ยินบ่อยในวงสนทนา ร้านกาแฟ และกลุ่มไลน์ เราเช็กให้แล้วทีละข้อกับหลักฐาน ทั้งงานวิจัยและข้อมูลจากรถจริงหลายหมื่นคัน ส่งหน้านี้ให้คนที่สงสัยได้เลย|The things you hear at coffee shops and in LINE groups, checked one by one against the evidence, from research papers to data on tens of thousands of real cars. Send this page to anyone who asks.]]</p>
+    <div class="myth-filter" role="group" aria-label="Filter">
+      <button type="button" data-f="all" aria-pressed="true">[[ทั้งหมด|All]]</button>
+      <button type="button" data-f="false" aria-pressed="false">[[ไม่จริง|False]]</button>
+      <button type="button" data-f="partly" aria-pressed="false">[[จริงบางส่วน|Partly true]]</button>
+      <button type="button" data-f="true" aria-pressed="false">[[จริง|True]]</button>
+    </div>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col myths">
+    <details class="acc myth" data-v="false" open><summary><span class="tag bad">[[ไม่จริง|False]]</span> [[“แบตรถไฟฟ้าต้องเปลี่ยนทุก 5 ปี”|"EV batteries need replacing every five years"]]</summary><div class="acc-b">
+      <p>[[ข้อมูลรถกว่า 22,700 คันพบว่าเสื่อมเฉลี่ย 2.3% ต่อปี คาดว่าเหลือราว 82% ที่ 8 ปี Tesla Model 3/Y Long Range เหลือเฉลี่ย 85% หลังวิ่ง 320,000 กม. และการรับประกันแบตในไทยส่วนใหญ่ยาว 8 ปี แบตส่วนใหญ่อยู่ได้นานกว่าตัวรถ|Data from 22,700+ vehicles shows 2.3% average loss per year, projecting about 82% at eight years. Tesla Model 3/Y Long Range packs average 85% after 320,000 km, and most battery warranties in Thailand run eight years. Most packs outlast the car.]] <a class="cite" href="sources.html#geotab2026">[1]</a> <a class="cite" href="sources.html#tesla2023">[2]</a></p>
+      <p><a href="lifespan.html">[[อ่านบทที่ 10: อายุแบต|Read chapter 10: lifespan]]</a></p></div></details>
+
+    <details class="acc myth" data-v="false"><summary><span class="tag bad">[[ไม่จริง|False]]</span> [[“ต้องใช้แบตให้หมดก่อนค่อยชาร์จ”|"Run it flat before recharging"]]</summary><div class="acc-b">
+      <p>[[นี่คือ “memory effect” ของแบตนิกเกิลแคดเมียมรุ่นเก่า แบตลิเทียมไอออนไม่มีปัญหานี้ และกลับชอบรอบตื้นๆ มากกว่ารอบลึก ชาร์จบ่อยๆ ได้เลย|That is the "memory effect" of old nickel-cadmium batteries. Lithium-ion doesn't have it, and actually prefers shallow cycles to deep ones. Top up as often as you like.]]</p>
+      <p><a href="low-soc.html">[[อ่านบทที่ 4|Read chapter 4]]</a></p></div></details>
+
+    <details class="acc myth" data-v="partly"><summary><span class="tag warn">[[จริงบางส่วน|Partly true]]</span> [[“ชาร์จเร็ว DC ทำให้แบตพัง”|"DC fast charging ruins the battery"]]</summary><div class="acc-b">
+      <p>[[มีผลจริงแต่ไม่มาก Geotab พบว่ารถที่ใช้ DC เกิน 12% ของครั้งเสื่อม 2.5% ต่อปี เทียบ 1.5% และถ้าใช้กำลังเกิน 100 kW เป็นประจำ 3.0% ต่อปี ส่วน Recurrent ไม่พบความต่างอย่างมีนัยสำคัญใน Tesla กว่า 12,500 คัน ใช้ได้ตามจำเป็น และตัดที่ ~80%|A real but modest effect. Geotab found cars using DC for over 12% of sessions lost 2.5% a year versus 1.5%, and 3.0% with habitual 100 kW+ charging; Recurrent found no significant difference across 12,500+ Teslas. Use it when you need it and stop near 80%.]] <a class="cite" href="sources.html#geotab2026">[1]</a> <a class="cite" href="sources.html#recurrent2023">[5]</a></p>
+      <p><a href="fast-charging.html">[[อ่านบทที่ 6|Read chapter 6]]</a></p></div></details>
+
+    <details class="acc myth" data-v="partly"><summary><span class="tag warn">[[จริงบางส่วน|Partly true]]</span> [[“ห้ามชาร์จเต็ม 100% เด็ดขาด”|"Never, ever charge to 100%"]]</summary><div class="acc-b">
+      <p>[[ขึ้นกับเคมี LFP หลายยี่ห้อแนะนำให้ชาร์จ 100% เป็นประจำ (Tesla บอกให้ชาร์จเต็มอย่างน้อยสัปดาห์ละครั้ง) สำหรับ NMC/NCA การแตะ 100% ก่อนเดินทางไม่เป็นปัญหา สิ่งที่ควรเลี่ยงคือ “จอดค้าง” ที่ 100% นานๆ โดยเฉพาะในที่ร้อน|It depends on the chemistry. Many LFP cars recommend 100% routinely (Tesla says fully charge at least weekly). For NMC/NCA, touching 100% before a trip is fine; what to avoid is sitting at 100% for long, especially in the heat.]] <a class="cite" href="sources.html#teslalfp">[11]</a></p>
+      <p><a href="high-soc.html">[[อ่านบทที่ 3|Read chapter 3]]</a></p></div></details>
+
+    <details class="acc myth" data-v="false"><summary><span class="tag bad">[[ไม่จริง|False]]</span> [[“รถไฟฟ้าไฟไหม้บ่อยกว่ารถน้ำมัน”|"EVs catch fire more often than petrol cars"]]</summary><div class="acc-b">
+      <p>[[สถิติสวีเดนปี 2022: รถไฟฟ้าไฟไหม้ 23 ครั้งจาก 611,000 คัน (≈0.004%) รถน้ำมันและดีเซล 3,400 ครั้งจาก 4.4 ล้านคัน (≈0.08%) แต่ไฟไหม้แบตดับยากกว่าและปะทุซ้ำได้|Swedish statistics for 2022: 23 EV fires among 611,000 vehicles (≈0.004%) versus 3,400 among 4.4 million petrol and diesel cars (≈0.08%). Battery fires are, however, harder to put out and can reignite.]] <a class="cite" href="sources.html#swinburne2023">[37]</a></p>
+      <p><a href="heat.html">[[อ่านบทที่ 7|Read chapter 7]]</a></p></div></details>
+
+    <details class="acc myth" data-v="partly"><summary><span class="tag warn">[[จริงบางส่วน|Partly true]]</span> [[“อากาศร้อนแบบไทยทำให้แบตพังเร็ว”|"Thai heat destroys batteries"]]</summary><div class="acc-b">
+      <p>[[ความร้อนเร่งการเสื่อมจริง Geotab พบว่ารถในพื้นที่ร้อนเสื่อมเร็วกว่าราว 0.4 จุดเปอร์เซ็นต์ต่อปี แต่ไม่ได้ “พัง” รถยุคใหม่มีระบบระบายความร้อนด้วยของเหลว การจอดในร่มและไม่จอดค้างตอนแบตสูงช่วยได้มาก|Heat really does speed ageing; Geotab found hot-climate vehicles losing about 0.4 points a year more. That is not "destroyed": modern liquid-cooled packs cope, and parking in shade and not sitting full help a lot.]] <a class="cite" href="sources.html#geotab2026">[1]</a></p>
+      <p><a href="heat.html">[[อ่านบทที่ 7|Read chapter 7]]</a></p></div></details>
+
+    <details class="acc myth" data-v="false"><summary><span class="tag bad">[[ไม่จริง|False]]</span> [[“เสียบชาร์จทิ้งไว้ทั้งคืน ไฟจะเกินจนแบตเสีย”|"Leaving it plugged in overnight overcharges it"]]</summary><div class="acc-b">
+      <p>[[BMS หยุดชาร์จเมื่อถึงลิมิตที่ตั้งไว้ ผู้ผลิตบางรายถึงกับแนะนำให้เสียบทิ้งไว้เมื่อจอดนาน สิ่งที่ควรทำคือตั้งลิมิตให้เหมาะกับเคมี และตั้งเวลาให้ชาร์จเสร็จใกล้เวลาออกเดินทาง|The BMS stops at the limit you set; some makers even recommend staying plugged in when parked for long. What helps is a sensible limit for the chemistry and scheduling the charge to finish near departure.]]</p>
+      <p><a href="high-soc.html">[[อ่านบทที่ 3|Read chapter 3]]</a></p></div></details>
+
+    <details class="acc myth" data-v="false"><summary><span class="tag bad">[[ไม่จริง|False]]</span> [[“ใช้ V2L แล้วแบตเสื่อมเร็ว”|"Using V2L wears out the battery"]]</summary><div class="acc-b">
+      <p>[[ใช้ไฟ 5 kWh จากแบต 75 kWh เท่ากับ 0.07 รอบเต็ม หรือเท่ากับขับรถราว 30 กม. ผลต่อแบตแทบไม่มี แค่ตั้งขีดจำกัดให้เหลือไฟพอขับ|Drawing 5 kWh from a 75 kWh pack is 0.07 of a full cycle, like driving about 30 km. The effect is negligible; just set a limit that leaves enough to drive.]]</p>
+      <p><a href="v2l.html">[[อ่านบทที่ 8|Read chapter 8]]</a></p></div></details>
+
+    <details class="acc myth" data-v="partly"><summary><span class="tag warn">[[จริงบางส่วน|Partly true]]</span> [[“ระยะทางบนจอลดลง แปลว่าแบตเสื่อม”|"Lower range on screen means the battery is degrading"]]</summary><div class="acc-b">
+      <p>[[ระยะทางบนจอคำนวณจาก % แบตคูณกับอัตรากินไฟช่วงหลัง และการประเมินของ BMS ซึ่งเปลี่ยนตามอุณหภูมิ การใช้แอร์ และการขับ ตัวเลขอาจแกว่งได้โดยแบตไม่ได้เสื่อม ต้องดูค่า SOH หรือทดสอบความจุจึงจะรู้จริง|Displayed range comes from % times recent consumption and the BMS's estimate, which shift with temperature, A/C and driving. It can swing without any real ageing; check SOH or test capacity to know.]]</p>
+      <p><a href="bms.html">[[อ่านบทที่ 9|Read chapter 9]]</a></p></div></details>
+
+    <details class="acc myth" data-v="partly"><summary><span class="tag warn">[[จริงบางส่วน|Partly true]]</span> [[“ชาร์จช้าดีกว่าชาร์จเร็วเสมอ”|"Slow charging is always better"]]</summary><div class="acc-b">
+      <p>[[สำหรับแบต การชาร์จ AC ช้ากว่าย่อมอ่อนโยนกว่า แต่ช้าเกินไปก็เสียพลังงานมาก ADAC พบว่าชาร์จจากเต้ารับธรรมดา 2.3 kW สูญเสีย 12.7–24.2% เทียบกับวอลล์บ็อกซ์ 11 kW ที่ 5.1–7.0% วอลล์บ็อกซ์ 7–11 kW คือจุดที่ลงตัวที่สุด|For the battery, slower AC is gentler, but too slow wastes energy: ADAC measured 12.7–24.2% losses from a 2.3 kW household socket versus 5.1–7.0% from an 11 kW wallbox. A 7–11 kW wallbox is the sweet spot.]] <a class="cite" href="sources.html#adac2026">[17]</a></p>
+      <p><a href="charging-curve.html">[[อ่านบทที่ 5|Read chapter 5]]</a></p></div></details>
+
+    <details class="acc myth" data-v="true"><summary><span class="tag ok">[[จริง|True]]</span> [[“LFP ชาร์จ 100% ได้บ่อยกว่า NMC”|"LFP can go to 100% more often than NMC"]]</summary><div class="acc-b">
+      <p>[[ขั้วบวก LFP ทำงานที่ศักย์ต่ำกว่าจุดที่อิเล็กโทรไลต์เริ่มสลายมาก และไม่มีการเปลี่ยนเฟสแบบ NMC นิกเกิลสูง อีกทั้งยังต้องการชาร์จเต็มเป็นระยะเพื่อให้ % แม่น|The LFP cathode works well below the potential where the electrolyte breaks down and has no nickel-rich-style phase collapse, and it needs periodic full charges to keep its gauge accurate.]]</p>
+      <p><a href="chemistry.html">[[อ่านบทที่ 2|Read chapter 2]]</a></p></div></details>
+
+    <details class="acc myth" data-v="true"><summary><span class="tag ok">[[จริง|True]]</span> [[“จอดทิ้งไว้ที่ 0% นานๆ ทำให้แบตเสียได้”|"Leaving it at 0% for a long time can kill the battery"]]</summary><div class="acc-b">
+      <p>[[รถยังกินไฟเองตอนจอด ถ้าแรงดันเซลล์ตกต่ำกว่าขีดที่ออกแบบ ฟอยล์ทองแดงจะละลาย และอาจเกิดลัดวงจรภายในเมื่อคายประจุเกินมาก (งานวิจัยพบที่ราว −12% ต่ำกว่าจุดตัด) จอดนานให้เหลือราว 50% หรือเสียบชาร์จไว้|A parked car keeps drawing power. If cell voltage falls past its design limit, the copper foil dissolves, and deep over-discharge (around −12% below cut-off in one study) can short the cell internally. For long parking, leave about 50% or keep it plugged in.]] <a class="cite" href="sources.html#guo2016">[7]</a></p>
+      <p><a href="low-soc.html">[[อ่านบทที่ 4|Read chapter 4]]</a></p></div></details>
+
+    <details class="acc myth" data-v="false"><summary><span class="tag bad">[[ไม่จริง|False]]</span> [[“ขับลุยน้ำขังแล้วไฟจะดูดคนในรถ”|"Driving through standing water will electrocute you"]]</summary><div class="acc-b">
+      <p>[[แพ็กแบตถูกซีล (ส่วนใหญ่ IP67 ขึ้นไป) และระบบไฟแรงสูงแยกจากตัวถังพร้อมระบบเฝ้าดูฉนวน ขับผ่านน้ำขังตามที่คู่มือกำหนดได้ แต่การจมน้ำนาน โดยเฉพาะน้ำเค็ม เป็นอีกเรื่องที่ต้องให้ศูนย์ตรวจ|Packs are sealed (mostly IP67 or better) and the high-voltage system is isolated from the body with insulation monitoring. Driving through standing water within the manual's limits is fine; prolonged submersion, especially in salt water, is a different matter that needs a service check.]] <a class="cite" href="sources.html#eenews2022">[38]</a></p>
+      <p><a href="heat.html">[[อ่านบทที่ 7|Read chapter 7]]</a></p></div></details>
+  </div>
+</section>
+<script type="module">
+  const btns = document.querySelectorAll('.myth-filter button');
+  btns.forEach((b) => b.addEventListener('click', () => {
+    btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll('.myth').forEach((d) => { d.hidden = b.dataset.f !== 'all' && d.dataset.v !== b.dataset.f; });
+  }));
+</script>

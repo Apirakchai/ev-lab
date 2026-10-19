@@ -1,0 +1,75 @@
+<!--meta {"slug":"bms"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.82">09</span><span>[[บทที่ 9 จาก 11|Chapter 9 of 11]]</span></div>
+    <h1>[[BMS สมองของแบตเตอรี่|The BMS, the battery's brain]]</h1>
+    <p class="deck">[[Battery Management System วัดแรงดันของเซลล์ทุกกลุ่ม วัดกระแสและอุณหภูมิหลายสิบจุด แล้วตัดสินใจทุกเสี้ยววินาทีว่าแบตเหลือเท่าไร จ่ายหรือรับไฟได้แค่ไหน ต้องบาลานซ์เซลล์ไหน และเมื่อไรต้องตัดไฟเพื่อความปลอดภัย|The battery management system measures every cell group's voltage, the current and dozens of temperatures, and decides many times a second how much charge is left, how much power can flow in or out, which cells need balancing, and when to cut power for safety.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2>[[งานของ BMS|What the BMS does]]</h2>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th>[[หน้าที่|Job]]</th><th>[[ทำอย่างไร|How]]</th></tr></thead>
+      <tbody>
+        <tr><td><b>[[วัด|Measure]]</b></td><td>[[แรงดันทุกกลุ่มอนุกรม (เช่น 96–192 ช่อง) ละเอียดระดับมิลลิโวลต์ กระแสรวม และอุณหภูมิหลายจุดในแพ็ก|Every series group's voltage (96–192 channels) to the millivolt, pack current, and temperatures throughout the pack]]</td></tr>
+        <tr><td><b>[[ประเมิน|Estimate]]</b></td><td>[[% แบต (SOC) สุขภาพแบต (SOH) และกำลังที่จ่าย/รับได้ (SOP) ซึ่งรถใช้คำนวณระยะทางและจำกัดการชาร์จเร็ว|State of charge, state of health and state of power, which drive the range estimate and fast-charging limits]]</td></tr>
+        <tr><td><b>[[ปกป้อง|Protect]]</b></td><td>[[ห้ามแรงดัน กระแส หรืออุณหภูมิเกินขอบเขต ตัดคอนแทคเตอร์เมื่อผิดปกติ เฝ้าดูฉนวนระหว่างไฟแรงสูงกับตัวถัง|Keeps voltage, current and temperature inside limits, opens contactors on faults, and monitors insulation between the high-voltage system and the body]]</td></tr>
+        <tr><td><b>[[บาลานซ์|Balance]]</b></td><td>[[ทำให้ทุกกลุ่มเซลล์มีประจุเท่ากัน เพื่อให้ใช้ความจุได้เต็ม|Keeps all groups at the same charge so the full capacity stays usable]]</td></tr>
+        <tr><td><b>[[สื่อสาร|Communicate]]</b></td><td>[[คุยกับระบบความร้อน มอเตอร์ และตู้ชาร์จ (เช่น ขอกระแสจากตู้ DC ผ่านโปรโตคอลของ CCS)|Talks to thermal management, the drive unit and the charger (e.g. requesting current from a DC charger over the CCS protocol)]]</td></tr>
+      </tbody>
+    </table></div>
+    <p>[[เสียง “คลิก” ตอนเปิดรถคือ <b>คอนแทคเตอร์</b> รีเลย์กำลังสูงที่ต่อแพ็กเข้ากับระบบ ก่อนต่อจริง BMS จะทำ <b>pre-charge</b> ผ่านตัวต้านทานเพื่อค่อยๆ ชาร์จตัวเก็บประจุในอินเวอร์เตอร์ ไม่ให้เกิดกระแสกระชากจนหน้าสัมผัสไหม้ และเมื่อเกิดการชนแรง <b>pyro-fuse</b> จะตัดวงจรแรงสูงทันที|The "clunk" when you start the car is the <b>contactors</b>, high-power relays connecting the pack. Before closing them the BMS <b>pre-charges</b> the inverter's capacitors through a resistor to avoid an inrush that would weld the contacts, and in a severe crash a <b>pyro-fuse</b> cuts the high-voltage circuit instantly.]]</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[BMS รู้ได้ยังไงว่าแบตเหลือกี่ %|How the BMS knows the charge level]]</h2>
+    <p m-s>[[ไม่มีเซนเซอร์วัด % ตรงๆ BMS ใช้ 2 วิธีร่วมกัน: (1) <b>นับไฟเข้าออก</b> (coulomb counting) แม่นในระยะสั้น แต่เซนเซอร์กระแสคลาดเคลื่อนนิดเดียวก็สะสมจนเพี้ยนได้ (2) <b>ดูแรงดันตอนพัก</b> แล้วเทียบกับกราฟแรงดัน ใช้ได้ดีกับ NMC ที่กราฟลาดชัน แต่ใช้แทบไม่ได้กับ LFP ที่กราฟแบน ลองเลื่อนความคลาดเคลื่อนของเซนเซอร์ แล้วสลับระหว่าง NMC กับ LFP ดู|There is no sensor for %. The BMS combines two methods: (1) <b>counting charge in and out</b> (coulomb counting), accurate short-term but a tiny current-sensor error accumulates into drift; (2) <b>reading voltage at rest</b> against the voltage curve, which works well for NMC's sloped curve and barely at all for LFP's flat one. Change the sensor error and switch between NMC and LFP below.]]</p>
+    <p m-d>[[ในทางปฏิบัติใช้ observer เช่น Extended Kalman Filter บนแบบจำลองวงจรสมมูล (ECM) <k>V = U_{oc}(z) - I R_0 - v_{RC}</k> โดย state คือ SOC <k>z</k> และแรงดันโพลาไรเซชัน <k>v_{RC}</k> สมการสถานะ <k>z_{k+1} = z_k - \eta\,I_k\,\Delta t/Q</k> ส่วนสมการวัดใช้ <k>U_{oc}(z)</k> ค่า Kalman gain ของ SOC แปรตาม <k>\partial U_{oc}/\partial z</k> ถ้าความชันเกือบศูนย์ (LFP ช่วงกลาง) การวัดแรงดันแทบไม่ให้ข้อมูล ตัวกรองจึงพึ่ง coulomb counting และความไม่แน่นอนโตขึ้นเรื่อยๆ จนกว่าจะถึงช่วงปลายที่กราฟชัน (ชาร์จเต็ม) นอกจากนี้ LFP ยังมี hysteresis ของ OCV ระหว่างชาร์จกับคายประจุหลายสิบมิลลิโวลต์ ทำให้ยากขึ้นอีก|In practice an observer such as an extended Kalman filter runs on an equivalent-circuit model, <k>V = U_{oc}(z) - I R_0 - v_{RC}</k>, with SOC <k>z</k> and polarisation voltage <k>v_{RC}</k> as states, process model <k>z_{k+1} = z_k - \eta\,I_k\,\Delta t/Q</k>, and <k>U_{oc}(z)</k> in the measurement model. The SOC Kalman gain scales with <k>\partial U_{oc}/\partial z</k>: when the slope is near zero (mid-range LFP), voltage carries almost no information, the filter falls back on coulomb counting, and uncertainty grows until the steep end of the curve (a full charge). LFP's tens-of-millivolts charge/discharge OCV hysteresis makes it harder still.]] <a class="cite" href="sources.html#birkl2017">[25]</a></p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="bms:soc">
+      <div class="inst-h"><span class="inst-t">[[% จริง กับ % ที่ BMS ประเมิน ตลอด 2 สัปดาห์|True vs estimated charge over two weeks]]</span></div>
+    </div>
+    <figcaption class="figcap">[[จำลองการขับทุกวันและชาร์จทุกคืน (ไม่ถึง 100%) ความคลาดเคลื่อนของเซนเซอร์คือออฟเซตคงที่ ตัวแก้ด้วยแรงดันแรงขึ้นตามความชันของกราฟ OCV ของเคมีนั้น เป็นแบบจำลองอย่างง่ายเพื่ออธิบายหลักการ|Simulated daily driving and nightly charging (not to 100%). Sensor error is a fixed offset; the voltage correction strengthens with the slope of each chemistry's OCV curve. A simplified model to show the principle.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[การบาลานซ์เซลล์|Cell balancing]]</h2>
+    <p>[[เซลล์ที่ผลิตมาไม่มีวันเหมือนกันเป๊ะ ความจุต่างกันเล็กน้อย อัตราการคายประจุเองต่างกัน และแต่ละตำแหน่งในแพ็กร้อนไม่เท่ากัน ถ้าปล่อยไว้ กลุ่มเซลล์จะเหลื่อมกันเรื่อยๆ แพ็กจะชาร์จได้แค่จนกลุ่มที่สูงสุดเต็ม และใช้ได้แค่จนกลุ่มที่ต่ำสุดหมด ความจุที่ใช้ได้จริงจึงหายไปทั้งที่เซลล์ไม่ได้เสื่อม BMS แก้ด้วยการบาลานซ์ แบบ <b>พาสซีฟ</b> (ระบายไฟส่วนเกินของกลุ่มที่สูงออกเป็นความร้อนผ่านตัวต้านทาน ใช้ในรถเกือบทุกคัน) หรือ <b>แอคทีฟ</b> (ย้ายพลังงานจากกลุ่มสูงไปกลุ่มต่ำ)|No two cells are identical: capacities differ slightly, self-discharge differs, and positions in the pack run at different temperatures. Left alone, groups drift apart; the pack can only charge until the highest group is full and discharge until the lowest is empty, so usable capacity shrinks even though no cell has aged. The BMS fixes this by <b>passive</b> balancing (bleeding the high groups' excess through resistors as heat, used in nearly every car) or <b>active</b> balancing (moving energy from high groups to low ones).]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="bms:balance">
+      <div class="inst-h"><span class="inst-t">[[8 กลุ่มเซลล์ที่ไม่เท่ากัน|Eight unequal cell groups]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ความจุของแต่ละกลุ่มต่างกันเล็กน้อย (±3%) และเริ่มต้นไม่เท่ากัน การบาลานซ์แบบพาสซีฟทำได้ช้า (กระแสไม่กี่สิบถึงร้อยกว่ามิลลิแอมป์) จึงเกิดเป็นหลักตอนชาร์จใกล้เต็ม นี่คืออีกเหตุผลที่ช่วงท้ายของการชาร์จช้า และที่ผู้ผลิตบางรายแนะนำให้ชาร์จเต็มเป็นครั้งคราว|Groups differ slightly in capacity (±3%) and start unequal. Passive balancing is slow (tens to a few hundred milliamps), so most of it happens near the top of a charge, one more reason the end of charging is slow and why some makers suggest an occasional full charge.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[สุขภาพแบต (SOH) วัดอย่างไร|How battery health (SOH) is measured]]</h2>
+    <ul>
+      <li>[[<b>SOH ด้านความจุ:</b> ความจุตอนนี้ ÷ ความจุตอนใหม่ BMS ประเมินจากการชาร์จหรือใช้ไฟช่วงกว้างๆ เทียบกับการเปลี่ยนของ %|<b>Capacity SOH:</b> today's capacity ÷ new capacity, estimated by the BMS from charge moved over wide SOC swings.]]</li>
+      <li>[[<b>SOH ด้านกำลัง:</b> ความต้านทานภายในที่เพิ่มขึ้น ทำให้เร่งแรงหรือชาร์จเร็วได้น้อยลง|<b>Power SOH:</b> growth in internal resistance, which cuts peak acceleration and fast-charging power.]]</li>
+      <li>[[<b>วิธีเช็กเอง:</b> บางยี่ห้อมีเมนูตรวจสุขภาพแบต (เช่น Tesla มีการทดสอบสุขภาพแบตในโหมด Service) หรือใช้แอปอ่าน OBD ที่รองรับรุ่นนั้น ระยะทางที่หน้าจอแสดงตอน 100% บอกแนวโน้มได้คร่าวๆ แต่แกว่งตามการประมาณของ BMS และอุณหภูมิ|<b>Checking it yourself:</b> some brands have a battery-health test (Tesla has one in Service Mode), or use an OBD app that supports your model. The range shown at 100% hints at the trend, but it swings with the BMS's estimate and temperature.]]</li>
+    </ul>
+    <div class="deepbox" m-d>
+      <p class="box-h">[[กลไกการเสื่อม 3 แบบที่วัดได้|Three measurable degradation modes]]</p>
+      <p>[[นักวิจัยแยกการเสื่อมเป็น (1) LLI สูญเสียลิเทียมที่ใช้งานได้ (SEI โต, ลิเทียมเพลตติ้ง) (2) LAM<sub>PE</sub> สูญเสียวัสดุขั้วบวก (รอยร้าว, โครงสร้างเปลี่ยน) และ (3) LAM<sub>NE</sub> สูญเสียวัสดุขั้วลบ (อนุภาคหลุดการเชื่อมต่อ) ซึ่งวินิจฉัยได้จาก differential voltage (dV/dQ) หรือ incremental capacity (dQ/dV) ที่ตำแหน่งยอดของกราฟเลื่อนไปต่างกัน (Birkl et al. 2017)|Researchers split degradation into (1) LLI, loss of lithium inventory (SEI growth, plating), (2) LAM<sub>PE</sub>, loss of positive-electrode material (cracking, phase change), and (3) LAM<sub>NE</sub>, loss of negative-electrode material (particles losing contact), diagnosed from how peaks shift in differential-voltage (dV/dQ) or incremental-capacity (dQ/dV) curves (Birkl et al. 2017).]] <a class="cite" href="sources.html#birkl2017">[25]</a></p>
+    </div>
+    <div class="key">
+      <p class="key-h">[[สรุปบทนี้|Chapter summary]]</p>
+      <ul>
+        <li>[[% บนจอเป็น “ค่าประมาณ” จากการนับกระแสผสมกับการอ่านแรงดัน|The % on screen is an estimate from counting current blended with voltage readings.]]</li>
+        <li>[[LFP วัด % ยากเพราะกราฟแรงดันแบน ต้องชาร์จเต็มเป็นระยะเพื่อรีเซ็ต|LFP is hard to gauge because its voltage curve is flat; regular full charges re-anchor it.]]</li>
+        <li>[[การบาลานซ์ส่วนใหญ่เกิดตอนใกล้เต็ม ถ้าระยะทางที่ 100% ลดลงผิดปกติ การชาร์จเต็มแล้วจอดพักสักพักอาจช่วยให้ BMS ประเมินใหม่|Balancing mostly happens near full. If range at 100% seems to drop oddly, a full charge followed by a rest can let the BMS re-estimate.]]</li>
+      </ul>
+    </div>
+  </div>
+</section>

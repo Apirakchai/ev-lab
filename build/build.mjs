@@ -85,6 +85,10 @@ const layout = expand(read(path.join(SRC, 'layout.html')));
 const assetFiles = walk(path.join(ROOT, 'assets')).filter((f) => /\.(css|js)$/.test(f));
 const V = hashOf(assetFiles);
 const pages = fs.readdirSync(path.join(SRC, 'pages')).filter((f) => f.endsWith('.html'));
+// citation numbers follow the order of <li id="…"> in the sources page
+const REF_IDS = [...read(path.join(SRC, 'pages', 'sources.html')).matchAll(/<li id="([\w-]+)"/g)].map((m) => m[1]);
+const refNum = (id) => { const i = REF_IDS.indexOf(id); if (i < 0) { console.warn('unknown citation id:', id); return '?'; } return i + 1; };
+const numberCites = (html) => html.replace(/<a class="cite" href="sources\.html#([\w-]+)">\[[^\]]*\]<\/a>/g, (_, id) => `<a class="cite" href="sources.html#${id}">[${refNum(id)}]</a>`);
 const built = [];
 
 for (const file of pages) {
@@ -92,7 +96,7 @@ for (const file of pages) {
   const m = raw.match(/^<!--meta\s*([\s\S]*?)-->/);
   if (!m) throw new Error(`missing meta in ${file}`);
   const meta = JSON.parse(m[1]);
-  const body = expand(raw.slice(m[0].length).replace('{{CHAPTER_PATH}}', pathHtml()));
+  const body = numberCites(expand(raw.slice(m[0].length).replace('{{CHAPTER_PATH}}', pathHtml())));
   const ch = CHAPTERS.find((c) => c.slug === meta.slug) || {};
   const titleTh = meta.title_th || ch.th, titleEn = meta.title_en || ch.en;
   const descTh = meta.desc_th || ch.dth || '', descEn = meta.desc_en || ch.den || '';

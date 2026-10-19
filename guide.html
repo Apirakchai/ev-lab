@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="th" data-lang="th" data-mode="simple" data-page="guide" data-title-th="คู่มือใช้รถไฟฟ้าในไทย — EV Lab" data-title-en="Owner's playbook for Thailand — EV Lab" data-desc-en="Daily charging rules, home chargers, TOU tariffs and more">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>คู่มือใช้รถไฟฟ้าในไทย — EV Lab</title>
+<meta name="description" content="กฎการชาร์จประจำวัน ติดตั้งที่ชาร์จบ้าน ค่าไฟ TOU และเรื่องที่ควรรู้">
+<meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11151a" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EV Lab by Sukmart">
+<meta property="og:title" content="คู่มือใช้รถไฟฟ้าในไทย — EV Lab">
+<meta property="og:description" content="กฎการชาร์จประจำวัน ติดตั้งที่ชาร์จบ้าน ค่าไฟ TOU และเรื่องที่ควรรู้">
+<meta property="og:image" content="https://ev.sukmart.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://ev.sukmart.com/guide.html">
+<script>
+/* Apply saved language / reading level / theme before first paint */
+(function () {
+  var d = document.documentElement, q = new URLSearchParams(location.search), s = {};
+  function get(k) { try { return localStorage.getItem('evlab.' + k); } catch (e) { return null; } }
+  var langs = (navigator.languages || [navigator.language || 'th']).join(',').toLowerCase();
+  s.lang = q.get('lang') || get('lang') || (langs.indexOf('th') > -1 || !/^en/.test(langs) ? 'th' : 'en');
+  s.mode = q.get('mode') || get('mode') || 'simple';
+  s.theme = q.get('theme') || get('theme') || '';
+  if (s.lang !== 'en') s.lang = 'th';
+  if (s.mode !== 'deep') s.mode = 'simple';
+  d.dataset.lang = s.lang; d.lang = s.lang; d.dataset.mode = s.mode;
+  if (s.theme === 'light' || s.theme === 'dark') d.dataset.theme = s.theme;
+  if (s.lang === 'en') document.title = d.dataset.titleEn;
+})();
+</script>
+<link rel="preload" href="assets/fonts/plex-thai-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/bj-thai-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?v=52ca97cd">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css?v=52ca97cd">
+<link rel="stylesheet" href="assets/css/site.css?v=52ca97cd">
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="th" lang="th">ข้ามไปยังเนื้อหา</span><span data-l="en" lang="en">Skip to content</span></a>
+<div class="readbar" aria-hidden="true"><i></i></div>
+<header class="hdr" id="top">
+  <div class="hdr-in">
+    <a class="brand" href="index.html" aria-label="EV Lab home">
+      <svg class="brand-mark" viewBox="0 0 40 24" aria-hidden="true"><rect x="1.5" y="3" width="32" height="18" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="34.5" y="8.5" width="4" height="7" rx="1.5" fill="currentColor"/><rect class="brand-fill" x="5" y="6.5" width="17" height="11" rx="2"/><circle class="brand-ion" cx="27.5" cy="12" r="2.6"/></svg>
+      <span class="brand-t">EV Lab</span><span class="brand-s">by Sukmart</span>
+    </a>
+    <button class="hdr-menu" type="button" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <span class="hdr-menu-t"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></span>
+    </button>
+    <div class="hdr-tools">
+      <div class="seg" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span class="seg-ico" aria-hidden="true">●</span><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span class="seg-ico" aria-hidden="true">◆</span><span data-l="th" lang="th">เชิงลึก</span><span data-l="en" lang="en">Deep</span></button>
+      </div>
+      <label class="langsel"><span class="sr">Language</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.8 10h14.4M10 2.8c2.2 2.3 2.2 12.1 0 14.4M10 2.8c-2.2 2.3-2.2 12.1 0 14.4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <select id="langSel" aria-label="Language / ภาษา">
+          <option value="th">ไทย</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+      <button class="hdr-theme" type="button" aria-label="Toggle light or dark theme">
+        <svg class="i-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5"/></g></svg>
+        <svg class="i-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.8 12.6A6.6 6.6 0 0 1 7.4 4.2a6.6 6.6 0 1 0 8.4 8.4z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <div class="menu-scrim" data-close-menu></div>
+  <nav class="menu-panel" aria-label="Site">
+    <div class="menu-top">
+      <a class="menu-home" href="index.html"><span data-l="th" lang="th">หน้าแรก</span><span data-l="en" lang="en">Home</span></a>
+      <button class="menu-x" type="button" data-close-menu aria-label="Close menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="menu-mode">
+      <p><span data-l="th" lang="th">ระดับเนื้อหา</span><span data-l="en" lang="en">Reading level</span></p>
+      <div class="seg seg-wide" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span data-l="th" lang="th">เชิงลึก (วิชาการ)</span><span data-l="en" lang="en">Deep (technical)</span></button>
+      </div>
+    </div>
+    <div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></p><ul class="menu-list"><li><a class="mi" href="basics.html"><span class="mi-num" aria-hidden="true">01</span><span class="mi-t"><span data-l="th" lang="th">แบตเตอรี่ทำงานอย่างไร</span><span data-l="en" lang="en">How a battery cell works</span></span><span class="mi-d"><span data-l="th" lang="th">ไอออน อิเล็กตรอน แรงดัน ความจุ และหน่วยที่ต้องรู้</span><span data-l="en" lang="en">Ions, electrons, voltage, capacity and the units that matter</span></span></a></li><li><a class="mi" href="chemistry.html"><span class="mi-num" aria-hidden="true">02</span><span class="mi-t"><span data-l="th" lang="th">เคมีแบตเตอรี่ทุกแบบ</span><span data-l="en" lang="en">Every battery chemistry</span></span><span class="mi-d"><span data-l="th" lang="th">LFP, NMC, NCA, LMFP, โซเดียมไอออน, โซลิดสเตต</span><span data-l="en" lang="en">LFP, NMC, NCA, LMFP, sodium-ion, solid-state</span></span></a></li><li><a class="mi" href="high-soc.html"><span class="mi-num" aria-hidden="true">03</span><span class="mi-t"><span data-l="th" lang="th">ทำไมชาร์จ 100% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why sitting at 100% wears a battery</span></span><span class="mi-d"><span data-l="th" lang="th">ศักย์ไฟฟ้าขั้วลบ ชั้น SEI และการเสื่อมตามเวลา</span><span data-l="en" lang="en">Anode potential, SEI growth and calendar ageing</span></span></a></li><li><a class="mi" href="low-soc.html"><span class="mi-num" aria-hidden="true">04</span><span class="mi-t"><span data-l="th" lang="th">ทำไมต่ำกว่า 10% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why running below 10% hurts</span></span><span class="mi-d"><span data-l="th" lang="th">ความต้านทานภายใน ความลึกของการคายประจุ และการคายประจุเกิน</span><span data-l="en" lang="en">Internal resistance, depth of discharge and over-discharge</span></span></a></li><li><a class="mi" href="charging-curve.html"><span class="mi-num" aria-hidden="true">05</span><span class="mi-t"><span data-l="th" lang="th">ทำไมเกิน 80% ชาร์จช้าลง</span><span data-l="en" lang="en">Why charging slows after 80%</span></span><span class="mi-d"><span data-l="th" lang="th">CC-CV, ลิเทียมเพลตติ้ง, การบาลานซ์เซลล์ และระบบ 400V/800V</span><span data-l="en" lang="en">CC-CV, lithium plating, cell balancing and 400 V vs 800 V</span></span></a></li><li><a class="mi" href="fast-charging.html"><span class="mi-num" aria-hidden="true">06</span><span class="mi-t"><span data-l="th" lang="th">ชาร์จเร็ว DC บ่อยๆ แบตพังไหม</span><span data-l="en" lang="en">Does DC fast charging hurt?</span></span><span class="mi-d"><span data-l="th" lang="th">กลไก ข้อมูลจริงจากรถหลายหมื่นคัน และวิธีชาร์จให้ถนอมแบต</span><span data-l="en" lang="en">Mechanisms, real data from tens of thousands of cars, and good habits</span></span></a></li><li><a class="mi" href="heat.html"><span class="mi-num" aria-hidden="true">07</span><span class="mi-t"><span data-l="th" lang="th">ความร้อน อากาศไทย และความปลอดภัย</span><span data-l="en" lang="en">Heat, Thai weather and safety</span></span><span class="mi-d"><span data-l="th" lang="th">อุณหภูมิกับการเสื่อม ระบบระบายความร้อน ไฟไหม้ และน้ำท่วม</span><span data-l="en" lang="en">Temperature and ageing, cooling, fire and floods</span></span></a></li><li><a class="mi" href="v2l.html"><span class="mi-num" aria-hidden="true">08</span><span class="mi-t"><span data-l="th" lang="th">V2L, V2H และ V2G</span><span data-l="en" lang="en">V2L, V2H and V2G</span></span><span class="mi-d"><span data-l="th" lang="th">รถจ่ายไฟให้เครื่องใช้ไฟฟ้า บ้าน และกริดได้อย่างไร</span><span data-l="en" lang="en">How a car powers appliances, a home and the grid</span></span></a></li><li><a class="mi" href="bms.html"><span class="mi-num" aria-hidden="true">09</span><span class="mi-t"><span data-l="th" lang="th">BMS สมองของแบตเตอรี่</span><span data-l="en" lang="en">The BMS, the battery's brain</span></span><span class="mi-d"><span data-l="th" lang="th">การวัด % แบต การบาลานซ์เซลล์ บัฟเฟอร์ และสุขภาพแบต (SOH)</span><span data-l="en" lang="en">Measuring %, cell balancing, buffers and state of health</span></span></a></li><li><a class="mi" href="lifespan.html"><span class="mi-num" aria-hidden="true">10</span><span class="mi-t"><span data-l="th" lang="th">อายุแบต การรับประกัน และรีไซเคิล</span><span data-l="en" lang="en">Lifespan, warranty and recycling</span></span><span class="mi-d"><span data-l="th" lang="th">แบตอยู่ได้กี่ปีกี่กิโล ซื้อรถมือสองต้องดูอะไร</span><span data-l="en" lang="en">How many years and kilometres, and what to check on a used EV</span></span></a></li><li><a class="mi" href="guide.html" aria-current="page"><span class="mi-num" aria-hidden="true">11</span><span class="mi-t"><span data-l="th" lang="th">คู่มือใช้รถไฟฟ้าในไทย</span><span data-l="en" lang="en">Owner's playbook for Thailand</span></span><span class="mi-d"><span data-l="th" lang="th">กฎการชาร์จประจำวัน ติดตั้งที่ชาร์จบ้าน ค่าไฟ TOU และเรื่องที่ควรรู้</span><span data-l="en" lang="en">Daily charging rules, home chargers, TOU tariffs and more</span></span></a></li></ul></div><div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">เครื่องมือและข้อมูล</span><span data-l="en" lang="en">Tools & reference</span></p><ul class="menu-list"><li><a class="mi" href="myths.html"><span class="mi-num mi-ico" aria-hidden="true">?</span><span class="mi-t"><span data-l="th" lang="th">ความเชื่อผิดๆ เรื่องแบต</span><span data-l="en" lang="en">Battery myths, checked</span></span><span class="mi-d"><span data-l="th" lang="th">เรื่องที่คนชอบพูดต่อกัน จริงหรือไม่ พร้อมหลักฐาน</span><span data-l="en" lang="en">Things people repeat, with the evidence</span></span></a></li><li><a class="mi" href="lab.html"><span class="mi-num mi-ico" aria-hidden="true">∿</span><span class="mi-t"><span data-l="th" lang="th">ห้องแล็บเครื่องคำนวณ</span><span data-l="en" lang="en">Calculator lab</span></span><span class="mi-d"><span data-l="th" lang="th">จำลองการเสื่อม เวลาชาร์จ ค่าใช้จ่าย ระยะทาง และ V2L</span><span data-l="en" lang="en">Simulate ageing, charge time, cost, range and V2L</span></span></a></li><li><a class="mi" href="glossary.html"><span class="mi-num mi-ico" aria-hidden="true">Aa</span><span class="mi-t"><span data-l="th" lang="th">อภิธานศัพท์ ไทย–อังกฤษ</span><span data-l="en" lang="en">Glossary, Thai–English</span></span><span class="mi-d"><span data-l="th" lang="th">คำศัพท์ทุกคำในเว็บ พร้อมคำแปลและความหมาย</span><span data-l="en" lang="en">Every term on the site, translated and explained</span></span></a></li><li><a class="mi" href="sources.html"><span class="mi-num mi-ico" aria-hidden="true">§</span><span class="mi-t"><span data-l="th" lang="th">แหล่งอ้างอิงและวิธีคำนวณ</span><span data-l="en" lang="en">Sources and methods</span></span><span class="mi-d"><span data-l="th" lang="th">งานวิจัย ข้อมูลจริง และแบบจำลองที่ใช้ในเว็บนี้</span><span data-l="en" lang="en">Papers, field data and the models used on this site</span></span></a></li></ul></div>
+  </nav>
+</div>
+<main id="main" class="main">
+
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:1">11</span><span><span data-l="th" lang="th">บทที่ 11 จาก 11</span><span data-l="en" lang="en">Chapter 11 of 11</span></span></div>
+    <h1><span data-l="th" lang="th">คู่มือใช้รถไฟฟ้าในไทย</span><span data-l="en" lang="en">Owner's playbook for Thailand</span></h1>
+    <p class="deck"><span data-l="th" lang="th">รวมทุกอย่างจาก 10 บทก่อนหน้าให้เป็นนิสัยที่ใช้ได้จริง พร้อมเรื่องที่คนใช้รถไฟฟ้าในไทยควรรู้: ติดตั้งที่ชาร์จบ้าน มิเตอร์ TOU ค่าไฟจริงต่อกิโล ตู้ชาร์จสาธารณะ แบต 12V และเรื่องอื่นๆ ที่มักไม่มีใครบอก</span><span data-l="en" lang="en">Everything from the previous ten chapters turned into habits you can actually use, plus what EV owners in Thailand should know: home charger installation, the TOU meter, real cost per kilometre, public chargers, the 12 V battery, and the things nobody tells you.</span></p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2><span data-l="th" lang="th">กฎการชาร์จตามชนิดแบต</span><span data-l="en" lang="en">Charging rules by battery type</span></h2>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th><span data-l="th" lang="th">สถานการณ์</span><span data-l="en" lang="en">Situation</span></th><th><span class="sw" style="background:#2fd0b0"></span>LFP</th><th><span class="sw" style="background:#9b8cff"></span>NMC / NCA</th></tr></thead>
+      <tbody>
+        <tr><td><b><span data-l="th" lang="th">ใช้ประจำวัน</span><span data-l="en" lang="en">Daily use</span></b></td><td><span data-l="th" lang="th">ตามคู่มือ (หลายยี่ห้อแนะนำ 100%)</span><span data-l="en" lang="en">Per the manual (many say 100%)</span></td><td><span data-l="th" lang="th">80–90% หรือตามคู่มือ</span><span data-l="en" lang="en">80–90% or per the manual</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">ชาร์จเต็ม 100%</span><span data-l="en" lang="en">Full 100% charge</span></b></td><td><span data-l="th" lang="th">อย่างน้อยสัปดาห์ละครั้ง เพื่อให้ % แม่น</span><span data-l="en" lang="en">At least weekly, to keep the gauge accurate</span></td><td><span data-l="th" lang="th">เมื่อต้องเดินทางไกล ออกรถไม่นานหลังเต็ม</span><span data-l="en" lang="en">For long trips; leave soon after it finishes</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">ปล่อยให้ต่ำ</span><span data-l="en" lang="en">Running low</span></b></td><td><span data-l="th" lang="th">ได้บ้าง แต่ % ช่วงท้ายอาจไม่แม่น</span><span data-l="en" lang="en">Occasionally; the gauge may be off near empty</span></td><td><span data-l="th" lang="th">ต่ำกว่า 10% ได้เมื่อจำเป็น ชาร์จต่อให้เร็ว</span><span data-l="en" lang="en">Below 10% when needed; recharge soon</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">ชาร์จเร็ว DC</span><span data-l="en" lang="en">DC fast charging</span></b></td><td><span data-l="th" lang="th">ใช้ได้ตามจำเป็น ตัดที่ ~80%</span><span data-l="en" lang="en">Fine when needed; stop near 80%</span></td><td><span data-l="th" lang="th">ใช้ได้ตามจำเป็น ตัดที่ ~80%</span><span data-l="en" lang="en">Fine when needed; stop near 80%</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">จอดนานเป็นสัปดาห์</span><span data-l="en" lang="en">Parked for weeks</span></b></td><td><span data-l="th" lang="th">~50% หรือเสียบชาร์จทิ้งไว้ตามคู่มือ</span><span data-l="en" lang="en">~50%, or stay plugged in per the manual</span></td><td><span data-l="th" lang="th">~50% หรือเสียบชาร์จทิ้งไว้ตั้งลิมิตต่ำ</span><span data-l="en" lang="en">~50%, or plugged in with a low limit</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">อากาศร้อนจัด</span><span data-l="en" lang="en">Very hot weather</span></b></td><td colspan="2"><span data-l="th" lang="th">จอดในร่ม เลี่ยงจอดตากแดดนานๆ ตอนแบตสูง</span><span data-l="en" lang="en">Park in shade; avoid long hours in the sun while the battery is high</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">ติดตั้งที่ชาร์จที่บ้านในไทย</span><span data-l="en" lang="en">Installing a home charger in Thailand</span></h2>
+    <p><span data-l="th" lang="th">ทางเลือกหลักมี 3 แบบ: <b>สายชาร์จพกพา</b> เสียบเต้ารับธรรมดา (ราว 2.3 kW ช้าและสูญเสียมาก ใช้ยามฉุกเฉิน) <b>วอลล์บ็อกซ์ 7.4 kW 1 เฟส</b> (ที่นิยมที่สุด ชาร์จเต็มข้ามคืน) และ <b>11–22 kW 3 เฟส</b> (เฉพาะรถที่ OBC รองรับ)</span><span data-l="en" lang="en">There are three main options: a <b>portable cable</b> in an ordinary socket (about 2.3 kW, slow and lossy; for emergencies), a <b>7.4 kW single-phase wallbox</b> (the most common; full overnight), and <b>11–22 kW three-phase</b> (only if the car's OBC supports it).</span></p>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th><span data-l="th" lang="th">รายการ</span><span data-l="en" lang="en">Item</span></th><th><span data-l="th" lang="th">ข้อกำหนดโดยทั่วไป (2569)</span><span data-l="en" lang="en">Typical requirement (2026)</span></th></tr></thead>
+      <tbody>
+        <tr><td><b><span data-l="th" lang="th">มิเตอร์</span><span data-l="en" lang="en">Meter</span></b></td><td><span data-l="th" lang="th">ขนาด 30 A ขึ้นไป (มัก 30(100)) สำหรับ 1 เฟส หรือ 3 เฟส 45 A ขึ้นไป ตามรุ่นรถ</span><span data-l="en" lang="en">30 A or larger (often 30(100)) single-phase, or 45 A+ three-phase, depending on the car</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">สายเมน</span><span data-l="en" lang="en">Main feeder</span></b></td><td><span data-l="th" lang="th">25 ตร.มม.</span><span data-l="en" lang="en">25 mm²</span></td></tr>
+        <tr><td><b>RCD</b></td><td><span data-l="th" lang="th">พิกัดกระแสรั่ว ≤30 mA ตัดภายใน 0.04 วินาที ชนิด Type B (หรือเทียบเท่า)</span><span data-l="en" lang="en">≤30 mA residual current, trips within 0.04 s, Type B (or equivalent)</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">สายดิน</span><span data-l="en" lang="en">Earthing</span></b></td><td><span data-l="th" lang="th">แยกจากสายดินบ้าน สายหุ้มฉนวนอย่างน้อย 10 ตร.มม.</span><span data-l="en" lang="en">Separate from the house earth, insulated, at least 10 mm²</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">แพ็กเกจของ กฟน.</span><span data-l="en" lang="en">MEA packages</span></b></td><td><span data-l="th" lang="th">7.4 kW 1 เฟส 29,000 บาท / 22 kW 3 เฟส 46,000 บาท (รวม VAT สาย 20 ม. ไม่รวมเครื่องชาร์จ)</span><span data-l="en" lang="en">7.4 kW 1-phase 29,000 THB / 22 kW 3-phase 46,000 THB (VAT incl., 20 m cable, charger not included)</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">มิเตอร์ TOU</span><span data-l="en" lang="en">TOU meter</span></b></td><td><span data-l="th" lang="th">กฟน. 6,640 บาท (แรงต่ำ) · กฟภ. ตั้งแต่ 3,300 บาท (1 เฟส) ตามประกาศปี 2569</span><span data-l="en" lang="en">MEA 6,640 THB (low voltage) · PEA from 3,300 THB (1-phase) under its 2026 notice</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="figcap" style="margin-left:0"><span data-l="th" lang="th">ที่มา: KTC (ปรับปรุง ม.ค. 2569) และฐานเศรษฐกิจ (มิ.ย. 2569) ราคาและข้อกำหนดอาจเปลี่ยน ควรสอบถามการไฟฟ้าในพื้นที่ และใช้ช่างที่มีใบอนุญาต</span><span data-l="en" lang="en">Sources: KTC (updated Jan 2026) and Thansettakij (Jun 2026). Prices and rules can change; check with your local utility and use a licensed electrician.</span> <a class="cite" href="sources.html#ktc2026">[22]</a> <a class="cite" href="sources.html#thtou">[18]</a></p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">มิเตอร์ TOU คุ้มไหม</span><span data-l="en" lang="en">Is a TOU meter worth it?</span></h2>
+    <p><span data-l="th" lang="th">อัตรา TOU บ้านอยู่อาศัย (แรงดันต่ำกว่า 22 kV) ค่าพลังงาน On-Peak 5.7982 และ Off-Peak 2.6369 บาท/หน่วย บวก Ft และ VAT แล้วตกราว 6.38 และ 3.00 บาท/หน่วย ขณะที่อัตราปกติแบบก้าวหน้าเฉลี่ยราว 4.2–4.9 บาท/หน่วย ช่วง On-Peak คือ จันทร์–ศุกร์ 09:00–22:00 นอกนั้นรวมเสาร์อาทิตย์และวันหยุดเป็น Off-Peak TOU คุ้มเมื่อย้ายการใช้ไฟส่วนใหญ่ (โดยเฉพาะการชาร์จรถ) ไปหลังสี่ทุ่มได้ แต่ถ้าบ้านเปิดแอร์หนักตอนกลางวันวันธรรมดา อาจแพงขึ้น ลองคำนวณกับบ้านของคุณ:</span><span data-l="en" lang="en">Residential TOU (below 22 kV) charges 5.7982 on-peak and 2.6369 off-peak THB/kWh; with Ft and VAT that is about 6.38 and 3.00. The normal progressive tariff averages around 4.2–4.9. On-peak is Monday–Friday 09:00–22:00; everything else, including weekends and holidays, is off-peak. TOU pays off if you can move most use, especially car charging, to after 22:00; a home running heavy daytime A/C on weekdays may pay more. Try it with your own numbers:</span> <a class="cite" href="sources.html#peatariff">[40]</a> <a class="cite" href="sources.html#thtou">[18]</a></p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="guide:tou">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">ค่าไฟรายเดือน: อัตราปกติ vs TOU</span><span data-l="en" lang="en">Monthly bill: normal tariff vs TOU</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">ใช้อัตราฐานของ กฟภ./กฟน. (ประเภท 1.1.2 และ TOU 1.2.2) + Ft 0.1623 บาท/หน่วย (ก.ย.–ธ.ค. 2569) + VAT 7% ไม่รวมค่ามิเตอร์ ค่าจริงอาจต่างเล็กน้อยตามรอบบิล</span><span data-l="en" lang="en">Uses PEA/MEA base rates (types 1.1.2 and TOU 1.2.2) + Ft 0.1623 THB/kWh (Sep–Dec 2026) + 7% VAT; meter cost excluded. Real bills may differ slightly by billing cycle.</span> <a class="cite" href="sources.html#thft">[19]</a></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">ค่าใช้จ่ายต่อกิโลเมตร</span><span data-l="en" lang="en">Cost per kilometre</span></h2>
+    <p><span data-l="th" lang="th">ตัวเลขที่คนมักอยากรู้ที่สุด ลองตั้งค่าให้ตรงกับการใช้ของคุณ</span><span data-l="en" lang="en">The number people most want to know. Set it to match your own use.</span></p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="guide:cost">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">บาทต่อกิโลเมตร: ชาร์จแบบต่างๆ เทียบกับรถน้ำมัน</span><span data-l="en" lang="en">Baht per km: ways of charging vs a petrol car</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">ราคาน้ำมันแก๊สโซฮอล์ 95 ของ ปตท. วันที่ 10 ต.ค. 2569 คือ 41.44 บาท/ลิตร ราคา DC สาธารณะเฉลี่ยปี 2569 ราว 7.30–8.50 (On-Peak) และ 4.10–6.50 (Off-Peak) บาท/kWh การชาร์จบ้านรวมความสูญเสียราว 7% (วอลล์บ็อกซ์) การชาร์จ DC รวมราว 5%</span><span data-l="en" lang="en">PTT Gasohol 95 was 41.44 THB/L on 10 Oct 2026. Public DC averaged about 7.30–8.50 (on-peak) and 4.10–6.50 (off-peak) THB/kWh in 2026. Home charging includes ~7% wallbox losses; DC includes ~5%.</span> <a class="cite" href="sources.html#thfuel">[21]</a> <a class="cite" href="sources.html#thdc">[20]</a> <a class="cite" href="sources.html#adac2026">[17]</a></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">ตู้ชาร์จสาธารณะในไทย</span><span data-l="en" lang="en">Public charging in Thailand</span></h2>
+    <ul>
+      <li><span data-l="th" lang="th">หัวชาร์จหลัก: AC = Type 2, DC = CCS2 รถส่วนใหญ่ในไทยรองรับทั้งสองแบบ</span><span data-l="en" lang="en">Main connectors: AC is Type 2, DC is CCS2; most cars in Thailand take both.</span></li>
+      <li><span data-l="th" lang="th">เครือข่ายใหญ่ เช่น PTT EV Station PluZ, EA Anywhere, EleXA (กฟผ.), PEA VOLTA และ Tesla Supercharger แต่ละเจ้ามีแอปและราคา On/Off-Peak ของตัวเอง</span><span data-l="en" lang="en">Big networks include PTT EV Station PluZ, EA Anywhere, EleXA (EGAT), PEA VOLTA and Tesla Superchargers, each with its own app and on/off-peak prices.</span></li>
+      <li><span data-l="th" lang="th">มารยาท: ชาร์จเสร็จแล้วย้ายรถ หลายเจ้าเก็บค่าจอดแช่ (idle fee) ตู้หัวคู่บางรุ่นแบ่งกำลังกัน ถ้ามีตู้ว่างแยกให้เลือกใช้ตู้ที่ไม่แบ่งกำลัง</span><span data-l="en" lang="en">Etiquette: move the car when done; many networks charge idle fees. Some dual-head units share power, so pick an unshared one if available.</span></li>
+      <li><span data-l="th" lang="th">ก่อนเดินทางไกล: เช็กสถานะตู้ในแอปและวางแผนให้ถึงตู้ตอนแบต 10–20% เพื่อได้กำลังสูงสุด</span><span data-l="en" lang="en">Before a road trip: check charger status in the app and plan to arrive at 10–20% for peak power.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">เรื่องที่ควรรู้เพิ่มเติม</span><span data-l="en" lang="en">What else you should know</span></h2>
+    <details class="acc" open><summary><span data-l="th" lang="th">แบต 12V เล็กๆ คือสาเหตุอันดับต้นๆ ที่ทำให้รถไฟฟ้า “ตาย”</span><span data-l="en" lang="en">The small 12 V battery is a top reason an EV "dies"</span></summary><div class="acc-b"><p><span data-l="th" lang="th">รถไฟฟ้าส่วนใหญ่ยังมีแบตแรงดันต่ำ (12V หรือ 16V ในบางรุ่น) ไว้เลี้ยงคอมพิวเตอร์ ระบบล็อก และสั่งเปิดคอนแทคเตอร์ของแบตใหญ่ ถ้าแบตนี้เสีย รถจะไม่ตื่นแม้แบตใหญ่เต็ม แบตตะกั่วกรดมักอยู่ได้ไม่กี่ปีในอากาศร้อน อาการเตือนคือมีข้อความเตือนแบต 12V ระบบรวน หรือรถตื่นช้า แก้ได้ด้วยการพ่วงแบต 12V (ไม่ใช่แบตแรงสูง) แล้วเปลี่ยนแบตลูกเล็กใหม่</span><span data-l="en" lang="en">Most EVs still carry a low-voltage battery (12 V, or 16 V on some) that powers the computers and locks and closes the main battery's contactors. If it fails, the car won't wake even with a full pack. Lead-acid units often last only a few years in the heat. Warning signs: 12 V alerts, glitches, slow wake-up. The fix is a jump on the 12 V circuit (never the high-voltage pack) and a new small battery.</span></p></div></details>
+    <details class="acc"><summary><span data-l="th" lang="th">ยางสึกเร็วกว่ารถน้ำมัน</span><span data-l="en" lang="en">Tyres wear faster than on petrol cars</span></summary><div class="acc-b"><p><span data-l="th" lang="th">รถไฟฟ้าหนักกว่าและมีแรงบิดทันที ยางจึงสึกเร็วกว่า ควรเช็กลมยางทุกเดือน สลับยางตามระยะ และใช้ยางที่รองรับน้ำหนักรถไฟฟ้า (มักมีสัญลักษณ์ HL หรือ XL) ลมยางอ่อนกินไฟเพิ่มด้วย</span><span data-l="en" lang="en">EVs are heavier and deliver instant torque, so tyres wear faster. Check pressures monthly, rotate on schedule, and use tyres rated for the weight (often marked HL or XL). Soft tyres also cost range.</span></p></div></details>
+    <details class="acc"><summary><span data-l="th" lang="th">เบรกแทบไม่ได้ใช้ แต่ต้องดูแล</span><span data-l="en" lang="en">You rarely use the brakes, but they still need care</span></summary><div class="acc-b"><p><span data-l="th" lang="th">การเบรกแบบเก็บพลังงาน (regen) ทำให้ผ้าเบรกแทบไม่สึก แต่จานเบรกอาจขึ้นสนิมในอากาศชื้นของไทย ควรเหยียบเบรกแรงๆ บ้างเป็นครั้งคราว และเปลี่ยนน้ำมันเบรกตามระยะเพราะดูดความชื้น</span><span data-l="en" lang="en">Regenerative braking means pads barely wear, but rotors can rust in Thailand's humidity. Brake firmly now and then, and change brake fluid on schedule since it absorbs moisture.</span></p></div></details>
+    <details class="acc"><summary><span data-l="th" lang="th">อะไรกินระยะทาง</span><span data-l="en" lang="en">What eats your range</span></summary><div class="acc-b"><p><span data-l="th" lang="th">ความเร็วสำคัญที่สุด แรงต้านอากาศเพิ่มตามกำลังสองของความเร็ว ขับ 120 กม./ชม. กินไฟมากกว่า 90 กม./ชม. ราว 30–40% แอร์ในไทยกินราว 1–2 kW ซึ่งมีผลมากในรถติด น้ำหนักบรรทุก ลมยาง และฝนตกก็มีผล ลองเครื่องคำนวณระยะทางในหน้าห้องแล็บ</span><span data-l="en" lang="en">Speed matters most: aerodynamic drag grows with the square of speed, so 120 km/h uses roughly 30–40% more than 90 km/h. Air-conditioning in Thailand draws roughly 1–2 kW, which weighs heavily in traffic. Load, tyre pressure and rain also count. Try the range calculator in the lab.</span></p></div></details>
+    <details class="acc"><summary><span data-l="th" lang="th">ความปลอดภัยของการชาร์จที่บ้าน</span><span data-l="en" lang="en">Home charging safety</span></summary><div class="acc-b"><ul><li><span data-l="th" lang="th">อย่าใช้ปลั๊กพ่วงหรือสายต่อกับสายชาร์จพกพา กระแสสูงต่อเนื่องหลายชั่วโมงทำให้ร้อนจนไหม้ได้</span><span data-l="en" lang="en">Never use extension cords or power strips with a portable charger; hours of high current can overheat them.</span></li><li><span data-l="th" lang="th">ถ้าปลั๊กหรือเต้ารับอุ่นผิดปกติ หยุดใช้และให้ช่างตรวจ</span><span data-l="en" lang="en">If a plug or socket feels warm, stop and have it checked.</span></li><li><span data-l="th" lang="th">ตรวจว่ามี RCD ที่เหมาะสม และสายดินถูกต้อง</span><span data-l="en" lang="en">Make sure a suitable RCD and correct earthing are in place.</span></li></ul></div></details>
+    <details class="acc"><summary><span data-l="th" lang="th">ซอฟต์แวร์อัปเดตเปลี่ยนพฤติกรรมแบตได้</span><span data-l="en" lang="en">Software updates can change battery behaviour</span></summary><div class="acc-b"><p><span data-l="th" lang="th">ผู้ผลิตปรับแผนที่การชาร์จ บัฟเฟอร์ และการประเมิน % ผ่านการอัปเดตได้ บางครั้งระยะทางที่แสดงหรือความเร็วชาร์จจึงเปลี่ยนหลังอัปเดต อ่านบันทึกการอัปเดตของรถ</span><span data-l="en" lang="en">Makers adjust charging maps, buffers and SOC estimation through updates, so displayed range or charging speed can change afterwards. Read your car's release notes.</span></p></div></details>
+  </div>
+</section>
+
+<nav class="pager" aria-label="Chapters"><a class="pager-a pager-prev" href="lifespan.html"><span class="pager-k"><span data-l="th" lang="th">ก่อนหน้า</span><span data-l="en" lang="en">Previous</span></span><span class="pager-t"><span data-l="th" lang="th">อายุแบต การรับประกัน และรีไซเคิล</span><span data-l="en" lang="en">Lifespan, warranty and recycling</span></span></a><span></span></nav>
+</main>
+<footer class="ftr">
+  <div class="ftr-in">
+    <div class="ftr-brand">
+      <p class="ftr-t">EV Lab <span>by Sukmart</span></p>
+      <p class="ftr-d"><span data-l="th" lang="th">ห้องเรียนออนไลน์เรื่องแบตเตอรี่รถยนต์ไฟฟ้า อธิบายได้ทั้งแบบเข้าใจง่ายและแบบวิชาการ พร้อมแหล่งอ้างอิงทุกตัวเลข</span><span data-l="en" lang="en">An open classroom on electric-vehicle batteries, explained simply or in full technical depth, with a source for every number.</span></p>
+    </div>
+    <ul class="ftr-links">
+      <li><a href="myths.html"><span data-l="th" lang="th">ความเชื่อผิดๆ</span><span data-l="en" lang="en">Myths</span></a></li>
+      <li><a href="lab.html"><span data-l="th" lang="th">เครื่องคำนวณ</span><span data-l="en" lang="en">Calculators</span></a></li>
+      <li><a href="glossary.html"><span data-l="th" lang="th">อภิธานศัพท์</span><span data-l="en" lang="en">Glossary</span></a></li>
+      <li><a href="sources.html"><span data-l="th" lang="th">แหล่งอ้างอิง</span><span data-l="en" lang="en">Sources</span></a></li>
+    </ul>
+    <p class="ftr-note"><span data-l="th" lang="th">ข้อมูลปรับปรุงล่าสุด ตุลาคม 2569 · เนื้อหาเพื่อการศึกษา ไม่ใช่คำแนะนำจากผู้ผลิตรถ ควรยึดคู่มือรถของคุณเป็นหลัก</span><span data-l="en" lang="en">Last updated October 2026 · For education, not a substitute for your carmaker's manual.</span></p>
+    <p class="ftr-copy">© 2026 Sukmart · ev.sukmart.com</p>
+  </div>
+</footer>
+<script type="module" src="assets/js/core.js?v=52ca97cd"></script>
+
+</body>
+</html>

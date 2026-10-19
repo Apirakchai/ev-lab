@@ -1,0 +1,78 @@
+<!--meta {"slug":"v2l"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.73">08</span><span>[[บทที่ 8 จาก 11|Chapter 8 of 11]]</span></div>
+    <h1>[[V2L, V2H และ V2G|V2L, V2H and V2G]]</h1>
+    <p class="deck">[[แบตรถไฟฟ้า 60–80 kWh คือพลังงานพอให้บ้านทั่วไปใช้ได้หลายวัน V2L (Vehicle-to-Load) ทำให้รถจ่ายไฟบ้าน 230 V ให้เครื่องใช้ไฟฟ้าได้โดยตรง ส่วน V2H และ V2G ไปไกลกว่านั้น คือจ่ายเข้าระบบไฟของบ้านหรือของการไฟฟ้า|A 60–80 kWh EV battery holds enough energy to run a typical home for days. V2L (vehicle-to-load) lets the car supply 230 V household power straight to appliances. V2H and V2G go further, feeding a home's wiring or the utility grid.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2>[[V2L ทำงานอย่างไร|How V2L works]]</h2>
+    <p m-s>[[แบตรถเก็บไฟตรง (DC) แรงดันหลายร้อยโวลต์ แต่เครื่องใช้ไฟฟ้าในบ้านต้องการไฟสลับ (AC) 230 V 50 Hz รถที่มี V2L จะใช้ <b>ออนบอร์ดชาร์จเจอร์แบบสองทิศทาง</b> ซึ่งปกติแปลง AC เป็น DC ตอนชาร์จ ให้ทำงานกลับด้านเป็น <b>อินเวอร์เตอร์</b> โดยสวิตช์ทรานซิสเตอร์กำลังเปิดปิดหลายหมื่นครั้งต่อวินาทีเพื่อ “ปั้น” คลื่นไซน์ขึ้นมา แล้วส่งออกทางหัวแปลง V2L ที่เสียบช่องชาร์จ หรือเต้ารับในห้องโดยสาร|The car's battery stores DC at several hundred volts, but household appliances want 230 V, 50 Hz AC. A V2L car runs its <b>bidirectional on-board charger</b>, which normally turns AC into DC while charging, in reverse as an <b>inverter</b>: power transistors switch tens of thousands of times a second to sculpt a sine wave, delivered through a V2L adapter in the charge port or a socket in the cabin.]]</p>
+    <p m-d>[[ภาคกำลังของ OBC แบบสองทิศทางทั่วไปมี 2 ขั้น: (1) DC-DC แบบแยกทางไฟฟ้า (เช่น Dual Active Bridge หรือ CLLC resonant) ปรับแรงดันแพ็ก 300–800 V ลงเป็นบัส DC ภายใน และ (2) อินเวอร์เตอร์ H-bridge/totem-pole ที่สร้าง AC ด้วย PWM แบบ sine-triangle จากนั้นตัวกรอง LC ตัดฮาร์มอนิกความถี่สวิตช์ออก เหลือไซน์ 50 Hz ในโหมด V2L อินเวอร์เตอร์ทำงานแบบ <b>grid-forming</b> (กำหนดแรงดันและความถี่เอง) ต่างจากโหมดชาร์จที่ตามกริด ขีดจำกัดกำลังมาจากพิกัดของ OBC สาย และหัวแปลง (เช่น 16 A × 230 V ≈ 3.6 kW)|A typical bidirectional OBC has two power stages: (1) an isolated DC-DC stage (dual active bridge or CLLC resonant) that converts the 300–800 V pack to an internal DC bus, and (2) an H-bridge or totem-pole inverter producing AC by sine-triangle PWM, after which an LC filter removes switching harmonics to leave a 50 Hz sine. In V2L mode the inverter is <b>grid-forming</b> (it sets voltage and frequency itself), unlike charging, where it follows the grid. Power is capped by the OBC, cabling and adapter ratings (e.g. 16 A × 230 V ≈ 3.6 kW).]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="v2l:flow">
+      <div class="inst-h"><span class="inst-t">[[จ่ายไฟจากรถ: เลือกเครื่องใช้ไฟฟ้าแล้วดูว่าใช้ได้นานแค่ไหน|Power from your car: pick appliances and see how long it lasts]]</span></div>
+    </div>
+    <figcaption class="figcap">[[กำลังไฟของเครื่องใช้ไฟฟ้าเป็นค่าทั่วไป ควรดูฉลากของเครื่องจริง ประสิทธิภาพอินเวอร์เตอร์สมมติ 90% และรถใช้ไฟเองระหว่างจ่าย V2L ราว 150 W (สมมติ) มอเตอร์อย่างตู้เย็นและแอร์กินไฟกระชากตอนสตาร์ทสูงกว่าค่าปกติหลายเท่า|Appliance wattages are typical; check the label on yours. Inverter efficiency assumed 90%, plus about 150 W used by the car itself while supplying V2L (assumed). Motors such as fridges and air-conditioners draw a multiple of their running power for a moment at start-up.]]</figcaption>
+  </figure>
+  <div class="col">
+    <p>[[ผลต่อแบตแทบไม่มี: ใช้ไฟ 5 kWh จากแบต 75 kWh เท่ากับแค่ 0.07 รอบเต็ม เทียบได้กับขับรถราว 30 กม. สิ่งเดียวที่ควรตั้งไว้คือ <b>ขีดจำกัดการคายประจุ</b> (รถส่วนใหญ่ตั้งได้ เช่นหยุดจ่ายที่ 20–30%) เพื่อเหลือไฟพอขับไปชาร์จ|The effect on the battery is negligible: drawing 5 kWh from a 75 kWh pack is just 0.07 of a full cycle, about the same as driving 30 km. The one setting that matters is the <b>discharge limit</b> (most cars let you stop at, say, 20–30%) so you still have enough to drive to a charger.]]</p>
+  </div>
+  <figure class="fig mid" m-d>
+    <div class="inst" data-fig="v2l:pwm">
+      <div class="inst-h"><span class="inst-t">[[อินเวอร์เตอร์สร้างคลื่นไซน์จากการเปิดปิดสวิตช์ (Sine-triangle PWM)|How an inverter builds a sine from switching (sine-triangle PWM)]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ความถี่สวิตช์จริงของอินเวอร์เตอร์ในรถสูงหลายหมื่นเฮิรตซ์ ภาพนี้ใช้ความถี่ต่ำกว่ามากเพื่อให้มองเห็นพัลส์ ตัวกรอง LC จำลองแบบอันดับหนึ่งอย่างง่าย|Real automotive inverters switch at tens of kilohertz; this uses a far lower carrier so you can see the pulses. The LC filter is a simple first-order approximation.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[รถรุ่นไหนจ่ายได้เท่าไร|How much each car can supply]]</h2>
+    <p>[[ตัวเลขข้างล่างเป็นกำลัง V2L สูงสุดตามสเปกที่ประกาศในตลาดนิวซีแลนด์ (EVDB) ซึ่งใช้หัวและไฟ 230 V ใกล้เคียงไทย รุ่นย่อยและตลาดอาจต่างกัน ควรเช็กกับตัวแทนจำหน่ายในไทย|Below are maximum V2L ratings published for the New Zealand market (EVDB), which uses 230 V like Thailand. Trims and markets can differ; confirm with your Thai dealer.]] <a class="cite" href="sources.html#evdbnz">[23]</a></p>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th>[[รุ่น|Model]]</th><th class="n">[[V2L สูงสุด|Max V2L]]</th><th>[[พอใช้กับ|Enough for]]</th></tr></thead>
+      <tbody>
+        <tr><td>BYD Atto 3 · MG4 · MG ZS EV</td><td class="n">2.2–2.4 kW</td><td>[[หม้อหุงข้าว + ตู้เย็น + ไฟ + พัดลม|Rice cooker + fridge + lights + fans]]</td></tr>
+        <tr><td>BYD Seal</td><td class="n">3.0 kW</td><td>[[เพิ่มไมโครเวฟหรือกาต้มน้ำได้ทีละอย่าง|Add a microwave or kettle, one at a time]]</td></tr>
+        <tr><td>BYD Dolphin · Sealion 7 · Atto 2 · Xpeng G6 · Zeekr X/7X · Tesla Model Y L · GAC Aion V</td><td class="n">3.3 kW</td><td>[[แอร์อินเวอร์เตอร์ 9,000–12,000 BTU ได้|A 9,000–12,000 BTU inverter A/C]]</td></tr>
+        <tr><td>Hyundai Ioniq 5/6 · Kia EV3/EV6/EV9 · MG S5 EV</td><td class="n">3.6 kW</td><td>[[เกือบทั้งบ้านขนาดเล็ก (ใช้ทีละไม่กี่อย่าง)|Most of a small home, a few loads at a time]]</td></tr>
+        <tr><td>GWM Ora (5, GT, Lux)</td><td class="n">6.0 kW</td><td>[[เครื่องมือช่าง เตาแม่เหล็กไฟฟ้า + แอร์|Power tools, induction hob + A/C]]</td></tr>
+        <tr><td>Denza D9 · MG IM6</td><td class="n">6.6 kW</td><td>[[ใกล้เคียงไฟบ้านเฟสเดียวขนาดเล็ก|Close to a small single-phase home supply]]</td></tr>
+        <tr><td>Toyota bZ4X</td><td class="n">1.5 kW</td><td>[[เครื่องใช้เล็กๆ|Small appliances]]</td></tr>
+        <tr><td>[[Tesla Model 3/Y รุ่นทั่วไป|Tesla Model 3/Y (most trims)]]</td><td class="n">–</td><td>[[ไม่มี V2L (มีเต้ารับ 12 V และโหมด Camp)|No V2L (12 V outlets and Camp Mode only)]]</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[V2L, V2H, V2G ต่างกันอย่างไร|V2L vs V2H vs V2G]]</h2>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th></th><th>V2L</th><th>V2H</th><th>V2G</th></tr></thead>
+      <tbody>
+        <tr><td><b>[[จ่ายไฟให้|Supplies]]</b></td><td>[[เครื่องใช้ไฟฟ้าที่เสียบตรง|Appliances plugged in directly]]</td><td>[[ระบบไฟทั้งบ้าน|The whole home's wiring]]</td><td>[[ระบบไฟของการไฟฟ้า|The utility grid]]</td></tr>
+        <tr><td><b>[[อุปกรณ์ที่ต้องมี|Equipment]]</b></td><td>[[หัวแปลง V2L หรือเต้ารับในรถ|V2L adapter or cabin socket]]</td><td>[[เครื่องชาร์จสองทิศทาง + สวิตช์ตัดแยกจากกริด|Bidirectional charger + grid-isolation transfer switch]]</td><td>[[เครื่องชาร์จสองทิศทางที่ได้รับอนุญาตเชื่อมกริด + มิเตอร์|Grid-approved bidirectional charger + metering]]</td></tr>
+        <tr><td><b>[[ใช้ทำอะไร|Use]]</b></td><td>[[ไฟดับ แคมป์ปิ้ง งานนอกสถานที่|Outages, camping, work sites]]</td><td>[[สำรองไฟบ้าน ใช้ไฟถูกตอนกลางคืนมาใช้ตอนแพง|Home backup, shifting cheap night power to peak hours]]</td><td>[[ช่วยรักษาเสถียรภาพกริด ขายไฟ|Grid support, selling power]]</td></tr>
+        <tr><td><b>[[มาตรฐานที่เกี่ยวข้อง|Standards]]</b></td><td>[[เฉพาะผู้ผลิต|Maker-specific]]</td><td>CHAdeMO (DC), ISO 15118-20</td><td>ISO 15118-20, IEEE 1547 / [[ข้อกำหนดการเชื่อมต่อของการไฟฟ้า|utility interconnection rules]]</td></tr>
+      </tbody>
+    </table></div>
+    <div class="warnbox">
+      <p class="box-h">[[ห้ามทำเด็ดขาด|Never do this]]</p>
+      <p>[[อย่าทำสายที่มีปลั๊กตัวผู้สองหัวเพื่อเสียบ V2L เข้าเต้ารับในบ้านเพื่อจ่ายไฟทั้งบ้าน ไฟจะย้อนเข้าสายของการไฟฟ้าได้ (backfeed) ซึ่งอาจทำให้ช่างที่ซ่อมสายไฟถูกไฟดูดเสียชีวิต และขาปลั๊กที่ยื่นออกมามีไฟเปลือย การจ่ายไฟเข้าระบบบ้านต้องผ่านสวิตช์สลับแหล่งจ่าย (transfer switch) ที่ตัดบ้านออกจากกริดก่อนเสมอ ติดตั้งโดยช่างไฟที่มีใบอนุญาต และควรปรึกษาการไฟฟ้านครหลวง/ส่วนภูมิภาค|Never make a double-male cable to push V2L into a wall socket to power the house. Power can flow back into the utility's lines (backfeed) and electrocute line workers, and the exposed plug pins are live. Feeding a home must go through a transfer switch that isolates it from the grid first, installed by a licensed electrician, ideally after consulting MEA/PEA.]]</p>
+    </div>
+    <div class="key">
+      <p class="key-h">[[สรุปบทนี้|Chapter summary]]</p>
+      <ul>
+        <li>[[V2L = รถเป็นพาวเวอร์แบงก์ 230 V ขนาดมหึมา ส่วนใหญ่จ่าย 2.2–3.6 kW บางรุ่นถึง 6.6 kW|V2L turns the car into a giant 230 V power bank, mostly 2.2–3.6 kW, some up to 6.6 kW.]]</li>
+        <li>[[ผลต่อแบตเล็กมาก ตั้งขีดจำกัดการคายประจุไว้ให้เหลือพอขับ|The battery barely notices; set a discharge limit so you can still drive.]]</li>
+        <li>[[จ่ายเข้าบ้านทั้งหลังต้องมีอุปกรณ์และการติดตั้งที่ถูกต้องเท่านั้น|Powering a whole home needs proper equipment and installation, nothing improvised.]]</li>
+      </ul>
+    </div>
+  </div>
+</section>

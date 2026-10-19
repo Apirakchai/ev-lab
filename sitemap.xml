@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ev.sukmart.com/basics.html</loc></url>
+  <url><loc>https://ev.sukmart.com/bms.html</loc></url>
   <url><loc>https://ev.sukmart.com/charging-curve.html</loc></url>
   <url><loc>https://ev.sukmart.com/chemistry.html</loc></url>
   <url><loc>https://ev.sukmart.com/fast-charging.html</loc></url>
+  <url><loc>https://ev.sukmart.com/glossary.html</loc></url>
+  <url><loc>https://ev.sukmart.com/guide.html</loc></url>
+  <url><loc>https://ev.sukmart.com/heat.html</loc></url>
   <url><loc>https://ev.sukmart.com/high-soc.html</loc></url>
   <url><loc>https://ev.sukmart.com/</loc></url>
+  <url><loc>https://ev.sukmart.com/lab.html</loc></url>
+  <url><loc>https://ev.sukmart.com/lifespan.html</loc></url>
   <url><loc>https://ev.sukmart.com/low-soc.html</loc></url>
+  <url><loc>https://ev.sukmart.com/myths.html</loc></url>
+  <url><loc>https://ev.sukmart.com/sources.html</loc></url>
+  <url><loc>https://ev.sukmart.com/v2l.html</loc></url>
 </urlset>

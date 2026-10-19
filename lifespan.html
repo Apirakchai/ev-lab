@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="th" data-lang="th" data-mode="simple" data-page="lifespan" data-title-th="อายุแบต การรับประกัน และรีไซเคิล — EV Lab" data-title-en="Lifespan, warranty and recycling — EV Lab" data-desc-en="How many years and kilometres, and what to check on a used EV">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>อายุแบต การรับประกัน และรีไซเคิล — EV Lab</title>
+<meta name="description" content="แบตอยู่ได้กี่ปีกี่กิโล ซื้อรถมือสองต้องดูอะไร">
+<meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11151a" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EV Lab by Sukmart">
+<meta property="og:title" content="อายุแบต การรับประกัน และรีไซเคิล — EV Lab">
+<meta property="og:description" content="แบตอยู่ได้กี่ปีกี่กิโล ซื้อรถมือสองต้องดูอะไร">
+<meta property="og:image" content="https://ev.sukmart.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://ev.sukmart.com/lifespan.html">
+<script>
+/* Apply saved language / reading level / theme before first paint */
+(function () {
+  var d = document.documentElement, q = new URLSearchParams(location.search), s = {};
+  function get(k) { try { return localStorage.getItem('evlab.' + k); } catch (e) { return null; } }
+  var langs = (navigator.languages || [navigator.language || 'th']).join(',').toLowerCase();
+  s.lang = q.get('lang') || get('lang') || (langs.indexOf('th') > -1 || !/^en/.test(langs) ? 'th' : 'en');
+  s.mode = q.get('mode') || get('mode') || 'simple';
+  s.theme = q.get('theme') || get('theme') || '';
+  if (s.lang !== 'en') s.lang = 'th';
+  if (s.mode !== 'deep') s.mode = 'simple';
+  d.dataset.lang = s.lang; d.lang = s.lang; d.dataset.mode = s.mode;
+  if (s.theme === 'light' || s.theme === 'dark') d.dataset.theme = s.theme;
+  if (s.lang === 'en') document.title = d.dataset.titleEn;
+})();
+</script>
+<link rel="preload" href="assets/fonts/plex-thai-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/bj-thai-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?v=52ca97cd">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css?v=52ca97cd">
+<link rel="stylesheet" href="assets/css/site.css?v=52ca97cd">
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="th" lang="th">ข้ามไปยังเนื้อหา</span><span data-l="en" lang="en">Skip to content</span></a>
+<div class="readbar" aria-hidden="true"><i></i></div>
+<header class="hdr" id="top">
+  <div class="hdr-in">
+    <a class="brand" href="index.html" aria-label="EV Lab home">
+      <svg class="brand-mark" viewBox="0 0 40 24" aria-hidden="true"><rect x="1.5" y="3" width="32" height="18" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="34.5" y="8.5" width="4" height="7" rx="1.5" fill="currentColor"/><rect class="brand-fill" x="5" y="6.5" width="17" height="11" rx="2"/><circle class="brand-ion" cx="27.5" cy="12" r="2.6"/></svg>
+      <span class="brand-t">EV Lab</span><span class="brand-s">by Sukmart</span>
+    </a>
+    <button class="hdr-menu" type="button" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <span class="hdr-menu-t"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></span>
+    </button>
+    <div class="hdr-tools">
+      <div class="seg" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span class="seg-ico" aria-hidden="true">●</span><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span class="seg-ico" aria-hidden="true">◆</span><span data-l="th" lang="th">เชิงลึก</span><span data-l="en" lang="en">Deep</span></button>
+      </div>
+      <label class="langsel"><span class="sr">Language</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.8 10h14.4M10 2.8c2.2 2.3 2.2 12.1 0 14.4M10 2.8c-2.2 2.3-2.2 12.1 0 14.4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <select id="langSel" aria-label="Language / ภาษา">
+          <option value="th">ไทย</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+      <button class="hdr-theme" type="button" aria-label="Toggle light or dark theme">
+        <svg class="i-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5"/></g></svg>
+        <svg class="i-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.8 12.6A6.6 6.6 0 0 1 7.4 4.2a6.6 6.6 0 1 0 8.4 8.4z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <div class="menu-scrim" data-close-menu></div>
+  <nav class="menu-panel" aria-label="Site">
+    <div class="menu-top">
+      <a class="menu-home" href="index.html"><span data-l="th" lang="th">หน้าแรก</span><span data-l="en" lang="en">Home</span></a>
+      <button class="menu-x" type="button" data-close-menu aria-label="Close menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="menu-mode">
+      <p><span data-l="th" lang="th">ระดับเนื้อหา</span><span data-l="en" lang="en">Reading level</span></p>
+      <div class="seg seg-wide" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span data-l="th" lang="th">เชิงลึก (วิชาการ)</span><span data-l="en" lang="en">Deep (technical)</span></button>
+      </div>
+    </div>
+    <div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></p><ul class="menu-list"><li><a class="mi" href="basics.html"><span class="mi-num" aria-hidden="true">01</span><span class="mi-t"><span data-l="th" lang="th">แบตเตอรี่ทำงานอย่างไร</span><span data-l="en" lang="en">How a battery cell works</span></span><span class="mi-d"><span data-l="th" lang="th">ไอออน อิเล็กตรอน แรงดัน ความจุ และหน่วยที่ต้องรู้</span><span data-l="en" lang="en">Ions, electrons, voltage, capacity and the units that matter</span></span></a></li><li><a class="mi" href="chemistry.html"><span class="mi-num" aria-hidden="true">02</span><span class="mi-t"><span data-l="th" lang="th">เคมีแบตเตอรี่ทุกแบบ</span><span data-l="en" lang="en">Every battery chemistry</span></span><span class="mi-d"><span data-l="th" lang="th">LFP, NMC, NCA, LMFP, โซเดียมไอออน, โซลิดสเตต</span><span data-l="en" lang="en">LFP, NMC, NCA, LMFP, sodium-ion, solid-state</span></span></a></li><li><a class="mi" href="high-soc.html"><span class="mi-num" aria-hidden="true">03</span><span class="mi-t"><span data-l="th" lang="th">ทำไมชาร์จ 100% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why sitting at 100% wears a battery</span></span><span class="mi-d"><span data-l="th" lang="th">ศักย์ไฟฟ้าขั้วลบ ชั้น SEI และการเสื่อมตามเวลา</span><span data-l="en" lang="en">Anode potential, SEI growth and calendar ageing</span></span></a></li><li><a class="mi" href="low-soc.html"><span class="mi-num" aria-hidden="true">04</span><span class="mi-t"><span data-l="th" lang="th">ทำไมต่ำกว่า 10% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why running below 10% hurts</span></span><span class="mi-d"><span data-l="th" lang="th">ความต้านทานภายใน ความลึกของการคายประจุ และการคายประจุเกิน</span><span data-l="en" lang="en">Internal resistance, depth of discharge and over-discharge</span></span></a></li><li><a class="mi" href="charging-curve.html"><span class="mi-num" aria-hidden="true">05</span><span class="mi-t"><span data-l="th" lang="th">ทำไมเกิน 80% ชาร์จช้าลง</span><span data-l="en" lang="en">Why charging slows after 80%</span></span><span class="mi-d"><span data-l="th" lang="th">CC-CV, ลิเทียมเพลตติ้ง, การบาลานซ์เซลล์ และระบบ 400V/800V</span><span data-l="en" lang="en">CC-CV, lithium plating, cell balancing and 400 V vs 800 V</span></span></a></li><li><a class="mi" href="fast-charging.html"><span class="mi-num" aria-hidden="true">06</span><span class="mi-t"><span data-l="th" lang="th">ชาร์จเร็ว DC บ่อยๆ แบตพังไหม</span><span data-l="en" lang="en">Does DC fast charging hurt?</span></span><span class="mi-d"><span data-l="th" lang="th">กลไก ข้อมูลจริงจากรถหลายหมื่นคัน และวิธีชาร์จให้ถนอมแบต</span><span data-l="en" lang="en">Mechanisms, real data from tens of thousands of cars, and good habits</span></span></a></li><li><a class="mi" href="heat.html"><span class="mi-num" aria-hidden="true">07</span><span class="mi-t"><span data-l="th" lang="th">ความร้อน อากาศไทย และความปลอดภัย</span><span data-l="en" lang="en">Heat, Thai weather and safety</span></span><span class="mi-d"><span data-l="th" lang="th">อุณหภูมิกับการเสื่อม ระบบระบายความร้อน ไฟไหม้ และน้ำท่วม</span><span data-l="en" lang="en">Temperature and ageing, cooling, fire and floods</span></span></a></li><li><a class="mi" href="v2l.html"><span class="mi-num" aria-hidden="true">08</span><span class="mi-t"><span data-l="th" lang="th">V2L, V2H และ V2G</span><span data-l="en" lang="en">V2L, V2H and V2G</span></span><span class="mi-d"><span data-l="th" lang="th">รถจ่ายไฟให้เครื่องใช้ไฟฟ้า บ้าน และกริดได้อย่างไร</span><span data-l="en" lang="en">How a car powers appliances, a home and the grid</span></span></a></li><li><a class="mi" href="bms.html"><span class="mi-num" aria-hidden="true">09</span><span class="mi-t"><span data-l="th" lang="th">BMS สมองของแบตเตอรี่</span><span data-l="en" lang="en">The BMS, the battery's brain</span></span><span class="mi-d"><span data-l="th" lang="th">การวัด % แบต การบาลานซ์เซลล์ บัฟเฟอร์ และสุขภาพแบต (SOH)</span><span data-l="en" lang="en">Measuring %, cell balancing, buffers and state of health</span></span></a></li><li><a class="mi" href="lifespan.html" aria-current="page"><span class="mi-num" aria-hidden="true">10</span><span class="mi-t"><span data-l="th" lang="th">อายุแบต การรับประกัน และรีไซเคิล</span><span data-l="en" lang="en">Lifespan, warranty and recycling</span></span><span class="mi-d"><span data-l="th" lang="th">แบตอยู่ได้กี่ปีกี่กิโล ซื้อรถมือสองต้องดูอะไร</span><span data-l="en" lang="en">How many years and kilometres, and what to check on a used EV</span></span></a></li><li><a class="mi" href="guide.html"><span class="mi-num" aria-hidden="true">11</span><span class="mi-t"><span data-l="th" lang="th">คู่มือใช้รถไฟฟ้าในไทย</span><span data-l="en" lang="en">Owner's playbook for Thailand</span></span><span class="mi-d"><span data-l="th" lang="th">กฎการชาร์จประจำวัน ติดตั้งที่ชาร์จบ้าน ค่าไฟ TOU และเรื่องที่ควรรู้</span><span data-l="en" lang="en">Daily charging rules, home chargers, TOU tariffs and more</span></span></a></li></ul></div><div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">เครื่องมือและข้อมูล</span><span data-l="en" lang="en">Tools & reference</span></p><ul class="menu-list"><li><a class="mi" href="myths.html"><span class="mi-num mi-ico" aria-hidden="true">?</span><span class="mi-t"><span data-l="th" lang="th">ความเชื่อผิดๆ เรื่องแบต</span><span data-l="en" lang="en">Battery myths, checked</span></span><span class="mi-d"><span data-l="th" lang="th">เรื่องที่คนชอบพูดต่อกัน จริงหรือไม่ พร้อมหลักฐาน</span><span data-l="en" lang="en">Things people repeat, with the evidence</span></span></a></li><li><a class="mi" href="lab.html"><span class="mi-num mi-ico" aria-hidden="true">∿</span><span class="mi-t"><span data-l="th" lang="th">ห้องแล็บเครื่องคำนวณ</span><span data-l="en" lang="en">Calculator lab</span></span><span class="mi-d"><span data-l="th" lang="th">จำลองการเสื่อม เวลาชาร์จ ค่าใช้จ่าย ระยะทาง และ V2L</span><span data-l="en" lang="en">Simulate ageing, charge time, cost, range and V2L</span></span></a></li><li><a class="mi" href="glossary.html"><span class="mi-num mi-ico" aria-hidden="true">Aa</span><span class="mi-t"><span data-l="th" lang="th">อภิธานศัพท์ ไทย–อังกฤษ</span><span data-l="en" lang="en">Glossary, Thai–English</span></span><span class="mi-d"><span data-l="th" lang="th">คำศัพท์ทุกคำในเว็บ พร้อมคำแปลและความหมาย</span><span data-l="en" lang="en">Every term on the site, translated and explained</span></span></a></li><li><a class="mi" href="sources.html"><span class="mi-num mi-ico" aria-hidden="true">§</span><span class="mi-t"><span data-l="th" lang="th">แหล่งอ้างอิงและวิธีคำนวณ</span><span data-l="en" lang="en">Sources and methods</span></span><span class="mi-d"><span data-l="th" lang="th">งานวิจัย ข้อมูลจริง และแบบจำลองที่ใช้ในเว็บนี้</span><span data-l="en" lang="en">Papers, field data and the models used on this site</span></span></a></li></ul></div>
+  </nav>
+</div>
+<main id="main" class="main">
+
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.91">10</span><span><span data-l="th" lang="th">บทที่ 10 จาก 11</span><span data-l="en" lang="en">Chapter 10 of 11</span></span></div>
+    <h1><span data-l="th" lang="th">อายุแบต การรับประกัน และรีไซเคิล</span><span data-l="en" lang="en">Lifespan, warranty and recycling</span></h1>
+    <p class="deck"><span data-l="th" lang="th">แบตรถไฟฟ้าส่วนใหญ่ไม่ได้ “พัง” แต่ค่อยๆ จุได้น้อยลง ข้อมูลจริงบอกว่าเฉลี่ยลดลงราว 2% ต่อปี หมายความว่าหลัง 8 ปียังเหลือราว 80% และเมื่อหมดอายุในรถ แบตยังมีชีวิตที่สอง และวัสดุในนั้นนำกลับมาใช้ใหม่ได้</span><span data-l="en" lang="en">Most EV batteries don't "die"; they slowly hold less. Field data says about 2% a year on average, which leaves roughly 80% after eight years. And when a pack retires from the car, it can have a second life, and its materials can be recovered.</span></p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2><span data-l="th" lang="th">รูปร่างของการเสื่อมตลอดอายุ</span><span data-l="en" lang="en">The shape of ageing over a lifetime</span></h2>
+    <p><span data-l="th" lang="th">การเสื่อมไม่ได้เป็นเส้นตรง ช่วงปีแรกความจุมักลดเร็วกว่า (SEI กำลังก่อตัวและเซลล์ปรับตัว) จากนั้นช้าลงและค่อนข้างคงที่ ในห้องแล็บ เซลล์ที่ถูกใช้หนักมากบางตัวมี “จุดหักศอก” (knee) ที่การเสื่อมเร่งขึ้นกะทันหันช่วงท้ายอายุ มักเกี่ยวกับลิเทียมเพลตติ้งหรือความต้านทานที่สะสม รถที่ใช้งานปกติและมีระบบจัดการแบตที่ดีมักใช้ไม่ถึงจุดนั้นก่อนตัวรถหมดอายุ</span><span data-l="en" lang="en">Ageing isn't a straight line. Capacity usually drops faster in the first year (the SEI is still forming and the cell settles), then slows to a steadier pace. In the lab, some very hard-used cells show a "knee" where fade suddenly accelerates late in life, often tied to lithium plating or accumulated resistance. Cars used normally with good battery management rarely reach it before the car itself is retired.</span> <a class="cite" href="sources.html#attia2022">[30]</a></p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="life:curve">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">สุขภาพแบตตามเวลา: ข้อมูลจริงเทียบกับเงื่อนไขรับประกัน</span><span data-l="en" lang="en">Battery health over time: field data vs the warranty</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">เส้นใช้อัตราเฉลี่ยต่อปีจาก Geotab (1.5%, 2.3% และ 3.0% ต่อปี) โดยปีแรกเสื่อมเร็วเป็นสองเท่าตามลักษณะทั่วไปของแบตลิเทียมไอออน จุดของ Tesla คือค่าเฉลี่ย 85% ที่ 320,000 กม. (Model 3/Y Long Range) แปลงเป็นปีตามระยะทางต่อปีที่คุณเลือก กรอบรับประกันคือเงื่อนไขของ Tesla ประเทศไทย</span><span data-l="en" lang="en">Lines use Geotab's average yearly rates (1.5%, 2.3%, 3.0%) with a doubled first-year loss, typical of lithium-ion. The Tesla point is the 85% average at 320,000 km (Model 3/Y Long Range), converted to years using your km per year. The warranty box is Tesla Thailand's terms.</span> <a class="cite" href="sources.html#geotab2026">[1]</a> <a class="cite" href="sources.html#tesla2023">[2]</a> <a class="cite" href="sources.html#teslath">[3]</a></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">แบตหนึ่งก้อนวิ่งได้กี่กิโล</span><span data-l="en" lang="en">How many kilometres is one battery good for?</span></h2>
+    <p><span data-l="th" lang="th">ลองคิดง่ายๆ: แบต 75 kWh ถ้าชาร์จเต็มรอบได้ 1,500 รอบ (ค่าต่ำของ NMC) ที่อัตรา 160 Wh/km วิ่งได้ราว 700,000 กม. ก่อนเหลือ 80% ในทางปฏิบัติรถส่วนบุคคลมักถูกจำกัดด้วย “เวลา” (การเสื่อมตามอายุ) มากกว่าจำนวนรอบ เพราะขับปีละไม่กี่หมื่นกิโล</span><span data-l="en" lang="en">A quick estimate: a 75 kWh pack good for 1,500 full cycles (the low end for NMC) at 160 Wh/km covers about 700,000 km before reaching 80%. In practice private cars are limited by time (calendar ageing) more than cycles, because they cover only tens of thousands of kilometres a year.</span></p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="life:km">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">อะไรหมดก่อน: รอบชาร์จ หรือเวลา</span><span data-l="en" lang="en">Which runs out first: cycles or years?</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">ค่ารอบชาร์จเป็นช่วงทั่วไปของแต่ละเคมี (บทที่ 2) อัตราเสื่อมตามเวลาตั้งได้เอง ผลเป็นการประมาณคร่าวๆ เพื่อเห็นภาพว่าปัจจัยไหนจำกัดอายุ</span><span data-l="en" lang="en">Cycle counts are typical ranges per chemistry (chapter 2); set the calendar rate yourself. A rough estimate to see which factor limits life.</span></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">การรับประกันแบตในไทย อ่านอะไรบ้าง</span><span data-l="en" lang="en">Battery warranties in Thailand: what to read</span></h2>
+    <p><span data-l="th" lang="th">ตัวอย่างที่ตรวจสอบได้: Tesla ประเทศไทยรับประกันแบตและชุดขับเคลื่อน 8 ปี หรือ 160,000 กม. (Model 3 RWD, Model Y Premium RWD) และ 8 ปีหรือ 192,000 กม. (รุ่น Long Range, Performance, Model Y L) แล้วแต่อย่างใดถึงก่อน โดยรับประกันความจุไม่ต่ำกว่า 70% ยี่ห้ออื่นส่วนใหญ่ให้ราว 8 ปีเช่นกัน แต่รายละเอียดต่างกัน ควรอ่าน 4 จุดนี้ในสัญญา:</span><span data-l="en" lang="en">A verifiable example: Tesla Thailand covers the battery and drive unit for 8 years or 160,000 km (Model 3 RWD, Model Y Premium RWD) and 8 years or 192,000 km (Long Range, Performance, Model Y L), whichever comes first, with at least 70% capacity retained. Most other brands also offer around 8 years, but the details differ. Check these four points in the contract:</span> <a class="cite" href="sources.html#teslath">[3]</a></p>
+    <ol class="steps">
+      <li><span data-l="th" lang="th"><b>รับประกันการเสื่อมหรือไม่</b> และกี่ % (70%? 75%?) บางสัญญาคุ้มครองแค่ “ความเสียหาย” ไม่รวมการลดความจุตามปกติ</span><span data-l="en" lang="en"><b>Is capacity loss covered</b>, and to what % (70%? 75%)? Some contracts cover only "defects", not normal fade.</span></li>
+      <li><span data-l="th" lang="th"><b>ใครเป็นผู้วัด และวัดอย่างไร</b> เช่น ต้องให้ศูนย์ทดสอบ</span><span data-l="en" lang="en"><b>Who measures, and how</b>: usually the service centre's own test.</span></li>
+      <li><span data-l="th" lang="th"><b>เงื่อนไขที่ทำให้สิทธิ์หมด</b> เช่น ดัดแปลง ซ่อมนอกศูนย์ อุบัติเหตุ น้ำท่วม</span><span data-l="en" lang="en"><b>What voids it</b>: modifications, non-dealer repairs, accidents, flood damage.</span></li>
+      <li><span data-l="th" lang="th"><b>โอนให้เจ้าของคนถัดไปได้ไหม</b> สำคัญมากเวลาขายต่อ</span><span data-l="en" lang="en"><b>Does it transfer to the next owner?</b> Crucial at resale.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">ซื้อรถไฟฟ้ามือสอง ต้องเช็กแบตอย่างไร</span><span data-l="en" lang="en">Buying a used EV: checking the battery</span></h2>
+    <ul>
+      <li><span data-l="th" lang="th">ขอ <b>รายงานสุขภาพแบต (SOH)</b> จากศูนย์บริการ หรือใช้แอป OBD ที่รองรับรุ่นนั้น</span><span data-l="en" lang="en">Ask for a <b>battery health (SOH) report</b> from a service centre, or use an OBD app that supports the model.</span></li>
+      <li><span data-l="th" lang="th">ชาร์จเต็มแล้วดูระยะทางที่จอแสดง เทียบกับสเปกตอนใหม่ (ระวังว่าค่านี้เป็นแค่การประมาณ)</span><span data-l="en" lang="en">Charge to full and compare the displayed range with the new-car figure (it is only an estimate).</span></li>
+      <li><span data-l="th" lang="th">ลองชาร์จเร็ว DC ดูว่ากำลังสูงสุดใกล้สเปกไหม แบตที่ความต้านทานสูงขึ้นจะรับกำลังได้น้อยลง</span><span data-l="en" lang="en">Try a DC fast charge and see whether peak power is near spec; a pack with higher resistance accepts less.</span></li>
+      <li><span data-l="th" lang="th">เช็กประวัติน้ำท่วมและอุบัติเหตุใต้ท้องรถ ดูรอยกระแทกที่กล่องแบต</span><span data-l="en" lang="en">Check for flood and underbody accident history; look for impacts on the battery case.</span></li>
+      <li><span data-l="th" lang="th">ตรวจว่าการรับประกันแบตเหลือกี่ปี/กี่กิโล และโอนได้หรือไม่</span><span data-l="en" lang="en">Confirm how much battery warranty remains, in years and km, and whether it transfers.</span></li>
+      <li><span data-l="th" lang="th">ถามนิสัยการใช้: ใช้ DC บ่อยแค่ไหน จอดที่ไหน ชาร์จถึงกี่ % (ข้อมูลประกอบ ไม่ใช่ตัวตัดสิน)</span><span data-l="en" lang="en">Ask about habits: how often DC, where it was parked, usual charge limit (context, not a verdict).</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">ชีวิตที่สองและการรีไซเคิล</span><span data-l="en" lang="en">Second life and recycling</span></h2>
+    <p><span data-l="th" lang="th">แบตที่เหลือความจุราว 70–80% อาจไม่เหมาะกับรถแล้ว แต่ยังใช้เป็น <b>ระบบกักเก็บพลังงานแบบอยู่กับที่</b> (เช่น เก็บไฟโซลาร์) ได้อีกหลายปี เมื่อหมดอายุจริงจึงเข้าสู่การรีไซเคิล ซึ่งมี 3 แนวทางหลัก:</span><span data-l="en" lang="en">A pack down to roughly 70–80% may no longer suit a car but can serve for years as <b>stationary storage</b> (for solar, say). When it is truly spent, it is recycled by one of three main routes:</span></p>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th><span data-l="th" lang="th">วิธี</span><span data-l="en" lang="en">Route</span></th><th><span data-l="th" lang="th">ทำอย่างไร</span><span data-l="en" lang="en">How</span></th><th><span data-l="th" lang="th">ได้อะไรคืน</span><span data-l="en" lang="en">What comes back</span></th></tr></thead>
+      <tbody>
+        <tr><td><b><span data-l="th" lang="th">ไพโรเมทัลเลอร์จี (หลอม)</span><span data-l="en" lang="en">Pyrometallurgy (smelting)</span></b></td><td><span data-l="th" lang="th">เผาที่อุณหภูมิสูง แยกโลหะผสม</span><span data-l="en" lang="en">High-temperature smelting into an alloy</span></td><td><span data-l="th" lang="th">นิกเกิล โคบอลต์ ทองแดงได้ดี ลิเทียมมักไปอยู่ในกากตะกรัน</span><span data-l="en" lang="en">Nickel, cobalt and copper well; lithium mostly ends up in slag</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">ไฮโดรเมทัลเลอร์จี (สกัดด้วยสารละลาย)</span><span data-l="en" lang="en">Hydrometallurgy (leaching)</span></b></td><td><span data-l="th" lang="th">บดเป็น “แบล็กแมส” แล้วละลายด้วยกรดและตกตะกอนแยกทีละธาตุ</span><span data-l="en" lang="en">Shred to "black mass", leach in acid, and precipitate each metal</span></td><td><span data-l="th" lang="th">ได้ทั้งลิเทียม นิกเกิล โคบอลต์ แมงกานีส ในอัตราสูง</span><span data-l="en" lang="en">High recovery of lithium, nickel, cobalt and manganese</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">รีไซเคิลโดยตรง</span><span data-l="en" lang="en">Direct recycling</span></b></td><td><span data-l="th" lang="th">ฟื้นฟูผงขั้วบวกโดยไม่สลายโครงผลึก</span><span data-l="en" lang="en">Restore cathode powder without breaking its crystal</span></td><td><span data-l="th" lang="th">ยังอยู่ในขั้นพัฒนา คุ้มค่ากับ LFP ที่ราคาโลหะต่ำ</span><span data-l="en" lang="en">Still emerging; attractive for low-metal-value LFP</span></td></tr>
+      </tbody>
+    </table></div>
+    <p><span data-l="th" lang="th">กฎหมายแบตเตอรี่ของสหภาพยุโรป (Regulation (EU) 2023/1542) ตั้งเป้าให้นำลิเทียมกลับคืน 50% ภายในปลายปี 2027 และ 80% ภายในปลายปี 2031 ส่วนโคบอลต์ นิกเกิล และทองแดง 90% และ 95% ตามลำดับ และบังคับสัดส่วนวัสดุรีไซเคิลขั้นต่ำในแบตใหม่ตั้งแต่ปี 2031 ซึ่งกลายเป็นมาตรฐานที่ผู้ผลิตทั่วโลกต้องปรับตาม</span><span data-l="en" lang="en">The EU Battery Regulation (Regulation (EU) 2023/1542) requires recovering 50% of lithium by the end of 2027 and 80% by the end of 2031, 90% and then 95% of cobalt, nickel and copper, and minimum recycled content in new batteries from 2031, a benchmark manufacturers worldwide are adapting to.</span> <a class="cite" href="sources.html#eubatt2023">[39]</a></p>
+    <div class="key">
+      <p class="key-h"><span data-l="th" lang="th">สรุปบทนี้</span><span data-l="en" lang="en">Chapter summary</span></p>
+      <ul>
+        <li><span data-l="th" lang="th">ค่าเฉลี่ยจากรถจริงราว 2% ต่อปี แบตส่วนใหญ่อยู่ได้นานกว่าการรับประกัน</span><span data-l="en" lang="en">Real-world average is about 2% a year; most packs outlast their warranty.</span></li>
+        <li><span data-l="th" lang="th">ปีแรกลดเร็วกว่าปกติ ไม่ต้องตกใจ หลังจากนั้นจะช้าลง</span><span data-l="en" lang="en">The first year drops faster than later ones; don't panic, it slows down.</span></li>
+        <li><span data-l="th" lang="th">อ่านสัญญารับประกันให้ละเอียด โดยเฉพาะเกณฑ์ % และการโอนสิทธิ์</span><span data-l="en" lang="en">Read the warranty closely, especially the % threshold and transferability.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<nav class="pager" aria-label="Chapters"><a class="pager-a pager-prev" href="bms.html"><span class="pager-k"><span data-l="th" lang="th">ก่อนหน้า</span><span data-l="en" lang="en">Previous</span></span><span class="pager-t"><span data-l="th" lang="th">BMS สมองของแบตเตอรี่</span><span data-l="en" lang="en">The BMS, the battery's brain</span></span></a><a class="pager-a pager-next" href="guide.html"><span class="pager-k"><span data-l="th" lang="th">บทถัดไป</span><span data-l="en" lang="en">Next chapter</span></span><span class="pager-t"><span data-l="th" lang="th">คู่มือใช้รถไฟฟ้าในไทย</span><span data-l="en" lang="en">Owner's playbook for Thailand</span></span></a></nav>
+</main>
+<footer class="ftr">
+  <div class="ftr-in">
+    <div class="ftr-brand">
+      <p class="ftr-t">EV Lab <span>by Sukmart</span></p>
+      <p class="ftr-d"><span data-l="th" lang="th">ห้องเรียนออนไลน์เรื่องแบตเตอรี่รถยนต์ไฟฟ้า อธิบายได้ทั้งแบบเข้าใจง่ายและแบบวิชาการ พร้อมแหล่งอ้างอิงทุกตัวเลข</span><span data-l="en" lang="en">An open classroom on electric-vehicle batteries, explained simply or in full technical depth, with a source for every number.</span></p>
+    </div>
+    <ul class="ftr-links">
+      <li><a href="myths.html"><span data-l="th" lang="th">ความเชื่อผิดๆ</span><span data-l="en" lang="en">Myths</span></a></li>
+      <li><a href="lab.html"><span data-l="th" lang="th">เครื่องคำนวณ</span><span data-l="en" lang="en">Calculators</span></a></li>
+      <li><a href="glossary.html"><span data-l="th" lang="th">อภิธานศัพท์</span><span data-l="en" lang="en">Glossary</span></a></li>
+      <li><a href="sources.html"><span data-l="th" lang="th">แหล่งอ้างอิง</span><span data-l="en" lang="en">Sources</span></a></li>
+    </ul>
+    <p class="ftr-note"><span data-l="th" lang="th">ข้อมูลปรับปรุงล่าสุด ตุลาคม 2569 · เนื้อหาเพื่อการศึกษา ไม่ใช่คำแนะนำจากผู้ผลิตรถ ควรยึดคู่มือรถของคุณเป็นหลัก</span><span data-l="en" lang="en">Last updated October 2026 · For education, not a substitute for your carmaker's manual.</span></p>
+    <p class="ftr-copy">© 2026 Sukmart · ev.sukmart.com</p>
+  </div>
+</footer>
+<script type="module" src="assets/js/core.js?v=52ca97cd"></script>
+
+</body>
+</html>

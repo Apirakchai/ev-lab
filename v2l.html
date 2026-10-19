@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="th" data-lang="th" data-mode="simple" data-page="v2l" data-title-th="V2L, V2H และ V2G — EV Lab" data-title-en="V2L, V2H and V2G — EV Lab" data-desc-en="How a car powers appliances, a home and the grid">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>V2L, V2H และ V2G — EV Lab</title>
+<meta name="description" content="รถจ่ายไฟให้เครื่องใช้ไฟฟ้า บ้าน และกริดได้อย่างไร">
+<meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11151a" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EV Lab by Sukmart">
+<meta property="og:title" content="V2L, V2H และ V2G — EV Lab">
+<meta property="og:description" content="รถจ่ายไฟให้เครื่องใช้ไฟฟ้า บ้าน และกริดได้อย่างไร">
+<meta property="og:image" content="https://ev.sukmart.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://ev.sukmart.com/v2l.html">
+<script>
+/* Apply saved language / reading level / theme before first paint */
+(function () {
+  var d = document.documentElement, q = new URLSearchParams(location.search), s = {};
+  function get(k) { try { return localStorage.getItem('evlab.' + k); } catch (e) { return null; } }
+  var langs = (navigator.languages || [navigator.language || 'th']).join(',').toLowerCase();
+  s.lang = q.get('lang') || get('lang') || (langs.indexOf('th') > -1 || !/^en/.test(langs) ? 'th' : 'en');
+  s.mode = q.get('mode') || get('mode') || 'simple';
+  s.theme = q.get('theme') || get('theme') || '';
+  if (s.lang !== 'en') s.lang = 'th';
+  if (s.mode !== 'deep') s.mode = 'simple';
+  d.dataset.lang = s.lang; d.lang = s.lang; d.dataset.mode = s.mode;
+  if (s.theme === 'light' || s.theme === 'dark') d.dataset.theme = s.theme;
+  if (s.lang === 'en') document.title = d.dataset.titleEn;
+})();
+</script>
+<link rel="preload" href="assets/fonts/plex-thai-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/bj-thai-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?v=52ca97cd">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css?v=52ca97cd">
+<link rel="stylesheet" href="assets/css/site.css?v=52ca97cd">
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="th" lang="th">ข้ามไปยังเนื้อหา</span><span data-l="en" lang="en">Skip to content</span></a>
+<div class="readbar" aria-hidden="true"><i></i></div>
+<header class="hdr" id="top">
+  <div class="hdr-in">
+    <a class="brand" href="index.html" aria-label="EV Lab home">
+      <svg class="brand-mark" viewBox="0 0 40 24" aria-hidden="true"><rect x="1.5" y="3" width="32" height="18" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="34.5" y="8.5" width="4" height="7" rx="1.5" fill="currentColor"/><rect class="brand-fill" x="5" y="6.5" width="17" height="11" rx="2"/><circle class="brand-ion" cx="27.5" cy="12" r="2.6"/></svg>
+      <span class="brand-t">EV Lab</span><span class="brand-s">by Sukmart</span>
+    </a>
+    <button class="hdr-menu" type="button" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <span class="hdr-menu-t"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></span>
+    </button>
+    <div class="hdr-tools">
+      <div class="seg" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span class="seg-ico" aria-hidden="true">●</span><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span class="seg-ico" aria-hidden="true">◆</span><span data-l="th" lang="th">เชิงลึก</span><span data-l="en" lang="en">Deep</span></button>
+      </div>
+      <label class="langsel"><span class="sr">Language</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.8 10h14.4M10 2.8c2.2 2.3 2.2 12.1 0 14.4M10 2.8c-2.2 2.3-2.2 12.1 0 14.4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <select id="langSel" aria-label="Language / ภาษา">
+          <option value="th">ไทย</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+      <button class="hdr-theme" type="button" aria-label="Toggle light or dark theme">
+        <svg class="i-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5"/></g></svg>
+        <svg class="i-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.8 12.6A6.6 6.6 0 0 1 7.4 4.2a6.6 6.6 0 1 0 8.4 8.4z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <div class="menu-scrim" data-close-menu></div>
+  <nav class="menu-panel" aria-label="Site">
+    <div class="menu-top">
+      <a class="menu-home" href="index.html"><span data-l="th" lang="th">หน้าแรก</span><span data-l="en" lang="en">Home</span></a>
+      <button class="menu-x" type="button" data-close-menu aria-label="Close menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="menu-mode">
+      <p><span data-l="th" lang="th">ระดับเนื้อหา</span><span data-l="en" lang="en">Reading level</span></p>
+      <div class="seg seg-wide" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span data-l="th" lang="th">เชิงลึก (วิชาการ)</span><span data-l="en" lang="en">Deep (technical)</span></button>
+      </div>
+    </div>
+    <div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></p><ul class="menu-list"><li><a class="mi" href="basics.html"><span class="mi-num" aria-hidden="true">01</span><span class="mi-t"><span data-l="th" lang="th">แบตเตอรี่ทำงานอย่างไร</span><span data-l="en" lang="en">How a battery cell works</span></span><span class="mi-d"><span data-l="th" lang="th">ไอออน อิเล็กตรอน แรงดัน ความจุ และหน่วยที่ต้องรู้</span><span data-l="en" lang="en">Ions, electrons, voltage, capacity and the units that matter</span></span></a></li><li><a class="mi" href="chemistry.html"><span class="mi-num" aria-hidden="true">02</span><span class="mi-t"><span data-l="th" lang="th">เคมีแบตเตอรี่ทุกแบบ</span><span data-l="en" lang="en">Every battery chemistry</span></span><span class="mi-d"><span data-l="th" lang="th">LFP, NMC, NCA, LMFP, โซเดียมไอออน, โซลิดสเตต</span><span data-l="en" lang="en">LFP, NMC, NCA, LMFP, sodium-ion, solid-state</span></span></a></li><li><a class="mi" href="high-soc.html"><span class="mi-num" aria-hidden="true">03</span><span class="mi-t"><span data-l="th" lang="th">ทำไมชาร์จ 100% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why sitting at 100% wears a battery</span></span><span class="mi-d"><span data-l="th" lang="th">ศักย์ไฟฟ้าขั้วลบ ชั้น SEI และการเสื่อมตามเวลา</span><span data-l="en" lang="en">Anode potential, SEI growth and calendar ageing</span></span></a></li><li><a class="mi" href="low-soc.html"><span class="mi-num" aria-hidden="true">04</span><span class="mi-t"><span data-l="th" lang="th">ทำไมต่ำกว่า 10% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why running below 10% hurts</span></span><span class="mi-d"><span data-l="th" lang="th">ความต้านทานภายใน ความลึกของการคายประจุ และการคายประจุเกิน</span><span data-l="en" lang="en">Internal resistance, depth of discharge and over-discharge</span></span></a></li><li><a class="mi" href="charging-curve.html"><span class="mi-num" aria-hidden="true">05</span><span class="mi-t"><span data-l="th" lang="th">ทำไมเกิน 80% ชาร์จช้าลง</span><span data-l="en" lang="en">Why charging slows after 80%</span></span><span class="mi-d"><span data-l="th" lang="th">CC-CV, ลิเทียมเพลตติ้ง, การบาลานซ์เซลล์ และระบบ 400V/800V</span><span data-l="en" lang="en">CC-CV, lithium plating, cell balancing and 400 V vs 800 V</span></span></a></li><li><a class="mi" href="fast-charging.html"><span class="mi-num" aria-hidden="true">06</span><span class="mi-t"><span data-l="th" lang="th">ชาร์จเร็ว DC บ่อยๆ แบตพังไหม</span><span data-l="en" lang="en">Does DC fast charging hurt?</span></span><span class="mi-d"><span data-l="th" lang="th">กลไก ข้อมูลจริงจากรถหลายหมื่นคัน และวิธีชาร์จให้ถนอมแบต</span><span data-l="en" lang="en">Mechanisms, real data from tens of thousands of cars, and good habits</span></span></a></li><li><a class="mi" href="heat.html"><span class="mi-num" aria-hidden="true">07</span><span class="mi-t"><span data-l="th" lang="th">ความร้อน อากาศไทย และความปลอดภัย</span><span data-l="en" lang="en">Heat, Thai weather and safety</span></span><span class="mi-d"><span data-l="th" lang="th">อุณหภูมิกับการเสื่อม ระบบระบายความร้อน ไฟไหม้ และน้ำท่วม</span><span data-l="en" lang="en">Temperature and ageing, cooling, fire and floods</span></span></a></li><li><a class="mi" href="v2l.html" aria-current="page"><span class="mi-num" aria-hidden="true">08</span><span class="mi-t"><span data-l="th" lang="th">V2L, V2H และ V2G</span><span data-l="en" lang="en">V2L, V2H and V2G</span></span><span class="mi-d"><span data-l="th" lang="th">รถจ่ายไฟให้เครื่องใช้ไฟฟ้า บ้าน และกริดได้อย่างไร</span><span data-l="en" lang="en">How a car powers appliances, a home and the grid</span></span></a></li><li><a class="mi" href="bms.html"><span class="mi-num" aria-hidden="true">09</span><span class="mi-t"><span data-l="th" lang="th">BMS สมองของแบตเตอรี่</span><span data-l="en" lang="en">The BMS, the battery's brain</span></span><span class="mi-d"><span data-l="th" lang="th">การวัด % แบต การบาลานซ์เซลล์ บัฟเฟอร์ และสุขภาพแบต (SOH)</span><span data-l="en" lang="en">Measuring %, cell balancing, buffers and state of health</span></span></a></li><li><a class="mi" href="lifespan.html"><span class="mi-num" aria-hidden="true">10</span><span class="mi-t"><span data-l="th" lang="th">อายุแบต การรับประกัน และรีไซเคิล</span><span data-l="en" lang="en">Lifespan, warranty and recycling</span></span><span class="mi-d"><span data-l="th" lang="th">แบตอยู่ได้กี่ปีกี่กิโล ซื้อรถมือสองต้องดูอะไร</span><span data-l="en" lang="en">How many years and kilometres, and what to check on a used EV</span></span></a></li><li><a class="mi" href="guide.html"><span class="mi-num" aria-hidden="true">11</span><span class="mi-t"><span data-l="th" lang="th">คู่มือใช้รถไฟฟ้าในไทย</span><span data-l="en" lang="en">Owner's playbook for Thailand</span></span><span class="mi-d"><span data-l="th" lang="th">กฎการชาร์จประจำวัน ติดตั้งที่ชาร์จบ้าน ค่าไฟ TOU และเรื่องที่ควรรู้</span><span data-l="en" lang="en">Daily charging rules, home chargers, TOU tariffs and more</span></span></a></li></ul></div><div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">เครื่องมือและข้อมูล</span><span data-l="en" lang="en">Tools & reference</span></p><ul class="menu-list"><li><a class="mi" href="myths.html"><span class="mi-num mi-ico" aria-hidden="true">?</span><span class="mi-t"><span data-l="th" lang="th">ความเชื่อผิดๆ เรื่องแบต</span><span data-l="en" lang="en">Battery myths, checked</span></span><span class="mi-d"><span data-l="th" lang="th">เรื่องที่คนชอบพูดต่อกัน จริงหรือไม่ พร้อมหลักฐาน</span><span data-l="en" lang="en">Things people repeat, with the evidence</span></span></a></li><li><a class="mi" href="lab.html"><span class="mi-num mi-ico" aria-hidden="true">∿</span><span class="mi-t"><span data-l="th" lang="th">ห้องแล็บเครื่องคำนวณ</span><span data-l="en" lang="en">Calculator lab</span></span><span class="mi-d"><span data-l="th" lang="th">จำลองการเสื่อม เวลาชาร์จ ค่าใช้จ่าย ระยะทาง และ V2L</span><span data-l="en" lang="en">Simulate ageing, charge time, cost, range and V2L</span></span></a></li><li><a class="mi" href="glossary.html"><span class="mi-num mi-ico" aria-hidden="true">Aa</span><span class="mi-t"><span data-l="th" lang="th">อภิธานศัพท์ ไทย–อังกฤษ</span><span data-l="en" lang="en">Glossary, Thai–English</span></span><span class="mi-d"><span data-l="th" lang="th">คำศัพท์ทุกคำในเว็บ พร้อมคำแปลและความหมาย</span><span data-l="en" lang="en">Every term on the site, translated and explained</span></span></a></li><li><a class="mi" href="sources.html"><span class="mi-num mi-ico" aria-hidden="true">§</span><span class="mi-t"><span data-l="th" lang="th">แหล่งอ้างอิงและวิธีคำนวณ</span><span data-l="en" lang="en">Sources and methods</span></span><span class="mi-d"><span data-l="th" lang="th">งานวิจัย ข้อมูลจริง และแบบจำลองที่ใช้ในเว็บนี้</span><span data-l="en" lang="en">Papers, field data and the models used on this site</span></span></a></li></ul></div>
+  </nav>
+</div>
+<main id="main" class="main">
+
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.73">08</span><span><span data-l="th" lang="th">บทที่ 8 จาก 11</span><span data-l="en" lang="en">Chapter 8 of 11</span></span></div>
+    <h1><span data-l="th" lang="th">V2L, V2H และ V2G</span><span data-l="en" lang="en">V2L, V2H and V2G</span></h1>
+    <p class="deck"><span data-l="th" lang="th">แบตรถไฟฟ้า 60–80 kWh คือพลังงานพอให้บ้านทั่วไปใช้ได้หลายวัน V2L (Vehicle-to-Load) ทำให้รถจ่ายไฟบ้าน 230 V ให้เครื่องใช้ไฟฟ้าได้โดยตรง ส่วน V2H และ V2G ไปไกลกว่านั้น คือจ่ายเข้าระบบไฟของบ้านหรือของการไฟฟ้า</span><span data-l="en" lang="en">A 60–80 kWh EV battery holds enough energy to run a typical home for days. V2L (vehicle-to-load) lets the car supply 230 V household power straight to appliances. V2H and V2G go further, feeding a home's wiring or the utility grid.</span></p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2><span data-l="th" lang="th">V2L ทำงานอย่างไร</span><span data-l="en" lang="en">How V2L works</span></h2>
+    <p data-m="s"><span data-l="th" lang="th">แบตรถเก็บไฟตรง (DC) แรงดันหลายร้อยโวลต์ แต่เครื่องใช้ไฟฟ้าในบ้านต้องการไฟสลับ (AC) 230 V 50 Hz รถที่มี V2L จะใช้ <b>ออนบอร์ดชาร์จเจอร์แบบสองทิศทาง</b> ซึ่งปกติแปลง AC เป็น DC ตอนชาร์จ ให้ทำงานกลับด้านเป็น <b>อินเวอร์เตอร์</b> โดยสวิตช์ทรานซิสเตอร์กำลังเปิดปิดหลายหมื่นครั้งต่อวินาทีเพื่อ “ปั้น” คลื่นไซน์ขึ้นมา แล้วส่งออกทางหัวแปลง V2L ที่เสียบช่องชาร์จ หรือเต้ารับในห้องโดยสาร</span><span data-l="en" lang="en">The car's battery stores DC at several hundred volts, but household appliances want 230 V, 50 Hz AC. A V2L car runs its <b>bidirectional on-board charger</b>, which normally turns AC into DC while charging, in reverse as an <b>inverter</b>: power transistors switch tens of thousands of times a second to sculpt a sine wave, delivered through a V2L adapter in the charge port or a socket in the cabin.</span></p>
+    <p data-m="d"><span data-l="th" lang="th">ภาคกำลังของ OBC แบบสองทิศทางทั่วไปมี 2 ขั้น: (1) DC-DC แบบแยกทางไฟฟ้า (เช่น Dual Active Bridge หรือ CLLC resonant) ปรับแรงดันแพ็ก 300–800 V ลงเป็นบัส DC ภายใน และ (2) อินเวอร์เตอร์ H-bridge/totem-pole ที่สร้าง AC ด้วย PWM แบบ sine-triangle จากนั้นตัวกรอง LC ตัดฮาร์มอนิกความถี่สวิตช์ออก เหลือไซน์ 50 Hz ในโหมด V2L อินเวอร์เตอร์ทำงานแบบ <b>grid-forming</b> (กำหนดแรงดันและความถี่เอง) ต่างจากโหมดชาร์จที่ตามกริด ขีดจำกัดกำลังมาจากพิกัดของ OBC สาย และหัวแปลง (เช่น 16 A × 230 V ≈ 3.6 kW)</span><span data-l="en" lang="en">A typical bidirectional OBC has two power stages: (1) an isolated DC-DC stage (dual active bridge or CLLC resonant) that converts the 300–800 V pack to an internal DC bus, and (2) an H-bridge or totem-pole inverter producing AC by sine-triangle PWM, after which an LC filter removes switching harmonics to leave a 50 Hz sine. In V2L mode the inverter is <b>grid-forming</b> (it sets voltage and frequency itself), unlike charging, where it follows the grid. Power is capped by the OBC, cabling and adapter ratings (e.g. 16 A × 230 V ≈ 3.6 kW).</span></p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="v2l:flow">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">จ่ายไฟจากรถ: เลือกเครื่องใช้ไฟฟ้าแล้วดูว่าใช้ได้นานแค่ไหน</span><span data-l="en" lang="en">Power from your car: pick appliances and see how long it lasts</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">กำลังไฟของเครื่องใช้ไฟฟ้าเป็นค่าทั่วไป ควรดูฉลากของเครื่องจริง ประสิทธิภาพอินเวอร์เตอร์สมมติ 90% และรถใช้ไฟเองระหว่างจ่าย V2L ราว 150 W (สมมติ) มอเตอร์อย่างตู้เย็นและแอร์กินไฟกระชากตอนสตาร์ทสูงกว่าค่าปกติหลายเท่า</span><span data-l="en" lang="en">Appliance wattages are typical; check the label on yours. Inverter efficiency assumed 90%, plus about 150 W used by the car itself while supplying V2L (assumed). Motors such as fridges and air-conditioners draw a multiple of their running power for a moment at start-up.</span></figcaption>
+  </figure>
+  <div class="col">
+    <p><span data-l="th" lang="th">ผลต่อแบตแทบไม่มี: ใช้ไฟ 5 kWh จากแบต 75 kWh เท่ากับแค่ 0.07 รอบเต็ม เทียบได้กับขับรถราว 30 กม. สิ่งเดียวที่ควรตั้งไว้คือ <b>ขีดจำกัดการคายประจุ</b> (รถส่วนใหญ่ตั้งได้ เช่นหยุดจ่ายที่ 20–30%) เพื่อเหลือไฟพอขับไปชาร์จ</span><span data-l="en" lang="en">The effect on the battery is negligible: drawing 5 kWh from a 75 kWh pack is just 0.07 of a full cycle, about the same as driving 30 km. The one setting that matters is the <b>discharge limit</b> (most cars let you stop at, say, 20–30%) so you still have enough to drive to a charger.</span></p>
+  </div>
+  <figure class="fig mid" data-m="d">
+    <div class="inst" data-fig="v2l:pwm">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">อินเวอร์เตอร์สร้างคลื่นไซน์จากการเปิดปิดสวิตช์ (Sine-triangle PWM)</span><span data-l="en" lang="en">How an inverter builds a sine from switching (sine-triangle PWM)</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">ความถี่สวิตช์จริงของอินเวอร์เตอร์ในรถสูงหลายหมื่นเฮิรตซ์ ภาพนี้ใช้ความถี่ต่ำกว่ามากเพื่อให้มองเห็นพัลส์ ตัวกรอง LC จำลองแบบอันดับหนึ่งอย่างง่าย</span><span data-l="en" lang="en">Real automotive inverters switch at tens of kilohertz; this uses a far lower carrier so you can see the pulses. The LC filter is a simple first-order approximation.</span></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">รถรุ่นไหนจ่ายได้เท่าไร</span><span data-l="en" lang="en">How much each car can supply</span></h2>
+    <p><span data-l="th" lang="th">ตัวเลขข้างล่างเป็นกำลัง V2L สูงสุดตามสเปกที่ประกาศในตลาดนิวซีแลนด์ (EVDB) ซึ่งใช้หัวและไฟ 230 V ใกล้เคียงไทย รุ่นย่อยและตลาดอาจต่างกัน ควรเช็กกับตัวแทนจำหน่ายในไทย</span><span data-l="en" lang="en">Below are maximum V2L ratings published for the New Zealand market (EVDB), which uses 230 V like Thailand. Trims and markets can differ; confirm with your Thai dealer.</span> <a class="cite" href="sources.html#evdbnz">[23]</a></p>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th><span data-l="th" lang="th">รุ่น</span><span data-l="en" lang="en">Model</span></th><th class="n"><span data-l="th" lang="th">V2L สูงสุด</span><span data-l="en" lang="en">Max V2L</span></th><th><span data-l="th" lang="th">พอใช้กับ</span><span data-l="en" lang="en">Enough for</span></th></tr></thead>
+      <tbody>
+        <tr><td>BYD Atto 3 · MG4 · MG ZS EV</td><td class="n">2.2–2.4 kW</td><td><span data-l="th" lang="th">หม้อหุงข้าว + ตู้เย็น + ไฟ + พัดลม</span><span data-l="en" lang="en">Rice cooker + fridge + lights + fans</span></td></tr>
+        <tr><td>BYD Seal</td><td class="n">3.0 kW</td><td><span data-l="th" lang="th">เพิ่มไมโครเวฟหรือกาต้มน้ำได้ทีละอย่าง</span><span data-l="en" lang="en">Add a microwave or kettle, one at a time</span></td></tr>
+        <tr><td>BYD Dolphin · Sealion 7 · Atto 2 · Xpeng G6 · Zeekr X/7X · Tesla Model Y L · GAC Aion V</td><td class="n">3.3 kW</td><td><span data-l="th" lang="th">แอร์อินเวอร์เตอร์ 9,000–12,000 BTU ได้</span><span data-l="en" lang="en">A 9,000–12,000 BTU inverter A/C</span></td></tr>
+        <tr><td>Hyundai Ioniq 5/6 · Kia EV3/EV6/EV9 · MG S5 EV</td><td class="n">3.6 kW</td><td><span data-l="th" lang="th">เกือบทั้งบ้านขนาดเล็ก (ใช้ทีละไม่กี่อย่าง)</span><span data-l="en" lang="en">Most of a small home, a few loads at a time</span></td></tr>
+        <tr><td>GWM Ora (5, GT, Lux)</td><td class="n">6.0 kW</td><td><span data-l="th" lang="th">เครื่องมือช่าง เตาแม่เหล็กไฟฟ้า + แอร์</span><span data-l="en" lang="en">Power tools, induction hob + A/C</span></td></tr>
+        <tr><td>Denza D9 · MG IM6</td><td class="n">6.6 kW</td><td><span data-l="th" lang="th">ใกล้เคียงไฟบ้านเฟสเดียวขนาดเล็ก</span><span data-l="en" lang="en">Close to a small single-phase home supply</span></td></tr>
+        <tr><td>Toyota bZ4X</td><td class="n">1.5 kW</td><td><span data-l="th" lang="th">เครื่องใช้เล็กๆ</span><span data-l="en" lang="en">Small appliances</span></td></tr>
+        <tr><td><span data-l="th" lang="th">Tesla Model 3/Y รุ่นทั่วไป</span><span data-l="en" lang="en">Tesla Model 3/Y (most trims)</span></td><td class="n">–</td><td><span data-l="th" lang="th">ไม่มี V2L (มีเต้ารับ 12 V และโหมด Camp)</span><span data-l="en" lang="en">No V2L (12 V outlets and Camp Mode only)</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">V2L, V2H, V2G ต่างกันอย่างไร</span><span data-l="en" lang="en">V2L vs V2H vs V2G</span></h2>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th></th><th>V2L</th><th>V2H</th><th>V2G</th></tr></thead>
+      <tbody>
+        <tr><td><b><span data-l="th" lang="th">จ่ายไฟให้</span><span data-l="en" lang="en">Supplies</span></b></td><td><span data-l="th" lang="th">เครื่องใช้ไฟฟ้าที่เสียบตรง</span><span data-l="en" lang="en">Appliances plugged in directly</span></td><td><span data-l="th" lang="th">ระบบไฟทั้งบ้าน</span><span data-l="en" lang="en">The whole home's wiring</span></td><td><span data-l="th" lang="th">ระบบไฟของการไฟฟ้า</span><span data-l="en" lang="en">The utility grid</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">อุปกรณ์ที่ต้องมี</span><span data-l="en" lang="en">Equipment</span></b></td><td><span data-l="th" lang="th">หัวแปลง V2L หรือเต้ารับในรถ</span><span data-l="en" lang="en">V2L adapter or cabin socket</span></td><td><span data-l="th" lang="th">เครื่องชาร์จสองทิศทาง + สวิตช์ตัดแยกจากกริด</span><span data-l="en" lang="en">Bidirectional charger + grid-isolation transfer switch</span></td><td><span data-l="th" lang="th">เครื่องชาร์จสองทิศทางที่ได้รับอนุญาตเชื่อมกริด + มิเตอร์</span><span data-l="en" lang="en">Grid-approved bidirectional charger + metering</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">ใช้ทำอะไร</span><span data-l="en" lang="en">Use</span></b></td><td><span data-l="th" lang="th">ไฟดับ แคมป์ปิ้ง งานนอกสถานที่</span><span data-l="en" lang="en">Outages, camping, work sites</span></td><td><span data-l="th" lang="th">สำรองไฟบ้าน ใช้ไฟถูกตอนกลางคืนมาใช้ตอนแพง</span><span data-l="en" lang="en">Home backup, shifting cheap night power to peak hours</span></td><td><span data-l="th" lang="th">ช่วยรักษาเสถียรภาพกริด ขายไฟ</span><span data-l="en" lang="en">Grid support, selling power</span></td></tr>
+        <tr><td><b><span data-l="th" lang="th">มาตรฐานที่เกี่ยวข้อง</span><span data-l="en" lang="en">Standards</span></b></td><td><span data-l="th" lang="th">เฉพาะผู้ผลิต</span><span data-l="en" lang="en">Maker-specific</span></td><td>CHAdeMO (DC), ISO 15118-20</td><td>ISO 15118-20, IEEE 1547 / <span data-l="th" lang="th">ข้อกำหนดการเชื่อมต่อของการไฟฟ้า</span><span data-l="en" lang="en">utility interconnection rules</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="warnbox">
+      <p class="box-h"><span data-l="th" lang="th">ห้ามทำเด็ดขาด</span><span data-l="en" lang="en">Never do this</span></p>
+      <p><span data-l="th" lang="th">อย่าทำสายที่มีปลั๊กตัวผู้สองหัวเพื่อเสียบ V2L เข้าเต้ารับในบ้านเพื่อจ่ายไฟทั้งบ้าน ไฟจะย้อนเข้าสายของการไฟฟ้าได้ (backfeed) ซึ่งอาจทำให้ช่างที่ซ่อมสายไฟถูกไฟดูดเสียชีวิต และขาปลั๊กที่ยื่นออกมามีไฟเปลือย การจ่ายไฟเข้าระบบบ้านต้องผ่านสวิตช์สลับแหล่งจ่าย (transfer switch) ที่ตัดบ้านออกจากกริดก่อนเสมอ ติดตั้งโดยช่างไฟที่มีใบอนุญาต และควรปรึกษาการไฟฟ้านครหลวง/ส่วนภูมิภาค</span><span data-l="en" lang="en">Never make a double-male cable to push V2L into a wall socket to power the house. Power can flow back into the utility's lines (backfeed) and electrocute line workers, and the exposed plug pins are live. Feeding a home must go through a transfer switch that isolates it from the grid first, installed by a licensed electrician, ideally after consulting MEA/PEA.</span></p>
+    </div>
+    <div class="key">
+      <p class="key-h"><span data-l="th" lang="th">สรุปบทนี้</span><span data-l="en" lang="en">Chapter summary</span></p>
+      <ul>
+        <li><span data-l="th" lang="th">V2L = รถเป็นพาวเวอร์แบงก์ 230 V ขนาดมหึมา ส่วนใหญ่จ่าย 2.2–3.6 kW บางรุ่นถึง 6.6 kW</span><span data-l="en" lang="en">V2L turns the car into a giant 230 V power bank, mostly 2.2–3.6 kW, some up to 6.6 kW.</span></li>
+        <li><span data-l="th" lang="th">ผลต่อแบตเล็กมาก ตั้งขีดจำกัดการคายประจุไว้ให้เหลือพอขับ</span><span data-l="en" lang="en">The battery barely notices; set a discharge limit so you can still drive.</span></li>
+        <li><span data-l="th" lang="th">จ่ายเข้าบ้านทั้งหลังต้องมีอุปกรณ์และการติดตั้งที่ถูกต้องเท่านั้น</span><span data-l="en" lang="en">Powering a whole home needs proper equipment and installation, nothing improvised.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<nav class="pager" aria-label="Chapters"><a class="pager-a pager-prev" href="heat.html"><span class="pager-k"><span data-l="th" lang="th">ก่อนหน้า</span><span data-l="en" lang="en">Previous</span></span><span class="pager-t"><span data-l="th" lang="th">ความร้อน อากาศไทย และความปลอดภัย</span><span data-l="en" lang="en">Heat, Thai weather and safety</span></span></a><a class="pager-a pager-next" href="bms.html"><span class="pager-k"><span data-l="th" lang="th">บทถัดไป</span><span data-l="en" lang="en">Next chapter</span></span><span class="pager-t"><span data-l="th" lang="th">BMS สมองของแบตเตอรี่</span><span data-l="en" lang="en">The BMS, the battery's brain</span></span></a></nav>
+</main>
+<footer class="ftr">
+  <div class="ftr-in">
+    <div class="ftr-brand">
+      <p class="ftr-t">EV Lab <span>by Sukmart</span></p>
+      <p class="ftr-d"><span data-l="th" lang="th">ห้องเรียนออนไลน์เรื่องแบตเตอรี่รถยนต์ไฟฟ้า อธิบายได้ทั้งแบบเข้าใจง่ายและแบบวิชาการ พร้อมแหล่งอ้างอิงทุกตัวเลข</span><span data-l="en" lang="en">An open classroom on electric-vehicle batteries, explained simply or in full technical depth, with a source for every number.</span></p>
+    </div>
+    <ul class="ftr-links">
+      <li><a href="myths.html"><span data-l="th" lang="th">ความเชื่อผิดๆ</span><span data-l="en" lang="en">Myths</span></a></li>
+      <li><a href="lab.html"><span data-l="th" lang="th">เครื่องคำนวณ</span><span data-l="en" lang="en">Calculators</span></a></li>
+      <li><a href="glossary.html"><span data-l="th" lang="th">อภิธานศัพท์</span><span data-l="en" lang="en">Glossary</span></a></li>
+      <li><a href="sources.html"><span data-l="th" lang="th">แหล่งอ้างอิง</span><span data-l="en" lang="en">Sources</span></a></li>
+    </ul>
+    <p class="ftr-note"><span data-l="th" lang="th">ข้อมูลปรับปรุงล่าสุด ตุลาคม 2569 · เนื้อหาเพื่อการศึกษา ไม่ใช่คำแนะนำจากผู้ผลิตรถ ควรยึดคู่มือรถของคุณเป็นหลัก</span><span data-l="en" lang="en">Last updated October 2026 · For education, not a substitute for your carmaker's manual.</span></p>
+    <p class="ftr-copy">© 2026 Sukmart · ev.sukmart.com</p>
+  </div>
+</footer>
+<script type="module" src="assets/js/core.js?v=52ca97cd"></script>
+
+</body>
+</html>

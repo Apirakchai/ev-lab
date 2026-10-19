@@ -1,0 +1,83 @@
+<!--meta {"slug":"charging-curve"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.45">05</span><span>[[บทที่ 5 จาก 11|Chapter 5 of 11]]</span></div>
+    <h1>[[ทำไมเกิน 80% ชาร์จช้าลง|Why charging slows after 80%]]</h1>
+    <p class="deck">[[ตอนแบตเหลือน้อย ตู้ชาร์จอัดไฟได้เต็มที่ แต่พอใกล้เต็ม รถต้องลดกระแสลงเรื่อยๆ ด้วยเหตุผล 3 อย่าง: แรงดันชนเพดาน กราไฟต์ใกล้อิ่มจนเสี่ยงเกิดลิเทียมเกาะผิว และต้องรอเซลล์ทุกก้อนให้เต็มพร้อมกัน 20% สุดท้ายจึงอาจใช้เวลาพอๆ กับ 70% แรก|When the battery is low, the charger can push hard. Near full, the car must keep cutting current for three reasons: voltage hits its ceiling, nearly-full graphite risks lithium plating, and every cell has to finish together. The last 20% can take as long as the first 70%.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <div class="analogy" m-s>
+      <p class="box-h">[[เปรียบเทียบง่ายๆ|Picture it like this]]</p>
+      <p>[[นึกถึงคนเข้าโรงหนังที่ยังว่าง ช่วงแรกคนเดินเข้าได้เร็วเพราะที่นั่งว่างเต็มไปหมด พอใกล้เต็ม คนที่มาทีหลังต้องเดินหาที่ว่างที่เหลือไม่กี่ที่ ลึกเข้าไปกลางแถว ถ้าเร่งให้วิ่งเข้าเร็วเท่าเดิม คนจะล้นออกมานั่งตามทางเดิน (นี่คือลิเทียมที่ “เกาะผิว” แทนที่จะเข้าไปในกราไฟต์) ผู้คุมจึงต้องปล่อยคนเข้าช้าลง|Think of an empty cinema. At first people stream in because seats are everywhere. Near full, latecomers must hunt for the few seats left deep in the middle of rows. Rush them in at the same pace and they end up sitting in the aisles (that is lithium "plating" on the surface instead of slipping into the graphite), so the usher slows the queue.]]</p>
+    </div>
+    <p>[[ลองเล่นเครื่องจำลองข้างล่าง เลือกรถตัวอย่างและตู้ชาร์จ แล้วดูว่าในแต่ละช่วง % อะไรคือตัวจำกัดกำลัง สีของเส้นบอกตัวจำกัดในขณะนั้น|Play with the simulator below. Pick an example pack and a charger and see what limits the power at each moment. The line's colour shows the limiting factor.]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="charging:sim">
+      <div class="inst-h"><span class="inst-t">[[เครื่องจำลองการชาร์จเร็ว|Fast-charging simulator]]</span></div>
+    </div>
+    <figcaption class="figcap">[[แพ็กตัวอย่างอิงจากสเปกที่เปิดเผยของรถแต่ละประเภท (เช่น LFP 60 kWh ชาร์จ 10–80% ราว 24 นาที) แผนที่กระแสของ BMS เป็นค่าประมาณเพื่อให้ได้เวลาใกล้เคียงของจริง ไม่ใช่ข้อมูลภายในของผู้ผลิต ค่าไฟคำนวณจากราคาที่คุณตั้ง|Example packs follow published specs for each class (e.g. LFP 60 kWh doing 10–80% in about 24 minutes). The BMS current maps are estimates tuned to match real-world times, not manufacturer data. Cost uses the price you set.]] <a class="cite" href="sources.html#evdb3103">[35]</a></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[เหตุผลที่ 1: แรงดันชนเพดาน (CC-CV)|Reason 1: the voltage ceiling (CC-CV)]]</h2>
+    <p>[[เพื่อดันกระแสเข้าเซลล์ ที่ชาร์จต้องให้แรงดันสูงกว่าแรงดันของแบตเอง ส่วนที่สูงกว่าคือ “แรงดันที่ใช้ดัน” ซึ่งเท่ากับกระแสคูณความต้านทาน (I×R) แต่แรงดันที่ขั้วเซลล์ห้ามเกินเพดาน (ราว 4.2 V สำหรับ NMC/NCA และ 3.65 V สำหรับ LFP) พอแบตใกล้เต็ม แรงดันของแบตเองสูงขึ้นจนเหลือ “ช่องว่าง” ให้ดันน้อยลง กระแสจึงต้องลดลง ช่วงแรกที่ชาร์จด้วยกระแสคงที่เรียกว่า CC (Constant Current) ช่วงหลังที่ตรึงแรงดันไว้ที่เพดานแล้วปล่อยให้กระแสค่อยๆ ลดเรียกว่า CV (Constant Voltage)|To push current in, the charger must sit above the battery's own voltage. The extra is the "pushing voltage", equal to current times resistance (I×R). But the cell's terminal voltage must never exceed its ceiling (about 4.2 V for NMC/NCA, 3.65 V for LFP). Near full, the battery's own voltage is high, leaving little headroom to push, so current must fall. The first, fixed-current stage is CC (constant current); the second, where voltage is held at the ceiling while current tapers, is CV (constant voltage).]]</p>
+    <kd m-d>V_{term} = V_{oc}(\mathrm{SOC}) + I\,R(\mathrm{SOC},T) \;\le\; V_{max}\quad\Rightarrow\quad I_{CV} = \frac{V_{max} - V_{oc}(\mathrm{SOC})}{R}</kd>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="charging:cccv">
+      <div class="inst-h"><span class="inst-t">[[การชาร์จแบบ CC-CV ของหนึ่งเซลล์ NMC|CC-CV charging of one NMC cell]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ยิ่งกระแสช่วง CC สูง แรงดันยิ่งชนเพดานเร็ว ช่วง CV จึงเริ่มเร็วขึ้น (ที่ % ต่ำลง) เซลล์ตัวอย่างใช้ความต้านทานภายในคงที่เพื่อความเข้าใจง่าย|The higher the CC current, the sooner voltage hits the ceiling, so CV starts earlier (at a lower %). The example cell uses a fixed internal resistance for clarity.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[เหตุผลที่ 2 (สำคัญที่สุด): กันลิเทียมเกาะผิว|Reason 2, the big one: avoiding lithium plating]]</h2>
+    <p m-s>[[ระหว่างชาร์จ ลิเทียมต้องแทรกเข้าไปในเกล็ดกราไฟต์ ผิวของเกล็ดจะเต็มก่อนข้างใน ถ้าผิวเต็มแล้วแต่ยังอัดลิเทียมเข้ามาเร็วเกินไป ลิเทียมจะไม่มีที่ไปและเกาะเป็นโลหะบนผิว (ลิเทียมเพลตติ้ง) โลหะที่เกาะนี้บางส่วนกลับมาใช้ไม่ได้ ทำให้ความจุหายถาวร และถ้างอกเป็นเส้นแหลม (เดนไดรต์) อาจแทงทะลุแผ่นกั้นจนลัดวงจร BMS จึงมี “แผนที่” กำหนดกระแสสูงสุดตาม % แบตและอุณหภูมิ ยิ่งแบตเต็มหรือยิ่งเย็น กระแสที่ปลอดภัยยิ่งต่ำ|While charging, lithium must slip inside graphite flakes, and each flake's surface fills before its core. If the surface is full but lithium keeps arriving too fast, it has nowhere to go and deposits as metal on the surface: lithium plating. Some of it never comes back (capacity lost for good), and if it grows into needles (dendrites) it can pierce the separator. So the BMS carries a map of the maximum safe current versus charge level and temperature. The fuller or colder the battery, the lower the safe current.]]</p>
+    <p m-d>[[ลิเทียมเพลตติ้งเกิดเมื่อศักย์ที่ผิวกราไฟต์เทียบ Li/Li⁺ ติดลบ <k>\phi_s - \phi_e < 0</k> ซึ่งเกิดได้ง่ายเมื่อ (1) ศักย์สมดุลของกราไฟต์ต่ำอยู่แล้ว (SOC สูง) (2) overpotential สูง (กระแสสูง หรืออุณหภูมิต่ำทำให้จลนพลศาสตร์และการแพร่ช้า) และ (3) ความเข้มข้นที่ผิวอนุภาคสูงกว่าค่าเฉลี่ยเพราะการแพร่ในของแข็งตามไม่ทัน แบบจำลองอย่างง่ายด้านล่างใช้ <k>U_-(\mathrm{SOC}_{surf})</k> จากสมการ Safari–Delacourt ลบ overpotential แบบ Arrhenius แล้วหากระแสสูงสุดที่ยังรักษาส่วนเผื่อ 10 mV|Plating occurs when graphite's surface potential vs Li/Li⁺ goes negative, <k>\phi_s - \phi_e < 0</k>. That is favoured by (1) an already-low equilibrium potential (high SOC), (2) high overpotential (high current, or low temperature slowing kinetics and diffusion), and (3) surface concentration running ahead of the average because solid diffusion lags. The simple model below takes <k>U_-(\mathrm{SOC}_{surf})</k> from the Safari–Delacourt fit, subtracts an Arrhenius overpotential, and finds the largest current that keeps a 10 mV margin.]] <a class="cite" href="sources.html#waldmann2018">[9]</a> <a class="cite" href="sources.html#tomaszewska2019">[29]</a></p>
+    <kd m-d>\mathrm{SOC}_{surf} = \mathrm{SOC} + k_d\,C,\qquad \phi_{surf} = U_-(\mathrm{SOC}_{surf}) - C\,r_a\,e^{\frac{E_a}{R}\left(\frac1T-\frac1{298}\right)} \;\ge\; 10\text{ mV}</kd>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="charging:plating">
+      <div class="inst-h"><span class="inst-t">[[กระแสสูงสุดที่ไม่เกิดลิเทียมเกาะผิว ตาม % แบตและอุณหภูมิ|Maximum plating-free current vs charge level and temperature]]</span></div>
+    </div>
+    <figcaption class="figcap">[[แบบจำลองเชิงฟิสิกส์อย่างง่ายเพื่ออธิบายรูปร่าง (ค่าพารามิเตอร์ k<sub>d</sub>=0.12, r<sub>a</sub>=25 mV/C ที่ 25°C, E<sub>a</sub>=40 kJ/mol เป็นค่าตัวอย่าง) แผนที่จริงของ BMS มาจากการทดสอบเซลล์แต่ละรุ่นอย่างละเอียดและมีส่วนเผื่อมากกว่า|A simplified physics model to explain the shape (k<sub>d</sub>=0.12, r<sub>a</sub>=25 mV/C at 25 °C, E<sub>a</sub>=40 kJ/mol are illustrative). Real BMS maps come from exhaustive testing of each cell and keep wider margins.]]</figcaption>
+  </figure>
+  <div class="col">
+    <p>[[นี่คือเหตุผลว่าทำไม <b>การอุ่นแบตก่อนชาร์จเร็ว (preconditioning)</b> สำคัญในประเทศหนาว และทำไมรถจะชาร์จช้าลงมากถ้าแบตเย็น ในไทยปัญหาตรงข้าม: แบตมักอุ่นพออยู่แล้ว ระบบจึงเน้นทำให้ไม่ร้อนเกิน ส่วนในแง่ % แบต ทุกคันเหมือนกัน คือยิ่งใกล้เต็ม กระแสที่ปลอดภัยยิ่งต่ำ|This is why <b>preconditioning</b> (warming the battery before fast charging) matters in cold countries, and why a cold battery charges painfully slowly. In Thailand it is the opposite: packs are usually warm enough already, so the system works to stop them overheating. On the charge-level side every car is the same: the fuller it gets, the lower the safe current.]]</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[เหตุผลที่ 3: รอให้เซลล์ทุกก้อนเต็มพร้อมกัน|Reason 3: waiting for every cell to finish]]</h2>
+    <p>[[แพ็กมีกลุ่มเซลล์ต่ออนุกรมเป็นร้อยกลุ่ม ซึ่งไม่มีทางเหมือนกันเป๊ะ กลุ่มที่ความจุน้อยกว่าเล็กน้อยจะเต็มก่อน แล้ว BMS ต้องลดกระแสทั้งแพ็กไม่ให้กลุ่มนั้นเกินเพดาน ช่วงท้ายจึงมีการ “บาลานซ์” ระบายพลังงานจากกลุ่มที่เต็มก่อนออกเป็นความร้อนเล็กน้อย หรือย้ายไปกลุ่มอื่น เพื่อให้ทุกกลุ่มเท่ากัน รายละเอียดอยู่ในบทที่ 9|A pack has around a hundred series groups that are never perfectly identical. A group with slightly less capacity fills first, and the BMS must throttle the whole pack so that group never passes the ceiling. Near the top it also "balances", bleeding a little energy from the early finishers as heat or shuffling it to others, until all groups match. Chapter 9 has the details.]]</p>
+    <h2 style="margin-top:1.3em">[[400 V กับ 800 V ต่างกันอย่างไร|400 V versus 800 V]]</h2>
+    <p>[[กำลัง = แรงดัน × กระแส ถ้ากระแสถูกจำกัดที่ 500 A (สายและหัวชาร์จ) แพ็ก 400 V ได้ราว 200 kW แต่แพ็ก 800 V ได้ราว 400 kW ในทางกลับกัน ถ้ากำลังเท่ากัน 800 V ใช้กระแสแค่ครึ่งเดียว ความร้อนในสายซึ่งเป็น I²R จึงเหลือแค่หนึ่งในสี่ ข้อควรรู้: รถ 800 V บางรุ่นต่อกับตู้ที่จ่ายได้สูงสุดแค่ราว 500 V ต้องใช้วงจรเพิ่มแรงดันในรถ ซึ่งมักชาร์จได้ช้ากว่ามาก|Power = voltage × current. With current capped at about 500 A by cables and connectors, a 400 V pack gets roughly 200 kW while an 800 V pack gets roughly 400 kW. Flip it around: at equal power, 800 V draws half the current, so cable heating (I²R) drops to a quarter. One catch: some 800 V cars on chargers that top out near 500 V need an on-board booster, and usually charge much more slowly.]]</p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="charging:volt">
+      <div class="inst-h"><span class="inst-t">[[แรงดันระบบ กระแส และความร้อนในสาย|System voltage, current and cable heat]]</span></div>
+    </div>
+  </figure>
+  <div class="col">
+    <h2>[[AC กับ DC ต่างกันตรงไหน|AC versus DC]]</h2>
+    <p>[[ไฟบ้านเป็นไฟสลับ (AC) แต่แบตเก็บไฟตรง (DC) การชาร์จ AC จึงต้องผ่าน <b>ออนบอร์ดชาร์จเจอร์ (OBC)</b> ในรถซึ่งมักแปลงได้ 7–22 kW ส่วนตู้ชาร์จเร็ว DC แปลงไฟเองในตู้ใหญ่แล้วส่งไฟตรงเข้าแบตโดยข้าม OBC จึงจ่ายได้หลายร้อยกิโลวัตต์ ในไทยหัวชาร์จ AC เป็น Type 2 และ DC เป็น CCS2 เป็นหลัก การชาร์จ AC ที่บ้านมีความสูญเสียด้วย ADAC ทดสอบพบว่าชาร์จจากเต้ารับธรรมดา 2.3 kW สูญเสีย 12.7–24.2% แต่วอลล์บ็อกซ์ 11 kW สูญเสียแค่ 5.1–7.0% เพราะส่วนที่กินไฟคงที่ (ระบบควบคุม ปั๊ม) ถูกเฉลี่ยในเวลาที่สั้นกว่า|Household power is alternating current (AC) but batteries store direct current (DC). AC charging therefore runs through the car's <b>on-board charger (OBC)</b>, typically 7–22 kW. DC fast chargers do the conversion in a big cabinet and feed DC straight to the pack, bypassing the OBC, so they can deliver hundreds of kilowatts. In Thailand, AC uses Type 2 plugs and DC mostly CCS2. Home AC charging also has losses: ADAC found 12.7–24.2% lost on a 2.3 kW household socket, but only 5.1–7.0% on an 11 kW wallbox, because fixed overheads (electronics, pumps) are spread over fewer hours.]] <a class="cite" href="sources.html#adac2026">[17]</a></p>
+    <div class="key">
+      <p class="key-h">[[สรุปบทนี้และวิธีชาร์จเร็วให้คุ้มเวลา|Summary, and how to fast-charge smartly]]</p>
+      <ul>
+        <li>[[กำลังสูงสุดเกิดตอนแบตต่ำ มาถึงตู้ชาร์จตอนเหลือ 10–20% จะได้กำลังสูงสุด|Peak power happens at low charge; arrive at 10–20% to get it.]]</li>
+        <li>[[ตัดที่ราว 80% แล้วไปต่อ มักเร็วกว่ารอจนเต็ม เพราะ 20% สุดท้ายกินเวลามาก|Leaving at around 80% usually beats waiting for full; the last 20% is slow.]]</li>
+        <li>[[แบตเย็นชาร์จช้า แบตร้อนเกินก็ถูกลดกำลัง ใช้การนำทางไปตู้ชาร์จในรถเพื่อให้ระบบเตรียมอุณหภูมิแบต|A cold pack charges slowly and an overheated one gets throttled. Navigating to the charger in the car lets it prepare the battery temperature.]]</li>
+        <li>[[ตู้ 150 kW ไม่ได้แปลว่ารถจะรับได้ 150 kW ตลอด กำลังจริงคือค่าที่น้อยที่สุดระหว่างตู้ สาย และแผนที่ของ BMS ณ % นั้น|A 150 kW charger doesn't mean 150 kW all the way. Actual power is the smallest of the charger, the cable and the BMS map at that moment.]]</li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,88 @@
+<!--meta {"slug":"low-soc"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.36">04</span><span>[[บทที่ 4 จาก 11|Chapter 4 of 11]]</span></div>
+    <h1>[[ทำไมต่ำกว่า 10% แบตถึงเสื่อม|Why running below 10% hurts]]</h1>
+    <p class="deck">[[ด้านล่างของแบตมีปัญหาคนละแบบกับด้านบน ความต้านทานภายในพุ่งสูง รอบการใช้ที่ลึกทำให้วัสดุยืดหดมาก และถ้าปล่อยให้ต่ำลงไปอีกจนเกินขีดที่ออกแบบไว้ ทองแดงในเซลล์จะเริ่มละลาย ซึ่งเป็นความเสียหายถาวรที่อันตราย|The bottom of the battery has different problems from the top. Internal resistance shoots up, deep cycles stretch and squeeze the materials hard, and if the charge falls past its design limit, the copper inside starts to dissolve, which is permanent and dangerous.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <div class="key">
+      <p class="key-h">[[สรุปก่อนอ่าน|Before you read]]</p>
+      <ul>
+        <li>[[0% บนหน้าจอยังไม่ใช่หมดจริง ผู้ผลิตกันบัฟเฟอร์ไว้ด้านล่างเพื่อไม่ให้เซลล์ถึงจุดอันตราย|0% on screen is not truly empty; makers keep a bottom buffer so cells never reach the danger zone.]]</li>
+        <li>[[ใช้ต่ำๆ บ้างไม่ใช่ปัญหา แต่ <b>รอบลึกๆ เป็นประจำ</b> (เช่น 100→5% ทุกวัน) สึกหรอมากกว่ารอบตื้นที่ใช้พลังงานเท่ากัน|Going low occasionally is fine, but <b>regular deep cycles</b> (say 100→5% daily) wear the cells more than shallow cycles moving the same energy.]]</li>
+        <li>[[อันตรายจริงคือ <b>การจอดทิ้งไว้ใกล้ 0% นานๆ</b> รถยังกินไฟเองทุกวัน ถ้าแรงดันเซลล์ต่ำกว่าขีดที่ออกแบบ ทองแดงจะละลายจนอาจเกิดลัดวงจรภายใน|The real danger is <b>leaving it parked near 0% for a long time</b>. The car keeps drawing power; push a cell past its design limit and its copper dissolves, which can lead to an internal short.]] <a class="cite" href="sources.html#guo2016">[7]</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[แบตต่ำ = ความต้านทานสูง|Low charge means high resistance]]</h2>
+    <p m-s>[[เมื่อแบตใกล้หมด ลิเทียมที่เหลือในขั้วลบมีน้อย และขั้วบวกก็แน่นจนลิเทียมแทรกกลับยาก ความต้านทานภายในจึงพุ่งขึ้นหลายเท่า ผลคือ แรงดันตกมากเวลาเหยียบคันเร่ง (voltage sag) ไฟส่วนหนึ่งกลายเป็นความร้อนในแบต และรถจะจำกัดกำลังเพื่อไม่ให้แรงดันต่ำเกินไป นี่คือเหตุผลที่รถหลายรุ่นอืดลงหรือเข้าโหมดจำกัดกำลัง (หลายคนเรียกโหมดเต่า) เมื่อแบตต่ำมาก|Near empty, little lithium is left in the anode and the cathode is so full that lithium struggles to squeeze back in, so internal resistance multiplies. Floor the pedal and the voltage sags hard, more energy turns into heat inside the pack, and the car caps power to keep voltage above its limit. That is why many cars feel sluggish, or enter a reduced-power "turtle" mode, when very low.]]</p>
+    <p m-d>[[ความต้านทานรวมของเซลล์ประกอบด้วยส่วนโอห์มิก (อิเล็กโทรไลต์ ตัวเก็บกระแส) การถ่ายโอนประจุที่ผิว (Butler–Volmer) และการแพร่ในของแข็ง ที่ SOC ต่ำ ความเข้มข้นลิเทียมที่ผิวขั้วบวกใกล้อิ่มตัว (<k>c_s \to c_{s,max}</k>) ทำให้ exchange current density <k>i_0 \propto c_e^{\alpha}\,(c_{s,max}-c_s)^{\alpha}\,c_s^{1-\alpha}</k> ลดลง และศักย์ OCV ชันขึ้นมากจนแรงดันขั้วตกเร็ว กำลังสูงสุดที่ดึงได้ถูกจำกัดโดยแรงดันต่ำสุด <k>V_{min}</k>:|Cell resistance has an ohmic part (electrolyte, collectors), a charge-transfer part (Butler–Volmer) and solid-state diffusion. At low SOC the cathode surface is nearly saturated (<k>c_s \to c_{s,max}</k>), shrinking the exchange current density <k>i_0 \propto c_e^{\alpha}\,(c_{s,max}-c_s)^{\alpha}\,c_s^{1-\alpha}</k>, while the OCV curve steepens, so terminal voltage collapses quickly. Peak discharge power is capped by the minimum voltage <k>V_{min}</k>:]]</p>
+    <kd m-d>P_{max} = V_{min}\,\frac{V_{oc}(SOC) - V_{min}}{R(SOC,T)},\qquad \dot Q_{heat} = I^2 R</kd>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="lowsoc:sag">
+      <div class="inst-h"><span class="inst-t">[[ความต้านทานภายใน แรงดันตก และความร้อน ตาม % แบต|Internal resistance, voltage sag and heat across the charge range]]</span></div>
+    </div>
+    <figcaption class="figcap">[[แพ็กตัวอย่าง 96S 75 kWh (แบบ NMC 400 V) ความต้านทานใช้รูปร่างทั่วไปของเซลล์ลิเทียมไอออน (สูงขึ้นแรงเมื่อ % ต่ำและเมื่อเย็น) ค่าจริงต่างไปตามเซลล์ ใช้เพื่อดูแนวโน้ม|Example 96S, 75 kWh NMC pack at 400 V. Resistance follows the usual lithium-ion shape (rising steeply at low charge and in the cold); real values vary by cell. Use it for trends.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[รอบลึกสึกกว่ารอบตื้น|Deep cycles wear more than shallow ones]]</h2>
+    <p>[[ทุกครั้งที่ลิเทียมเข้าออก วัสดุจะพองและหด กราไฟต์ขยายราว 10% ตอนเต็ม ขั้วบวก NMC หดตัวมากตอนเกือบเต็ม รอบที่ลึกมากจึงเหมือนดัดลวดไปมาเป็นมุมกว้าง อนุภาคร้าวและ SEI แตกแล้วต้องสร้างใหม่ (กินลิเทียมเพิ่ม) ส่วนรอบตื้นๆ ในช่วงกลางเหมือนดัดลวดนิดเดียว จึงทนได้หลายรอบกว่ามาก แม้ขนพลังงานรวมเท่ากัน|Every time lithium moves in and out, the materials swell and shrink: graphite grows about 10% when full, and NMC contracts sharply near full. A very deep cycle is like bending a wire through a wide angle: particles crack and the SEI breaks and must re-form, consuming more lithium. Shallow cycles in the middle are small bends, so the cell survives far more of them even when the total energy moved is the same.]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="lowsoc:dod">
+      <div class="inst-h"><span class="inst-t">[[เลือกช่วง % ที่ใช้ประจำวัน แล้วดูสุขภาพแบตหลัง 10 ปี|Choose your daily window and see battery health after 10 years]]</span></div>
+    </div>
+    <figcaption class="figcap">[[คำนวณด้วยแบบจำลอง NREL BLAST-Lite (การเสื่อมตามเวลา + ตามรอบ) ที่อุณหภูมิแบตเฉลี่ย 30°C ขับเท่ากันทุกแบบ แบบ NMC622 มีเทอมความลึกของรอบยกกำลังหก จึงลงโทษรอบลึกเกือบเต็มแรงมาก ส่วนแบบ NCA ฟิตกับข้อมูลรอบลึกเท่านั้นจึงไวต่อความลึกน้อยกว่า ผลเป็นเซลล์ห้องแล็บ ใช้เทียบแนวโน้ม|Computed with NREL's BLAST-Lite (calendar + cycle ageing) at a 30 °C average battery temperature, same driving in every case. The NMC622 model's sixth-power depth term punishes near-full-depth cycles hard; the NCA model was fitted only to deep cycles, so it is less depth-sensitive. Lab cells; compare trends.]] <a class="cite" href="sources.html#blast">[10]</a></figcaption>
+  </figure>
+  <div class="col">
+    <p>[[ข้อมูลจริงจาก Geotab (รถกว่า 22,700 คัน) ก็ไปทางเดียวกันแต่เบากว่าที่คนกลัว: รถที่ใช้เวลาอยู่ในช่วงสุดขอบ (ต่ำกว่า 20% หรือสูงกว่า 80%) น้อยกว่าครึ่งของเวลา เสื่อมเฉลี่ย 1.4% ต่อปี ส่วนกลุ่มที่อยู่ช่วงสุดขอบเกิน 80% ของเวลา เสื่อม 2.0% ต่อปี|Field data from Geotab (22,700+ vehicles) points the same way but more gently than many fear: cars spending under half their time at the extremes (below 20% or above 80%) lost 1.4% a year on average, while those spending over 80% of their time there lost 2.0% a year.]] <a class="cite" href="sources.html#geotab2026">[1]</a></p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[ต่ำกว่า 0%: เมื่อทองแดงเริ่มละลาย|Below 0%: when the copper starts to dissolve]]</h2>
+    <p>[[ถ้าเซลล์ถูกดึงไฟจนต่ำกว่าแรงดันต่ำสุดที่ออกแบบไว้ (การคายประจุเกิน หรือ over-discharge) ลิเทียมในขั้วลบหมดจนศักย์ของขั้วลบพุ่งขึ้น งานวิจัยของ Guo และคณะ (2016) บนเซลล์ NCM ขนาด 25 Ah พบว่าเมื่อศักย์ขั้วลบสูงถึงราว 3.4–3.5 V เทียบกับลิเทียม ฟอยล์ทองแดงเริ่มกัดกร่อน ไอออนทองแดงไปตกตะกอนเป็นกิ่งบนขั้วบวกและแผ่นกั้น เมื่อคายประจุเกินไปถึงราว −12% ของความจุ (ต่ำกว่าจุดตัด) ทองแดงที่งอกจะทะลุแผ่นกั้นจนลัดวงจรภายใน|If a cell is drained below its minimum design voltage (over-discharge), the anode runs out of lithium and its potential climbs. Guo et al. (2016), testing 25 Ah NCM cells, found the copper foil begins to corrode once the anode reaches about 3.4–3.5 V vs lithium. Copper ions then deposit as branches on the cathode and separator, and by about −12% of capacity (below the cut-off) those deposits bridge the separator and short the cell internally.]] <a class="cite" href="sources.html#guo2016">[7]</a></p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="lowsoc:over">
+      <div class="inst-h"><span class="inst-t">[[จากแบตต่ำ ไปจนถึงการคายประจุเกิน|From low charge to over-discharge]]</span></div>
+    </div>
+    <figcaption class="figcap">[[แผนภาพเชิงแนวคิดตามผลการทดลองของ Guo et al. 2016 (เซลล์ NCM/กราไฟต์ 25 Ah ตัดที่ 2.75 V) ตำแหน่งบัฟเฟอร์ของรถจริงแตกต่างกันไปตามผู้ผลิต|Conceptual diagram following Guo et al. 2016 (25 Ah NCM/graphite cell, 2.75 V cut-off). Real cars' buffer positions vary by maker.]]</figcaption>
+  </figure>
+  <div class="col">
+    <p>[[ในชีวิตจริง BMS จะตัดไม่ให้คุณขับจนถึงจุดนั้น แต่สิ่งที่ BMS ห้ามไม่ได้คือ <b>การกินไฟตอนจอด</b> รถไฟฟ้ายังใช้ไฟจากแบตใหญ่ไปชาร์จแบตเตอรี่ 12V ดูแลระบบสื่อสาร ระบบเฝ้ารถ และบางรุ่นเปิดแอร์ป้องกันห้องโดยสารร้อนจัด ถ้าจอดทิ้งที่ 2–3% หลายสัปดาห์ แบตอาจไหลลงไปถึงจุดอันตราย และเมื่อแบต 12V หมดตาม รถจะสตาร์ทหรือแม้แต่เปิดประตูไม่ได้|In daily driving the BMS stops you long before that point. What it cannot stop is <b>drain while parked</b>: the big battery still tops up the 12 V battery and runs connectivity, security cameras and, on some models, cabin-overheat protection. Left at 2–3% for weeks, the pack can slide into the danger zone, and once the 12 V battery dies too, the car may not wake or even unlock.]]</p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="lowsoc:drain">
+      <div class="inst-h"><span class="inst-t">[[จอดทิ้งไว้นานแค่ไหนถึงจะอันตราย|How long can it sit before it gets risky?]]</span></div>
+    </div>
+    <figcaption class="figcap">[[อัตรากินไฟตอนจอดแตกต่างกันมากตามรุ่น ซอฟต์แวร์ และฟีเจอร์ที่เปิดไว้ ลองดูค่าของรถคุณเองจากแอปของรถ (จอดข้ามคืนแล้วดู % ที่หายไป)|Parked drain varies hugely by model, software and enabled features. Measure yours in the car's app: park overnight and note the % lost.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[LFP ต่างกันอย่างไร|How LFP differs]]</h2>
+    <p>[[ในแง่การเสื่อมตามเวลา LFP กลับชอบอยู่ที่ % ต่ำ (เสื่อมช้าสุด) แต่มีจุดที่ต้องระวังคือ <b>% บนจอไม่แม่น</b> เพราะกราฟแรงดันแบน ถ้าไม่ได้ชาร์จเต็มนาน รถอาจคิดว่ายังเหลือ 8% แต่จริงๆ เหลือน้อยกว่านั้น แล้วแรงดันตกหน้าผาตอนท้าย (ดูกราฟในบทที่ 2) รถ LFP จึงควรชาร์จเต็มตามที่คู่มือแนะนำ และไม่ควรขับเฉียดศูนย์เป็นนิสัย|For calendar ageing, LFP actually prefers low charge. Its catch is <b>an unreliable gauge</b>: the voltage curve is flat, so without regular full charges the car may think 8% is left when there is less, and the voltage then falls off a cliff at the very end (see chapter 2's chart). Charge LFP to full as the manual recommends, and don't make a habit of running it near zero.]]</p>
+    <h2 style="margin-top:1.4em">[[สิ่งที่ควรทำ|What to do]]</h2>
+    <ul>
+      <li>[[ขับถึง 10% หรือต่ำกว่าได้เมื่อจำเป็น แต่ชาร์จต่อให้เร็ว อย่าจอดทิ้งไว้|Dropping to 10% or below is fine when needed; just charge soon rather than leaving it parked low.]]</li>
+      <li>[[เป็นนิสัยประจำวัน ช่วงประมาณ 20–80% (NMC/NCA) ถนอมแบตที่สุด ไม่จำเป็นต้องเคร่ง เพราะข้อมูลจริงแสดงผลต่างที่ไม่มาก|As a daily habit, roughly 20–80% (NMC/NCA) is kindest. No need to be obsessive; the field data shows modest differences.]]</li>
+      <li>[[จอดรถหลายสัปดาห์: เหลือราว 50% ปิดฟีเจอร์ที่กินไฟ (เช่นกล้องเฝ้ารถ) หรือเสียบชาร์จทิ้งไว้โดยตั้งลิมิตต่ำ ถ้ารถรองรับ|Parking for weeks: leave about 50%, switch off power-hungry features such as camera surveillance, or stay plugged in with a low limit if the car supports it.]]</li>
+      <li>[[ถ้าแบตไฟฟ้าหมดเกลี้ยงจนรถไม่ตอบสนอง อย่าพยายามชาร์จเอง ให้ติดต่อศูนย์บริการ เพราะเซลล์ที่คายประจุเกินอาจเสียหายภายในและไม่ปลอดภัยที่จะชาร์จต่อ|If the pack is completely flat and the car won't respond, don't try to revive it yourself. Call the service centre: over-discharged cells can be damaged inside and unsafe to recharge.]]</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,115 @@
+<!--meta {"slug":"high-soc"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.27">03</span><span>[[บทที่ 3 จาก 11|Chapter 3 of 11]]</span></div>
+    <h1>[[ทำไมชาร์จ 100% แบตถึงเสื่อม|Why sitting at 100% wears a battery]]</h1>
+    <p class="deck">[[คำตอบสั้นๆ: ตอนแบตเต็ม ขั้วลบอยู่ที่ศักย์ต่ำมากจนอิเล็กโทรไลต์ทำปฏิกิริยากินลิเทียมไปเรื่อยๆ ส่วนขั้วบวกก็ถูกดึงลิเทียมออกจนโครงสร้างเครียด ยิ่งอยู่ในสภาพนี้นานและยิ่งร้อน ก็ยิ่งเสื่อมเร็ว การแตะ 100% แป๊บเดียวแทบไม่มีผล|The short answer: at full charge the anode sits at such a low potential that the electrolyte keeps reacting and eating lithium, while the cathode is stripped of so much lithium that its structure strains. The longer it stays there, and the hotter it is, the faster it ages. Touching 100% briefly barely matters.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <div class="key">
+      <p class="key-h">[[สรุปก่อนอ่าน|Before you read]]</p>
+      <ul>
+        <li>[[ตัวการหลักของการเสื่อมตอนจอดคือ <b>ชั้น SEI ที่โตขึ้นบนขั้วลบ</b> ซึ่งโตเร็วขึ้นเมื่อแบตอยู่ที่ % สูง งานวิจัยของ Keil และคณะ (2016) ยืนยันว่าศักย์ต่ำของกราไฟต์ตอนแบตเต็มคือตัวเร่งหลัก|The main cause of ageing while parked is <b>SEI growth on the anode</b>, which speeds up at high charge. Keil et al. (2016) showed the graphite's low potential at high charge is the main accelerator.]] <a class="cite" href="sources.html#keil2016">[4]</a></li>
+        <li>[[แบตนิกเกิลสูง (NMC/NCA) มีปัญหาเพิ่มที่ขั้วบวก: โครงผลึกหดตัวฉับพลันใกล้ 4.2 V ทำให้อนุภาคร้าว|Nickel-rich cells (NMC/NCA) add a cathode problem: the lattice contracts abruptly near 4.2 V and particles crack.]] <a class="cite" href="sources.html#ryu2018">[13]</a></li>
+        <li>[[สิ่งที่สำคัญคือ <b>จำนวนชั่วโมงที่จอดค้างไว้ที่ % สูง</b> คูณกับ <b>อุณหภูมิ</b> ไม่ใช่การแตะ 100% ก่อนออกเดินทาง|What counts is <b>hours spent parked high</b> multiplied by <b>temperature</b>, not touching 100% just before you leave.]]</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[ศักย์ของสองขั้ว เมื่อแบตใกล้เต็ม|Both electrodes' potentials as the battery fills]]</h2>
+    <p m-s>[[ในบทที่ 1 เราบอกว่าแรงดันแบตคือ “ความสูงของเขา” ระหว่างสองขั้ว แต่ละขั้วเองก็มีระดับของมัน ตอนชาร์จ ขั้วบวกถูกดันสูงขึ้น ขั้วลบถูกกดต่ำลง ปัญหาคืออิเล็กโทรไลต์ทนได้แค่ช่วงหนึ่ง ถ้าขั้วลบต่ำมาก อิเล็กโทรไลต์ถูก “รีดิวซ์” ไปสร้างชั้น SEI เพิ่ม ถ้าขั้วบวกสูงมาก อิเล็กโทรไลต์ถูก “ออกซิไดซ์” ทั้งสองอย่างกินลิเทียมและทำให้ความจุหายไปทีละน้อย ลองเลื่อน % ดูว่าแต่ละขั้วไปอยู่ตรงไหน|Chapter 1 called the cell voltage the height of a hill between the electrodes. Each electrode has its own level too. Charging pushes the cathode up and the anode down. The trouble is that the electrolyte is only stable within a window: if the anode goes very low, the electrolyte is reduced into more SEI; if the cathode goes very high, the electrolyte is oxidised. Both consume lithium and slowly erase capacity. Move the slider to see where each electrode sits.]]</p>
+    <p m-d>[[ศักย์ของแต่ละขั้วเทียบกับ Li/Li⁺ ได้จาก <k>V_{cell} = U_+ - U_-</k> กราไฟต์ทำงานที่ 0.08–0.25 V ซึ่งต่ำกว่าศักย์รีดักชันของ EC (~0.8 V) ตลอดเวลา SEI จึงจำเป็นต้องมีเพื่อหยุดปฏิกิริยา (kinetic passivation) แต่ SEI ไม่สมบูรณ์ อัตราการโตของ SEI ขึ้นกับแรงขับทางไฟฟ้าเคมี ซึ่งยิ่งมากเมื่อ <k>U_-</k> ต่ำลง แบบจำลองที่ฟิตกับข้อมูลจริง (เช่น NREL BLAST-Lite สำหรับเซลล์ LFP/กราไฟต์) จึงใส่เทอม <k>\exp(-\alpha U_-/T)</k> ส่วนขั้วบวก NMC ที่ <k>U_+ \gtrsim 4.2</k> V มีทั้งการออกซิไดซ์อิเล็กโทรไลต์ การละลายของโลหะทรานซิชัน การปล่อยออกซิเจนจากผิว และการเปลี่ยนเฟส H2→H3|Each electrode's potential vs Li/Li⁺ follows from <k>V_{cell} = U_+ - U_-</k>. Graphite runs at 0.08–0.25 V, always below EC's reduction potential (~0.8 V), so the SEI must exist to passivate it kinetically. It is never perfect: its growth rate rises with the electrochemical driving force, i.e. as <k>U_-</k> falls. Data-fitted models (e.g. NREL BLAST-Lite for LFP/graphite) therefore carry an <k>\exp(-\alpha U_-/T)</k> term. On the NMC side, at <k>U_+ \gtrsim 4.2</k> V you add electrolyte oxidation, transition-metal dissolution, surface oxygen release and the H2→H3 phase transition.]] <a class="cite" href="sources.html#safari2011">[32]</a> <a class="cite" href="sources.html#blast">[10]</a></p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="highsoc:ladder">
+      <div class="inst-h"><span class="inst-t">[[ศักย์ของขั้วบวกและขั้วลบ เทียบกับช่วงที่อิเล็กโทรไลต์ทนได้|Electrode potentials vs the electrolyte's stability window]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ศักย์ขั้วลบคำนวณจากสมการของกราไฟต์ (Safari & Delacourt 2011) ศักย์ขั้วบวก = แรงดันเซลล์ + ศักย์ขั้วลบ “อัตราการโตของ SEI” เป็นค่าเทียบที่ 50% ตามเทอมศักย์ขั้วลบในแบบจำลอง NREL BLAST-Lite ช่วงทนของอิเล็กโทรไลต์เป็นค่าโดยประมาณ|Anode potential from the graphite equation of Safari & Delacourt (2011); cathode potential = cell voltage + anode potential. "SEI growth rate" is relative to 50%, using the anode-potential term of NREL's BLAST-Lite model. Electrolyte window values are approximate.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[จอดไว้เฉยๆ ก็เสื่อมได้: Calendar ageing|Ageing while parked: calendar ageing]]</h2>
+    <p>[[แบตเสื่อมได้ 2 ทาง คือ <b>ตามรอบการใช้</b> (cycle ageing) และ <b>ตามเวลา</b> (calendar ageing) ทางหลังเกิดแม้รถจอดนิ่ง และขึ้นกับ 2 ปัจจัยหลัก: % แบตตอนจอด กับอุณหภูมิ สำหรับคนส่วนใหญ่ที่ขับวันละไม่กี่สิบกิโล รถจอดอยู่กว่า 90% ของเวลา calendar ageing จึงมักเป็นส่วนใหญ่ของการเสื่อมทั้งหมด|Batteries age two ways: with <b>use</b> (cycle ageing) and with <b>time</b> (calendar ageing). The second happens even when the car never moves, and depends mostly on two things: the charge level while parked and the temperature. Most cars sit parked more than 90% of the time, so for typical drivers calendar ageing is often the larger share.]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="highsoc:calendar">
+      <div class="inst-h"><span class="inst-t">[[ความจุที่เหลือ เมื่อจอดเก็บที่ % และอุณหภูมิต่างกัน|Capacity left after storage at different charge levels and temperatures]]</span></div>
+    </div>
+    <figcaption class="figcap">[[แบบจำลองจาก NREL BLAST-Lite ซึ่งฟิตกับข้อมูลทดสอบจริงของเซลล์แต่ละแบบ (NCA: ข้อมูลของ Keil et al. 2016) เป็นผลของ “เซลล์เดี่ยวในห้องแล็บ” แบตทั้งแพ็กในรถมีระบบระบายความร้อนและบัฟเฟอร์ ค่าจริงจึงมักดีกว่านี้ ใช้เพื่อเทียบ “แนวโน้ม” ระหว่างสภาพการจอดต่างๆ|Models from NREL's BLAST-Lite, each fitted to real test data for that cell (NCA: Keil et al. 2016 data). These are bare lab cells; a car's pack has thermal management and buffers and usually does better. Use them to compare trends between parking habits.]] <a class="cite" href="sources.html#blast">[10]</a></figcaption>
+  </figure>
+  <div class="col">
+    <p>[[สังเกต 3 อย่างจากกราฟ: (1) % ยิ่งสูง เส้นยิ่งตกเร็ว โดยเฉพาะ NCA (2) อุณหภูมิมีผลแรงพอๆ กันหรือมากกว่า เลื่อนจาก 25°C เป็น 35°C แล้วดู (3) เส้นโค้งตกเร็วในช่วงแรกแล้วค่อยๆ ช้าลง เพราะ SEI ที่หนาขึ้นป้องกันตัวเองได้ดีขึ้น (โตตามรากที่สองของเวลาโดยประมาณ)|Notice three things. (1) Higher charge means a steeper fall, especially for NCA. (2) Temperature matters as much or more; slide from 25 °C to 35 °C and watch. (3) Each curve drops fastest at first and then slows, because a thicker SEI protects itself better; growth goes roughly with the square root of time.]]</p>
+    <div class="deepbox" m-d>
+      <p class="box-h">[[สมการของแบบจำลอง|Model equations]]</p>
+      <p>[[NCA (Panasonic 18650B): ความจุที่หายตามเวลา|NCA (Panasonic 18650B), capacity lost with time:]]</p>
+      <kd>q_{cal}(t) = k_{cal}\,t^{\,0.512},\qquad k_{cal} = 75.4\,e^{-3340/T}\,e^{\,353\,\mathrm{SOC}/T}</kd>
+      <p>[[LFP (ปริซึม 250 Ah): ใช้ศักย์ขั้วลบแทน % ตรงๆ|LFP (250 Ah prismatic), driven by anode potential:]]</p>
+      <kd>q_{cal}(t) = k_{cal}\,t^{\,0.526},\qquad k_{cal} = 8.37\times10^{4}\,e^{-5210/T}\,e^{-3560\,U_-(\mathrm{SOC})/T}</kd>
+      <p>[[NMC622 (เซลล์รถยนต์ DENSO 50 Ah): <k>q_{cal} = b_1(\mathrm{SOC},T)\sqrt{t}</k> โดย <k>b_1</k> เป็นพหุนามกำลังสามของ SOC คูณ Arrhenius (Ea = 37 kJ/mol) <b>เซลล์นี้ไวต่อ SOC น้อยมาก</b> ซึ่งสอดคล้องกับที่ Keil พบว่าการเสื่อมเป็น “ขั้นบันได” ตามสเตจของกราไฟต์ ไม่ได้เพิ่มเป็นเส้นตรง เซลล์ต่างรุ่นจึงไวต่อ % ไม่เท่ากัน แต่แนวโน้มรวมของงานวิจัยส่วนใหญ่คือ % ต่ำ + เย็น = เสื่อมช้าที่สุด|NMC622 (DENSO 50 Ah automotive cell): <k>q_{cal} = b_1(\mathrm{SOC},T)\sqrt{t}</k>, with <k>b_1</k> a cubic in SOC times an Arrhenius term (Ea = 37 kJ/mol). <b>This cell is barely SOC-sensitive</b>, consistent with Keil's finding that fade climbs in steps that follow graphite's staging rather than a straight line. Cells differ, but the weight of evidence says low charge plus cool storage ages slowest.]] <a class="cite" href="sources.html#keil2016">[4]</a></p>
+      <p>[[<k>t</k> เป็นวัน, <k>T</k> เป็นเคลวิน ตัวเลขทั้งหมดมาจากซอร์สโค้ด BLAST-Lite v1.1.1 ของ NREL|<k>t</k> in days, <k>T</k> in kelvin; all constants from NREL's BLAST-Lite v1.1.1 source.]]</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[เกิดอะไรขึ้นข้างในเมื่อแบตเต็ม|What actually happens inside at full charge]]</h2>
+    <ol class="steps">
+      <li>[[<b>SEI โตเร็วขึ้น (ขั้วลบ)</b> กราไฟต์ที่อัดลิเทียมเต็มมีศักย์ราว 0.085 V ต่ำสุดของช่วงใช้งาน อิเล็กโทรไลต์ที่แทรกผ่าน SEI จะถูกรีดิวซ์ต่อและ “ล็อก” ลิเทียมไว้ในชั้น SEI ลิเทียมที่ถูกล็อกคือความจุที่หายถาวร (Loss of Lithium Inventory, LLI) และเป็นกลไกหลักของ calendar ageing|<b>SEI grows faster (anode).</b> Fully lithiated graphite sits around 0.085 V, its lowest potential. Electrolyte that seeps through the SEI keeps being reduced and locks lithium into new SEI. That locked lithium is permanently lost capacity (loss of lithium inventory, LLI), the dominant calendar-ageing mechanism.]] <a class="cite" href="sources.html#keil2016">[4]</a></li>
+      <li>[[<b>อิเล็กโทรไลต์ถูกออกซิไดซ์ (ขั้วบวก)</b> ที่ศักย์สูงเกินราว 4.2–4.3 V vs Li อิเล็กโทรไลต์ที่ผิวขั้วบวกสลายตัว เกิดฟิล์ม CEI และแก๊ส ความต้านทานเพิ่มขึ้น|<b>Electrolyte oxidation (cathode).</b> Above roughly 4.2–4.3 V vs Li the electrolyte breaks down at the cathode surface, forming a CEI film and gas, and resistance rises.]] <a class="cite" href="sources.html#vetter2005">[24]</a></li>
+      <li>[[<b>โครงผลึกนิกเกิลสูงหดตัวและร้าว</b> NMC/NCA ที่ถูกดึงลิเทียมออกมากเกิดการเปลี่ยนเฟส H2→H3 แกน c หดตัวฉับพลัน อนุภาคทุติยภูมิที่ประกอบจากเกรนเล็กๆ จึงร้าวตามขอบเกรน อิเล็กโทรไลต์ซึมเข้ารอยร้าว สร้างผิวใหม่ที่ทำปฏิกิริยาได้อีก|<b>Nickel-rich lattices shrink and crack.</b> Heavily delithiated NMC/NCA undergoes the H2→H3 transition: the c-axis collapses abruptly, and secondary particles made of many small grains crack along grain boundaries. Electrolyte floods the cracks, creating fresh surfaces to react.]] <a class="cite" href="sources.html#ryu2018">[13]</a> <a class="cite" href="sources.html#chen2019">[34]</a></li>
+      <li>[[<b>ออกซิเจนหลุดจากผิวขั้วบวก</b> เมื่อดึงลิเทียมออกจากขั้วบวกเกินราว 80% ผิวของ NMC เริ่มปล่อยออกซิเจน (Jung et al. 2017) ผิวกลายเป็นโครงสร้างแบบเกลือหิน (rock-salt) ที่ลิเทียมผ่านยาก สำหรับ NMC811 จุดนี้อยู่ใกล้กับการชาร์จเต็ม|<b>Oxygen leaves the cathode surface.</b> Once roughly 80% of the cathode's lithium is removed, NMC surfaces start releasing oxygen (Jung et al. 2017) and reconstruct into a rock-salt layer that lithium crosses poorly. For NMC811 that point lies close to a full charge.]] <a class="cite" href="sources.html#jung2017">[31]</a></li>
+      <li>[[<b>โลหะทรานซิชันละลายแล้วไปทำลาย SEI</b> แมงกานีส/นิกเกิลที่ละลายจากขั้วบวกจะวิ่งไปตกที่ขั้วลบ เร่งการโตของ SEI อีกต่อหนึ่ง (เรียกว่า cross-talk)|<b>Dissolved metals poison the anode.</b> Manganese or nickel leached from the cathode migrates to the anode and accelerates SEI growth there ("cross-talk").]] <a class="cite" href="sources.html#edge2021">[26]</a></li>
+    </ol>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="highsoc:particle">
+      <div class="inst-h"><span class="inst-t">[[อนุภาคขั้วบวกนิกเกิลสูง เมื่อชาร์จเต็มซ้ำๆ|A nickel-rich cathode particle, charged high again and again]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ภาพจำลองเชิงแนวคิด: อนุภาคทุติยภูมิขนาดราว 10 µm ประกอบจากเกรนปฐมภูมิ เมื่อชาร์จสูงเกินราว 4.1–4.2 V เกรนหดตัวไม่เท่ากันในแต่ละทิศ ขอบเกรนจึงแยก ภาพไม่ได้คำนวณจากแบบจำลองเชิงกล|Conceptual: a ~10 µm secondary particle made of primary grains. Above about 4.1–4.2 V the grains shrink unevenly in different directions, so boundaries separate. Not computed from a mechanical model.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[“เวลาที่ค้างไว้” สำคัญกว่าตัวเลข|Time spent high matters more than the number]]</h2>
+    <p>[[ลองเทียบสองนิสัย: (ก) กลับบ้านหกโมงเย็นแล้วเสียบชาร์จทันที แบตเต็มตั้งแต่สี่ทุ่มแล้วนั่งรอทั้งคืน กับ (ข) ตั้งเวลาให้ชาร์จเสร็จตอนเจ็ดโมงเช้าก่อนออกจากบ้าน ทั้งสองแบบได้แบตเท่ากันตอนออกเดินทาง แต่แบบ (ข) ใช้เวลาที่ % สูงน้อยกว่าหลายชั่วโมงต่อวัน และในไทยยังได้ค่าไฟช่วง Off-Peak (หลัง 22:00) ด้วย|Compare two habits. (A) Plug in at 6 pm on arrival: full by 10 pm, then waiting full all night. (B) Schedule charging to finish at 7 am, just before leaving. Both leave with the same charge, but (B) spends many fewer hours high every day, and in Thailand it also lands in the off-peak tariff window (after 22:00).]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="highsoc:timeline">
+      <div class="inst-h"><span class="inst-t">[[24 ชั่วโมงของแบต: ชาร์จทันที vs ตั้งเวลาให้เสร็จตอนออกเดินทาง|24 hours of a battery: charge on arrival vs finish at departure]]</span></div>
+    </div>
+    <figcaption class="figcap">[[อัตราการเสื่อมตามเวลาคำนวณด้วยแบบจำลองเดียวกับกราฟด้านบน เฉลี่ยตลอด 24 ชั่วโมง แสดงเป็นค่าเทียบกันระหว่างสองนิสัย|Calendar-ageing rate from the same models as above, averaged across the 24 hours and shown relative between the two habits.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[แล้วทำไม LFP ถึงแนะนำให้ชาร์จ 100%|So why do LFP cars say charge to 100%?]]</h2>
+    <p>[[ขั้วบวก LFP ทำงานที่ราว 3.4–3.5 V vs Li ต่ำกว่าจุดที่อิเล็กโทรไลต์เริ่มสลายมาก และไม่มีการเปลี่ยนเฟสแบบ H2→H3 ปัญหาฝั่งขั้วบวกจึงเกือบไม่มี เหลือแค่ฝั่งขั้วลบ (SEI) ซึ่งเป็นกราไฟต์เหมือนกัน ผลรวมคือ LFP ไวต่อการอยู่ที่ 100% น้อยกว่ามาก ในขณะที่ต้องการชาร์จเต็มเป็นระยะเพื่อให้ BMS ปรับ % ให้แม่น (บทที่ 2 และ 9) Tesla จึงแนะนำเจ้าของรถ LFP ให้ “ตั้งลิมิตไว้ 100% แม้ใช้ประจำวัน และชาร์จเต็มอย่างน้อยสัปดาห์ละครั้ง”|An LFP cathode works at about 3.4–3.5 V vs Li, far below where the electrolyte starts to oxidise, and has no H2→H3-type collapse, so the cathode-side problems mostly vanish. Only the anode side (SEI on graphite) remains. LFP is therefore far less sensitive to sitting at 100%, while it needs regular full charges for its BMS to re-anchor the gauge (chapters 2 and 9). That is why Tesla tells LFP owners to "keep your charge limit set to 100%, even for daily use" and to fully charge "at least once per week".]] <a class="cite" href="sources.html#teslalfp">[11]</a></p>
+    <div class="warnbox">
+      <p class="box-h">[[ยึดคู่มือรถของคุณเป็นหลัก|Your car's manual comes first]]</p>
+      <p>[[ผู้ผลิตรู้ว่าตั้งบัฟเฟอร์ไว้เท่าไร ใช้เซลล์อะไร และ BMS ทำงานอย่างไร ถ้าคู่มือบอกให้ชาร์จ 100% สำหรับ LFP ก็ทำตาม ส่วนรถ NMC/NCA ถ้าคู่มือแนะนำ 80–90% สำหรับใช้ประจำวัน ก็ใช้ช่วงนั้น และชาร์จ 100% ได้เมื่อต้องเดินทางไกลโดยออกรถไม่นานหลังชาร์จเต็ม|The maker knows its buffers, cells and BMS. If the manual says 100% for LFP, do that. For NMC/NCA, if it recommends 80–90% for daily use, stick to it and go to 100% for long trips, leaving soon after it finishes.]]</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[สิ่งที่ควรทำ|What to do]]</h2>
+    <ul>
+      <li>[[<b>NMC/NCA:</b> ตั้งลิมิตประจำวัน 80–90% (หรือตามคู่มือ) ชาร์จ 100% เฉพาะวันเดินทางไกล และพยายามออกรถภายในหนึ่งถึงสองชั่วโมงหลังชาร์จเต็ม|<b>NMC/NCA:</b> set the daily limit to 80–90% (or what the manual says); go to 100% only for long trips and try to leave within an hour or two of it finishing.]]</li>
+      <li>[[<b>LFP:</b> ทำตามคู่มือ ส่วนใหญ่แนะนำ 100% และชาร์จเต็มอย่างน้อยสัปดาห์ละครั้ง|<b>LFP:</b> follow the manual; most say 100%, with a full charge at least weekly.]]</li>
+      <li>[[<b>ทุกเคมี:</b> ใช้การตั้งเวลา “ออกเดินทาง” ให้ชาร์จเสร็จใกล้เวลาออกจากบ้าน เลี่ยงการจอดตากแดดนานๆ ตอนแบตสูง ถ้าจะจอดหลายวันหรือหลายสัปดาห์ให้เหลือราว 50–60%|<b>Every chemistry:</b> use the departure-time setting so charging ends near when you leave; avoid long hours in the sun while the battery is high; for days or weeks of parking, leave it around 50–60%.]]</li>
+      <li>[[<b>เกร็ด:</b> ตอนแบต 100% รถจะลดหรือปิดเบรกแบบเก็บพลังงาน (regen) เพราะแบตไม่มีที่ให้ประจุกลับ ระยะเบรกจะรู้สึกต่างจากปกติในช่วงแรกที่ออกรถ|<b>Side note:</b> at 100% the car limits regenerative braking because there is nowhere to put the energy, so the first few kilometres feel different.]]</li>
+    </ul>
+  </div>
+</section>

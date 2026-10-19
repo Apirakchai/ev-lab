@@ -66,7 +66,7 @@ export const Uc = (chem, soc) => CHEM[chem].ocv(soc) + (CHEM[chem].anode === 'gr
 
 // ---------- cell resistance (normalised, R(50%,25°C)=1) ----------
 export function rRel(soc, tC, Ea = 30000) {
-  const fs = 1 + 1.6 * Math.exp(-soc / 0.06) + 0.35 * Math.exp(-soc / 0.25) + 0.12 * Math.max(0, soc - 0.85) / 0.15;
+  const fs = 1 + 2.5 * Math.exp(-soc / 0.08) + 0.5 * Math.exp(-soc / 0.3) + 0.12 * Math.max(0, soc - 0.85) / 0.15;
   const ft = Math.exp((Ea / R_GAS) * (1 / K(tC) - 1 / 298.15));
   return fs * ft;
 }

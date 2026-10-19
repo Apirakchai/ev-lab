@@ -1,0 +1,69 @@
+<!--meta {"slug":"fast-charging"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.55">06</span><span>[[บทที่ 6 จาก 11|Chapter 6 of 11]]</span></div>
+    <h1>[[ชาร์จเร็ว DC บ่อยๆ แบตพังไหม|Does frequent DC fast charging hurt?]]</h1>
+    <p class="deck">[[คำตอบตามหลักฐาน: มีผลจริง แต่น้อยกว่าที่คนกลัวมาก ข้อมูลรถกว่า 22,700 คันพบว่ากลุ่มที่ใช้ DC บ่อยเสื่อมเร็วขึ้นราว 1 จุดเปอร์เซ็นต์ต่อปี ส่วนข้อมูล Tesla กว่า 12,500 คันไม่พบความต่างที่มีนัยสำคัญ สิ่งที่ต่างกันมากกว่าคือค่าไฟ|The evidence-based answer: yes, a little, and much less than people fear. Data from 22,700+ vehicles shows heavy DC users losing about one extra percentage point a year; data from 12,500+ Teslas found no statistically significant difference. The bigger difference is your electricity bill.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2>[[ทำไมชาร์จเร็วถึง “อาจ” ทำร้ายแบต|Why fast charging can wear a battery]]</h2>
+    <ul>
+      <li>[[<b>ลิเทียมเกาะผิว (plating):</b> กระแสสูงทำให้ผิวกราไฟต์เต็มก่อนลิเทียมจะแทรกเข้าไปได้ทัน (บทที่ 5) เสี่ยงที่สุดเมื่อ แบตเย็น + % สูง + กระแสสูง พร้อมกัน|<b>Lithium plating:</b> high current fills the graphite surface faster than lithium can diffuse in (chapter 5). Riskiest when cold, high charge and high current coincide.]] <a class="cite" href="sources.html#waldmann2018">[9]</a></li>
+      <li>[[<b>ความร้อน:</b> ความร้อนในแบตเท่ากับ I²R กระแสเพิ่ม 2 เท่า ความร้อนเพิ่ม 4 เท่า ความร้อนเร่งการโตของ SEI ตามกฎของ Arrhenius|<b>Heat:</b> heat inside the pack goes with I²R, so doubling current quadruples heat, and heat speeds SEI growth (Arrhenius).]] <a class="cite" href="sources.html#waldmann2014">[27]</a></li>
+      <li>[[<b>ความเค้นเชิงกล:</b> ลิเทียมเข้าเร็ว ทำให้ผิวอนุภาคพองก่อนแกนกลาง เกิดแรงดึงจนร้าว และกระแสในเซลล์ใหญ่กระจายไม่สม่ำเสมอ บางจุดทำงานหนักกว่าจุดอื่น|<b>Mechanical stress:</b> fast lithiation swells particle surfaces before their cores, cracking them, and current spreads unevenly in large cells so some spots work harder.]] <a class="cite" href="sources.html#tomaszewska2019">[29]</a></li>
+    </ul>
+    <p>[[ข่าวดีคือรถยุคใหม่ออกแบบมาเพื่อสิ่งนี้ BMS จำกัดกระแสตามแผนที่ที่ทดสอบมาแล้ว ระบบระบายความร้อนด้วยของเหลวดึงความร้อนออก และการนำทางไปตู้ชาร์จทำให้รถเตรียมอุณหภูมิแบต แผนภาพข้างล่างแสดงว่าเส้นกระแสของรถ (เส้นขาว) วิ่งอยู่ใต้ขอบเขตอันตรายเสมอ|The good news is that modern cars are built for this. The BMS caps current with a tested map, liquid cooling pulls heat out, and navigating to a charger lets the car prepare the battery's temperature. The map below shows the car's current (white line) staying under the danger boundary.]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="fast:risk">
+      <div class="inst-h"><span class="inst-t">[[แผนที่ความเสี่ยงลิเทียมเพลตติ้ง กับกระแสที่ BMS ยอมให้จริง|Plating-risk map vs the current the BMS actually allows]]</span></div>
+    </div>
+    <figcaption class="figcap">[[สีพื้นหลังคือส่วนเผื่อของศักย์ขั้วลบจากแบบจำลองอย่างง่ายในบทที่ 5 (แดง = เสี่ยง) เส้นขาวคือแผนที่กระแสของแพ็กตัวอย่างหลังปรับตามอุณหภูมิ ทั้งสองเป็นค่าประกอบการอธิบาย ไม่ใช่ข้อมูลของรถรุ่นใดรุ่นหนึ่ง|Background colour is the anode-potential margin from chapter 5's simple model (red = risk). The white line is an example pack's current map after temperature derating. Both are explanatory, not any specific car's data.]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[หลักฐานจากรถจริง|What real-world data shows]]</h2>
+    <p>[[งานวิจัยในห้องแล็บมักทดสอบแบบหนักสุดๆ (ชาร์จเร็วทุกรอบจนเต็ม) ข้อมูลจากรถที่ใช้งานจริงจึงตอบคำถามของคนทั่วไปได้ตรงกว่า|Lab studies usually torture cells (fast charging every cycle to full). Data from cars in everyday use answers the real question more directly.]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="fast:evidence">
+      <div class="inst-h"><span class="inst-t">[[ผลการศึกษาจากรถที่ใช้งานจริง|Results from cars in real use]]</span></div>
+    </div>
+    <figcaption class="figcap">[[Geotab: รถกว่า 22,700 คัน 21 รุ่น ข้อมูลเผยแพร่ปี 2026 · INL: Nissan Leaf 4 คันที่เมืองฟีนิกซ์ (แบตไม่มีระบบระบายความร้อนด้วยของเหลว) · Recurrent: Tesla Model 3/Y กว่า 12,500 คัน|Geotab: 22,700+ vehicles, 21 models, published 2026 · INL: four Nissan Leafs in Phoenix (passively cooled pack) · Recurrent: 12,500+ Tesla Model 3/Y.]] <a class="cite" href="sources.html#geotab2026">[1]</a> <a class="cite" href="sources.html#inl2015">[6]</a> <a class="cite" href="sources.html#recurrent2023">[5]</a></figcaption>
+  </figure>
+  <div class="col">
+    <ul>
+      <li>[[<b>Geotab (2026):</b> รถที่ชาร์จ DC น้อยกว่า 12% ของจำนวนครั้ง เสื่อม 1.5% ต่อปี มากกว่า 12% เสื่อม 2.5% ต่อปี ในกลุ่มที่ใช้ DC หนัก ถ้ามากกว่า 40% ของครั้งเป็นการชาร์จเกิน 100 kW เสื่อม 3.0% ต่อปี (คาดว่าเหลือ 76% ที่ 8 ปี เทียบ 88% ของกลุ่ม 1.5%)|<b>Geotab (2026):</b> cars using DC for under 12% of sessions lost 1.5% a year; over 12%, 2.5% a year. Among heavy DC users, those with over 40% of sessions above 100 kW lost 3.0% a year (projected 76% at eight years versus 88% for the 1.5% group).]]</li>
+      <li>[[<b>Recurrent (2023):</b> เทียบ Tesla ที่ชาร์จเร็วอย่างน้อย 90% ของเวลา กับคันที่ชาร์จเร็วน้อยกว่า 10% “ไม่พบความแตกต่างของการลดลงของระยะทางอย่างมีนัยสำคัญทางสถิติ” (เทียบเฉพาะสองขั้วสุด และ Tesla ระบุว่ากำลังชาร์จสูงสุดอาจลดลงเล็กน้อยหลังชาร์จเร็วมากๆ)|<b>Recurrent (2023):</b> Teslas fast-charging at least 90% of the time versus under 10% showed "no statistically significant difference in range degradation" (only the two extremes were compared, and Tesla notes peak charging rate may drop slightly after very many Supercharging sessions).]]</li>
+      <li>[[<b>INL (2014–15):</b> Nissan Leaf ที่ชาร์จ DC 50 kW ล้วน เทียบกับ AC ล้วน ที่ 40,000 ไมล์ (64,000 กม.) ความจุหาย 25% กับ 22% ต่างกัน 3 จุด ทั้งที่ Leaf ไม่มีระบบระบายความร้อนด้วยของเหลว|<b>INL (2014–15):</b> Nissan Leafs charged only by 50 kW DC versus only AC lost 25% versus 22% of capacity at 40,000 miles (64,000 km), a 3-point gap, even though the Leaf has no liquid cooling.]]</li>
+      <li>[[<b>Tesla (Impact Report 2023):</b> Model 3/Y Long Range เหลือความจุเฉลี่ย 85% หลัง 200,000 ไมล์ (ราว 320,000 กม.) ซึ่งรวมการชาร์จทุกแบบในชีวิตจริงแล้ว|<b>Tesla (Impact Report 2023):</b> Model 3/Y Long Range packs averaged 85% capacity after 200,000 miles (~320,000 km), including every kind of real-world charging.]] <a class="cite" href="sources.html#tesla2023">[2]</a></li>
+    </ul>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="fast:mix">
+      <div class="inst-h"><span class="inst-t">[[ประมาณการเสื่อมต่อปีจากพฤติกรรมการชาร์จ (อิงข้อมูล Geotab)|Estimate yearly loss from your charging habits (Geotab-based)]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ตัวเลขคือค่าเฉลี่ยของกลุ่มรถใน Geotab ที่มีพฤติกรรมใกล้เคียง (ไม่ใช่การทำนายรถคันใดคันหนึ่ง) การรวมผลของสภาพอากาศเป็นการประมาณแบบบวกกันอย่างหยาบ แต่ละคันอาจต่างจากค่าเฉลี่ยมาก|Figures are Geotab cohort averages for similar habits, not a prediction for one car. Adding the climate effect is a rough approximation. Individual cars can differ a lot from the average.]] <a class="cite" href="sources.html#geotab2026">[1]</a></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[ในไทย เรื่องเงินต่างกันมากกว่าเรื่องแบต|In Thailand, money differs more than battery wear]]</h2>
+    <p>[[ราคาชาร์จ DC สาธารณะในไทยปี 2569 ช่วง On-Peak อยู่ราว 7.30–8.50 บาท/kWh และ Off-Peak ราว 4.10–6.50 บาท/kWh ขณะที่ชาร์จบ้านด้วยมิเตอร์ TOU ช่วง Off-Peak อยู่ราว 3.00 บาท/kWh (รวม Ft และ VAT) ถ้าขับปีละ 15,000 กม. ใช้ไฟราว 2,400 kWh การชาร์จ DC ช่วง On-Peak ทั้งหมดจะแพงกว่าชาร์จบ้านกลางคืนราว 1 หมื่นบาทต่อปี|Public DC prices in Thailand in 2026 run about 7.30–8.50 THB/kWh on-peak and 4.10–6.50 off-peak, while home charging on a TOU meter costs about 3.00 THB/kWh off-peak (Ft and VAT included). Driving 15,000 km a year uses roughly 2,400 kWh; doing it all at on-peak DC costs around 10,000 THB a year more than charging at home overnight.]] <a class="cite" href="sources.html#thdc">[20]</a> <a class="cite" href="sources.html#thtou">[18]</a></p>
+    <div class="key">
+      <p class="key-h">[[วิธีใช้ DC ให้ถนอมแบตและกระเป๋าเงิน|Using DC kindly, for battery and wallet]]</p>
+      <ul>
+        <li>[[ใช้ DC เมื่อจำเป็น เช่น เดินทางไกล ไม่ต้องกลัว แต่ถ้ามีที่ชาร์จบ้าน AC กลางคืนคือตัวเลือกหลักที่ถูกและถนอมที่สุด|Use DC when you need it, such as road trips, without worry; if you have home charging, overnight AC is the cheapest and gentlest default.]]</li>
+        <li>[[ตัดที่ 80% เมื่อชาร์จเร็ว เว้นแต่ต้องใช้ระยะทางจริงๆ|Stop around 80% when fast charging unless you truly need the range.]]</li>
+        <li>[[เลือกช่วง Off-Peak ของตู้สาธารณะถ้าทำได้ ราคาต่างกันเกือบครึ่ง|Pick public chargers' off-peak hours when possible; prices differ by almost half.]]</li>
+        <li>[[ไม่จำเป็นต้องเลือกตู้ช้ากว่าเพื่อถนอมแบต ถ้าเวลาของคุณมีค่า แต่ถ้าไม่รีบ ตู้กำลังต่ำกว่าก็ช่วยลดความร้อนได้บ้าง (ข้อมูล Geotab ชี้ว่ากำลังสูงเป็นประจำมีผล)|No need to hunt for slower chargers to protect the battery if your time matters; if you're not in a hurry, lower power does reduce heat a little (Geotab links habitual high power to faster wear).]]</li>
+      </ul>
+    </div>
+  </div>
+</section>

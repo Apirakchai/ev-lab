@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="th" data-lang="th" data-mode="simple" data-page="fast-charging" data-title-th="ชาร์จเร็ว DC บ่อยๆ แบตพังไหม — EV Lab" data-title-en="Does DC fast charging hurt? — EV Lab" data-desc-en="Mechanisms, real data from tens of thousands of cars, and good habits">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ชาร์จเร็ว DC บ่อยๆ แบตพังไหม — EV Lab</title>
+<meta name="description" content="กลไก ข้อมูลจริงจากรถหลายหมื่นคัน และวิธีชาร์จให้ถนอมแบต">
+<meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11151a" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EV Lab by Sukmart">
+<meta property="og:title" content="ชาร์จเร็ว DC บ่อยๆ แบตพังไหม — EV Lab">
+<meta property="og:description" content="กลไก ข้อมูลจริงจากรถหลายหมื่นคัน และวิธีชาร์จให้ถนอมแบต">
+<meta property="og:image" content="https://ev.sukmart.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://ev.sukmart.com/fast-charging.html">
+<script>
+/* Apply saved language / reading level / theme before first paint */
+(function () {
+  var d = document.documentElement, q = new URLSearchParams(location.search), s = {};
+  function get(k) { try { return localStorage.getItem('evlab.' + k); } catch (e) { return null; } }
+  var langs = (navigator.languages || [navigator.language || 'th']).join(',').toLowerCase();
+  s.lang = q.get('lang') || get('lang') || (langs.indexOf('th') > -1 || !/^en/.test(langs) ? 'th' : 'en');
+  s.mode = q.get('mode') || get('mode') || 'simple';
+  s.theme = q.get('theme') || get('theme') || '';
+  if (s.lang !== 'en') s.lang = 'th';
+  if (s.mode !== 'deep') s.mode = 'simple';
+  d.dataset.lang = s.lang; d.lang = s.lang; d.dataset.mode = s.mode;
+  if (s.theme === 'light' || s.theme === 'dark') d.dataset.theme = s.theme;
+  if (s.lang === 'en') document.title = d.dataset.titleEn;
+})();
+</script>
+<link rel="preload" href="assets/fonts/plex-thai-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/bj-thai-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?v=03578e45">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css?v=03578e45">
+<link rel="stylesheet" href="assets/css/site.css?v=03578e45">
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="th" lang="th">ข้ามไปยังเนื้อหา</span><span data-l="en" lang="en">Skip to content</span></a>
+<div class="readbar" aria-hidden="true"><i></i></div>
+<header class="hdr" id="top">
+  <div class="hdr-in">
+    <a class="brand" href="index.html" aria-label="EV Lab home">
+      <svg class="brand-mark" viewBox="0 0 40 24" aria-hidden="true"><rect x="1.5" y="3" width="32" height="18" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="34.5" y="8.5" width="4" height="7" rx="1.5" fill="currentColor"/><rect class="brand-fill" x="5" y="6.5" width="17" height="11" rx="2"/><circle class="brand-ion" cx="27.5" cy="12" r="2.6"/></svg>
+      <span class="brand-t">EV Lab</span><span class="brand-s">by Sukmart</span>
+    </a>
+    <button class="hdr-menu" type="button" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <span class="hdr-menu-t"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></span>
+    </button>
+    <div class="hdr-tools">
+      <div class="seg" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span class="seg-ico" aria-hidden="true">●</span><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span class="seg-ico" aria-hidden="true">◆</span><span data-l="th" lang="th">เชิงลึก</span><span data-l="en" lang="en">Deep</span></button>
+      </div>
+      <label class="langsel"><span class="sr">Language</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.8 10h14.4M10 2.8c2.2 2.3 2.2 12.1 0 14.4M10 2.8c-2.2 2.3-2.2 12.1 0 14.4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <select id="langSel" aria-label="Language / ภาษา">
+          <option value="th">ไทย</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+      <button class="hdr-theme" type="button" aria-label="Toggle light or dark theme">
+        <svg class="i-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5"/></g></svg>
+        <svg class="i-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.8 12.6A6.6 6.6 0 0 1 7.4 4.2a6.6 6.6 0 1 0 8.4 8.4z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <div class="menu-scrim" data-close-menu></div>
+  <nav class="menu-panel" aria-label="Site">
+    <div class="menu-top">
+      <a class="menu-home" href="index.html"><span data-l="th" lang="th">หน้าแรก</span><span data-l="en" lang="en">Home</span></a>
+      <button class="menu-x" type="button" data-close-menu aria-label="Close menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="menu-mode">
+      <p><span data-l="th" lang="th">ระดับเนื้อหา</span><span data-l="en" lang="en">Reading level</span></p>
+      <div class="seg seg-wide" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span data-l="th" lang="th">เชิงลึก (วิชาการ)</span><span data-l="en" lang="en">Deep (technical)</span></button>
+      </div>
+    </div>
+    <div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></p><ul class="menu-list"><li><a class="mi" href="basics.html"><span class="mi-num" aria-hidden="true">01</span><span class="mi-t"><span data-l="th" lang="th">แบตเตอรี่ทำงานอย่างไร</span><span data-l="en" lang="en">How a battery cell works</span></span><span class="mi-d"><span data-l="th" lang="th">ไอออน อิเล็กตรอน แรงดัน ความจุ และหน่วยที่ต้องรู้</span><span data-l="en" lang="en">Ions, electrons, voltage, capacity and the units that matter</span></span></a></li><li><a class="mi" href="chemistry.html"><span class="mi-num" aria-hidden="true">02</span><span class="mi-t"><span data-l="th" lang="th">เคมีแบตเตอรี่ทุกแบบ</span><span data-l="en" lang="en">Every battery chemistry</span></span><span class="mi-d"><span data-l="th" lang="th">LFP, NMC, NCA, LMFP, โซเดียมไอออน, โซลิดสเตต</span><span data-l="en" lang="en">LFP, NMC, NCA, LMFP, sodium-ion, solid-state</span></span></a></li><li><a class="mi" href="high-soc.html"><span class="mi-num" aria-hidden="true">03</span><span class="mi-t"><span data-l="th" lang="th">ทำไมชาร์จ 100% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why sitting at 100% wears a battery</span></span><span class="mi-d"><span data-l="th" lang="th">ศักย์ไฟฟ้าขั้วลบ ชั้น SEI และการเสื่อมตามเวลา</span><span data-l="en" lang="en">Anode potential, SEI growth and calendar ageing</span></span></a></li><li><a class="mi" href="low-soc.html"><span class="mi-num" aria-hidden="true">04</span><span class="mi-t"><span data-l="th" lang="th">ทำไมต่ำกว่า 10% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why running below 10% hurts</span></span><span class="mi-d"><span data-l="th" lang="th">ความต้านทานภายใน ความลึกของการคายประจุ และการคายประจุเกิน</span><span data-l="en" lang="en">Internal resistance, depth of discharge and over-discharge</span></span></a></li><li><a class="mi" href="charging-curve.html"><span class="mi-num" aria-hidden="true">05</span><span class="mi-t"><span data-l="th" lang="th">ทำไมเกิน 80% ชาร์จช้าลง</span><span data-l="en" lang="en">Why charging slows after 80%</span></span><span class="mi-d"><span data-l="th" lang="th">CC-CV, ลิเทียมเพลตติ้ง, การบาลานซ์เซลล์ และระบบ 400V/800V</span><span data-l="en" lang="en">CC-CV, lithium plating, cell balancing and 400 V vs 800 V</span></span></a></li><li><a class="mi" href="fast-charging.html" aria-current="page"><span class="mi-num" aria-hidden="true">06</span><span class="mi-t"><span data-l="th" lang="th">ชาร์จเร็ว DC บ่อยๆ แบตพังไหม</span><span data-l="en" lang="en">Does DC fast charging hurt?</span></span><span class="mi-d"><span data-l="th" lang="th">กลไก ข้อมูลจริงจากรถหลายหมื่นคัน และวิธีชาร์จให้ถนอมแบต</span><span data-l="en" lang="en">Mechanisms, real data from tens of thousands of cars, and good habits</span></span></a></li><li><a class="mi" href="heat.html"><span class="mi-num" aria-hidden="true">07</span><span class="mi-t"><span data-l="th" lang="th">ความร้อน อากาศไทย และความปลอดภัย</span><span data-l="en" lang="en">Heat, Thai weather and safety</span></span><span class="mi-d"><span data-l="th" lang="th">อุณหภูมิกับการเสื่อม ระบบระบายความร้อน ไฟไหม้ และน้ำท่วม</span><span data-l="en" lang="en">Temperature and ageing, cooling, fire and floods</span></span></a></li><li><a class="mi" href="v2l.html"><span class="mi-num" aria-hidden="true">08</span><span class="mi-t"><span data-l="th" lang="th">V2L, V2H และ V2G</span><span data-l="en" lang="en">V2L, V2H and V2G</span></span><span class="mi-d"><span data-l="th" lang="th">รถจ่ายไฟให้เครื่องใช้ไฟฟ้า บ้าน และกริดได้อย่างไร</span><span data-l="en" lang="en">How a car powers appliances, a home and the grid</span></span></a></li><li><a class="mi" href="bms.html"><span class="mi-num" aria-hidden="true">09</span><span class="mi-t"><span data-l="th" lang="th">BMS สมองของแบตเตอรี่</span><span data-l="en" lang="en">The BMS, the battery's brain</span></span><span class="mi-d"><span data-l="th" lang="th">การวัด % แบต การบาลานซ์เซลล์ บัฟเฟอร์ และสุขภาพแบต (SOH)</span><span data-l="en" lang="en">Measuring %, cell balancing, buffers and state of health</span></span></a></li><li><a class="mi" href="lifespan.html"><span class="mi-num" aria-hidden="true">10</span><span class="mi-t"><span data-l="th" lang="th">อายุแบต การรับประกัน และรีไซเคิล</span><span data-l="en" lang="en">Lifespan, warranty and recycling</span></span><span class="mi-d"><span data-l="th" lang="th">แบตอยู่ได้กี่ปีกี่กิโล ซื้อรถมือสองต้องดูอะไร</span><span data-l="en" lang="en">How many years and kilometres, and what to check on a used EV</span></span></a></li><li><a class="mi" href="guide.html"><span class="mi-num" aria-hidden="true">11</span><span class="mi-t"><span data-l="th" lang="th">คู่มือใช้รถไฟฟ้าในไทย</span><span data-l="en" lang="en">Owner's playbook for Thailand</span></span><span class="mi-d"><span data-l="th" lang="th">กฎการชาร์จประจำวัน ติดตั้งที่ชาร์จบ้าน ค่าไฟ TOU และเรื่องที่ควรรู้</span><span data-l="en" lang="en">Daily charging rules, home chargers, TOU tariffs and more</span></span></a></li></ul></div><div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">เครื่องมือและข้อมูล</span><span data-l="en" lang="en">Tools & reference</span></p><ul class="menu-list"><li><a class="mi" href="myths.html"><span class="mi-num mi-ico" aria-hidden="true">?</span><span class="mi-t"><span data-l="th" lang="th">ความเชื่อผิดๆ เรื่องแบต</span><span data-l="en" lang="en">Battery myths, checked</span></span><span class="mi-d"><span data-l="th" lang="th">เรื่องที่คนชอบพูดต่อกัน จริงหรือไม่ พร้อมหลักฐาน</span><span data-l="en" lang="en">Things people repeat, with the evidence</span></span></a></li><li><a class="mi" href="lab.html"><span class="mi-num mi-ico" aria-hidden="true">∿</span><span class="mi-t"><span data-l="th" lang="th">ห้องแล็บเครื่องคำนวณ</span><span data-l="en" lang="en">Calculator lab</span></span><span class="mi-d"><span data-l="th" lang="th">จำลองการเสื่อม เวลาชาร์จ ค่าใช้จ่าย ระยะทาง และ V2L</span><span data-l="en" lang="en">Simulate ageing, charge time, cost, range and V2L</span></span></a></li><li><a class="mi" href="glossary.html"><span class="mi-num mi-ico" aria-hidden="true">Aa</span><span class="mi-t"><span data-l="th" lang="th">อภิธานศัพท์ ไทย–อังกฤษ</span><span data-l="en" lang="en">Glossary, Thai–English</span></span><span class="mi-d"><span data-l="th" lang="th">คำศัพท์ทุกคำในเว็บ พร้อมคำแปลและความหมาย</span><span data-l="en" lang="en">Every term on the site, translated and explained</span></span></a></li><li><a class="mi" href="sources.html"><span class="mi-num mi-ico" aria-hidden="true">§</span><span class="mi-t"><span data-l="th" lang="th">แหล่งอ้างอิงและวิธีคำนวณ</span><span data-l="en" lang="en">Sources and methods</span></span><span class="mi-d"><span data-l="th" lang="th">งานวิจัย ข้อมูลจริง และแบบจำลองที่ใช้ในเว็บนี้</span><span data-l="en" lang="en">Papers, field data and the models used on this site</span></span></a></li></ul></div>
+  </nav>
+</div>
+<main id="main" class="main">
+
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.55">06</span><span><span data-l="th" lang="th">บทที่ 6 จาก 11</span><span data-l="en" lang="en">Chapter 6 of 11</span></span></div>
+    <h1><span data-l="th" lang="th">ชาร์จเร็ว DC บ่อยๆ แบตพังไหม</span><span data-l="en" lang="en">Does frequent DC fast charging hurt?</span></h1>
+    <p class="deck"><span data-l="th" lang="th">คำตอบตามหลักฐาน: มีผลจริง แต่น้อยกว่าที่คนกลัวมาก ข้อมูลรถกว่า 22,700 คันพบว่ากลุ่มที่ใช้ DC บ่อยเสื่อมเร็วขึ้นราว 1 จุดเปอร์เซ็นต์ต่อปี ส่วนข้อมูล Tesla กว่า 12,500 คันไม่พบความต่างที่มีนัยสำคัญ สิ่งที่ต่างกันมากกว่าคือค่าไฟ</span><span data-l="en" lang="en">The evidence-based answer: yes, a little, and much less than people fear. Data from 22,700+ vehicles shows heavy DC users losing about one extra percentage point a year; data from 12,500+ Teslas found no statistically significant difference. The bigger difference is your electricity bill.</span></p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2><span data-l="th" lang="th">ทำไมชาร์จเร็วถึง “อาจ” ทำร้ายแบต</span><span data-l="en" lang="en">Why fast charging can wear a battery</span></h2>
+    <ul>
+      <li><span data-l="th" lang="th"><b>ลิเทียมเกาะผิว (plating):</b> กระแสสูงทำให้ผิวกราไฟต์เต็มก่อนลิเทียมจะแทรกเข้าไปได้ทัน (บทที่ 5) เสี่ยงที่สุดเมื่อ แบตเย็น + % สูง + กระแสสูง พร้อมกัน</span><span data-l="en" lang="en"><b>Lithium plating:</b> high current fills the graphite surface faster than lithium can diffuse in (chapter 5). Riskiest when cold, high charge and high current coincide.</span> <a class="cite" href="sources.html#waldmann2018">[9]</a></li>
+      <li><span data-l="th" lang="th"><b>ความร้อน:</b> ความร้อนในแบตเท่ากับ I²R กระแสเพิ่ม 2 เท่า ความร้อนเพิ่ม 4 เท่า ความร้อนเร่งการโตของ SEI ตามกฎของ Arrhenius</span><span data-l="en" lang="en"><b>Heat:</b> heat inside the pack goes with I²R, so doubling current quadruples heat, and heat speeds SEI growth (Arrhenius).</span> <a class="cite" href="sources.html#waldmann2014">[27]</a></li>
+      <li><span data-l="th" lang="th"><b>ความเค้นเชิงกล:</b> ลิเทียมเข้าเร็ว ทำให้ผิวอนุภาคพองก่อนแกนกลาง เกิดแรงดึงจนร้าว และกระแสในเซลล์ใหญ่กระจายไม่สม่ำเสมอ บางจุดทำงานหนักกว่าจุดอื่น</span><span data-l="en" lang="en"><b>Mechanical stress:</b> fast lithiation swells particle surfaces before their cores, cracking them, and current spreads unevenly in large cells so some spots work harder.</span> <a class="cite" href="sources.html#tomaszewska2019">[29]</a></li>
+    </ul>
+    <p><span data-l="th" lang="th">ข่าวดีคือรถยุคใหม่ออกแบบมาเพื่อสิ่งนี้ BMS จำกัดกระแสตามแผนที่ที่ทดสอบมาแล้ว ระบบระบายความร้อนด้วยของเหลวดึงความร้อนออก และการนำทางไปตู้ชาร์จทำให้รถเตรียมอุณหภูมิแบต แผนภาพข้างล่างแสดงว่าเส้นกระแสของรถ (เส้นขาว) วิ่งอยู่ใต้ขอบเขตอันตรายเสมอ</span><span data-l="en" lang="en">The good news is that modern cars are built for this. The BMS caps current with a tested map, liquid cooling pulls heat out, and navigating to a charger lets the car prepare the battery's temperature. The map below shows the car's current (white line) staying under the danger boundary.</span></p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="fast:risk">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">แผนที่ความเสี่ยงลิเทียมเพลตติ้ง กับกระแสที่ BMS ยอมให้จริง</span><span data-l="en" lang="en">Plating-risk map vs the current the BMS actually allows</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">สีพื้นหลังคือส่วนเผื่อของศักย์ขั้วลบจากแบบจำลองอย่างง่ายในบทที่ 5 (แดง = เสี่ยง) เส้นขาวคือแผนที่กระแสของแพ็กตัวอย่างหลังปรับตามอุณหภูมิ ทั้งสองเป็นค่าประกอบการอธิบาย ไม่ใช่ข้อมูลของรถรุ่นใดรุ่นหนึ่ง</span><span data-l="en" lang="en">Background colour is the anode-potential margin from chapter 5's simple model (red = risk). The white line is an example pack's current map after temperature derating. Both are explanatory, not any specific car's data.</span></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">หลักฐานจากรถจริง</span><span data-l="en" lang="en">What real-world data shows</span></h2>
+    <p><span data-l="th" lang="th">งานวิจัยในห้องแล็บมักทดสอบแบบหนักสุดๆ (ชาร์จเร็วทุกรอบจนเต็ม) ข้อมูลจากรถที่ใช้งานจริงจึงตอบคำถามของคนทั่วไปได้ตรงกว่า</span><span data-l="en" lang="en">Lab studies usually torture cells (fast charging every cycle to full). Data from cars in everyday use answers the real question more directly.</span></p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="fast:evidence">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">ผลการศึกษาจากรถที่ใช้งานจริง</span><span data-l="en" lang="en">Results from cars in real use</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">Geotab: รถกว่า 22,700 คัน 21 รุ่น ข้อมูลเผยแพร่ปี 2026 · INL: Nissan Leaf 4 คันที่เมืองฟีนิกซ์ (แบตไม่มีระบบระบายความร้อนด้วยของเหลว) · Recurrent: Tesla Model 3/Y กว่า 12,500 คัน</span><span data-l="en" lang="en">Geotab: 22,700+ vehicles, 21 models, published 2026 · INL: four Nissan Leafs in Phoenix (passively cooled pack) · Recurrent: 12,500+ Tesla Model 3/Y.</span> <a class="cite" href="sources.html#geotab2026">[1]</a> <a class="cite" href="sources.html#inl2015">[6]</a> <a class="cite" href="sources.html#recurrent2023">[5]</a></figcaption>
+  </figure>
+  <div class="col">
+    <ul>
+      <li><span data-l="th" lang="th"><b>Geotab (2026):</b> รถที่ชาร์จ DC น้อยกว่า 12% ของจำนวนครั้ง เสื่อม 1.5% ต่อปี มากกว่า 12% เสื่อม 2.5% ต่อปี ในกลุ่มที่ใช้ DC หนัก ถ้ามากกว่า 40% ของครั้งเป็นการชาร์จเกิน 100 kW เสื่อม 3.0% ต่อปี (คาดว่าเหลือ 76% ที่ 8 ปี เทียบ 88% ของกลุ่ม 1.5%)</span><span data-l="en" lang="en"><b>Geotab (2026):</b> cars using DC for under 12% of sessions lost 1.5% a year; over 12%, 2.5% a year. Among heavy DC users, those with over 40% of sessions above 100 kW lost 3.0% a year (projected 76% at eight years versus 88% for the 1.5% group).</span></li>
+      <li><span data-l="th" lang="th"><b>Recurrent (2023):</b> เทียบ Tesla ที่ชาร์จเร็วอย่างน้อย 90% ของเวลา กับคันที่ชาร์จเร็วน้อยกว่า 10% “ไม่พบความแตกต่างของการลดลงของระยะทางอย่างมีนัยสำคัญทางสถิติ” (เทียบเฉพาะสองขั้วสุด และ Tesla ระบุว่ากำลังชาร์จสูงสุดอาจลดลงเล็กน้อยหลังชาร์จเร็วมากๆ)</span><span data-l="en" lang="en"><b>Recurrent (2023):</b> Teslas fast-charging at least 90% of the time versus under 10% showed "no statistically significant difference in range degradation" (only the two extremes were compared, and Tesla notes peak charging rate may drop slightly after very many Supercharging sessions).</span></li>
+      <li><span data-l="th" lang="th"><b>INL (2014–15):</b> Nissan Leaf ที่ชาร์จ DC 50 kW ล้วน เทียบกับ AC ล้วน ที่ 40,000 ไมล์ (64,000 กม.) ความจุหาย 25% กับ 22% ต่างกัน 3 จุด ทั้งที่ Leaf ไม่มีระบบระบายความร้อนด้วยของเหลว</span><span data-l="en" lang="en"><b>INL (2014–15):</b> Nissan Leafs charged only by 50 kW DC versus only AC lost 25% versus 22% of capacity at 40,000 miles (64,000 km), a 3-point gap, even though the Leaf has no liquid cooling.</span></li>
+      <li><span data-l="th" lang="th"><b>Tesla (Impact Report 2023):</b> Model 3/Y Long Range เหลือความจุเฉลี่ย 85% หลัง 200,000 ไมล์ (ราว 320,000 กม.) ซึ่งรวมการชาร์จทุกแบบในชีวิตจริงแล้ว</span><span data-l="en" lang="en"><b>Tesla (Impact Report 2023):</b> Model 3/Y Long Range packs averaged 85% capacity after 200,000 miles (~320,000 km), including every kind of real-world charging.</span> <a class="cite" href="sources.html#tesla2023">[2]</a></li>
+    </ul>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="fast:mix">
+      <div class="inst-h"><span class="inst-t"><span data-l="th" lang="th">ประมาณการเสื่อมต่อปีจากพฤติกรรมการชาร์จ (อิงข้อมูล Geotab)</span><span data-l="en" lang="en">Estimate yearly loss from your charging habits (Geotab-based)</span></span></div>
+    </div>
+    <figcaption class="figcap"><span data-l="th" lang="th">ตัวเลขคือค่าเฉลี่ยของกลุ่มรถใน Geotab ที่มีพฤติกรรมใกล้เคียง (ไม่ใช่การทำนายรถคันใดคันหนึ่ง) การรวมผลของสภาพอากาศเป็นการประมาณแบบบวกกันอย่างหยาบ แต่ละคันอาจต่างจากค่าเฉลี่ยมาก</span><span data-l="en" lang="en">Figures are Geotab cohort averages for similar habits, not a prediction for one car. Adding the climate effect is a rough approximation. Individual cars can differ a lot from the average.</span> <a class="cite" href="sources.html#geotab2026">[1]</a></figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2><span data-l="th" lang="th">ในไทย เรื่องเงินต่างกันมากกว่าเรื่องแบต</span><span data-l="en" lang="en">In Thailand, money differs more than battery wear</span></h2>
+    <p><span data-l="th" lang="th">ราคาชาร์จ DC สาธารณะในไทยปี 2569 ช่วง On-Peak อยู่ราว 7.30–8.50 บาท/kWh และ Off-Peak ราว 4.10–6.50 บาท/kWh ขณะที่ชาร์จบ้านด้วยมิเตอร์ TOU ช่วง Off-Peak อยู่ราว 3.00 บาท/kWh (รวม Ft และ VAT) ถ้าขับปีละ 15,000 กม. ใช้ไฟราว 2,400 kWh การชาร์จ DC ช่วง On-Peak ทั้งหมดจะแพงกว่าชาร์จบ้านกลางคืนราว 1 หมื่นบาทต่อปี</span><span data-l="en" lang="en">Public DC prices in Thailand in 2026 run about 7.30–8.50 THB/kWh on-peak and 4.10–6.50 off-peak, while home charging on a TOU meter costs about 3.00 THB/kWh off-peak (Ft and VAT included). Driving 15,000 km a year uses roughly 2,400 kWh; doing it all at on-peak DC costs around 10,000 THB a year more than charging at home overnight.</span> <a class="cite" href="sources.html#thdc">[20]</a> <a class="cite" href="sources.html#thtou">[18]</a></p>
+    <div class="key">
+      <p class="key-h"><span data-l="th" lang="th">วิธีใช้ DC ให้ถนอมแบตและกระเป๋าเงิน</span><span data-l="en" lang="en">Using DC kindly, for battery and wallet</span></p>
+      <ul>
+        <li><span data-l="th" lang="th">ใช้ DC เมื่อจำเป็น เช่น เดินทางไกล ไม่ต้องกลัว แต่ถ้ามีที่ชาร์จบ้าน AC กลางคืนคือตัวเลือกหลักที่ถูกและถนอมที่สุด</span><span data-l="en" lang="en">Use DC when you need it, such as road trips, without worry; if you have home charging, overnight AC is the cheapest and gentlest default.</span></li>
+        <li><span data-l="th" lang="th">ตัดที่ 80% เมื่อชาร์จเร็ว เว้นแต่ต้องใช้ระยะทางจริงๆ</span><span data-l="en" lang="en">Stop around 80% when fast charging unless you truly need the range.</span></li>
+        <li><span data-l="th" lang="th">เลือกช่วง Off-Peak ของตู้สาธารณะถ้าทำได้ ราคาต่างกันเกือบครึ่ง</span><span data-l="en" lang="en">Pick public chargers' off-peak hours when possible; prices differ by almost half.</span></li>
+        <li><span data-l="th" lang="th">ไม่จำเป็นต้องเลือกตู้ช้ากว่าเพื่อถนอมแบต ถ้าเวลาของคุณมีค่า แต่ถ้าไม่รีบ ตู้กำลังต่ำกว่าก็ช่วยลดความร้อนได้บ้าง (ข้อมูล Geotab ชี้ว่ากำลังสูงเป็นประจำมีผล)</span><span data-l="en" lang="en">No need to hunt for slower chargers to protect the battery if your time matters; if you're not in a hurry, lower power does reduce heat a little (Geotab links habitual high power to faster wear).</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<nav class="pager" aria-label="Chapters"><a class="pager-a pager-prev" href="charging-curve.html"><span class="pager-k"><span data-l="th" lang="th">ก่อนหน้า</span><span data-l="en" lang="en">Previous</span></span><span class="pager-t"><span data-l="th" lang="th">ทำไมเกิน 80% ชาร์จช้าลง</span><span data-l="en" lang="en">Why charging slows after 80%</span></span></a><a class="pager-a pager-next" href="heat.html"><span class="pager-k"><span data-l="th" lang="th">บทถัดไป</span><span data-l="en" lang="en">Next chapter</span></span><span class="pager-t"><span data-l="th" lang="th">ความร้อน อากาศไทย และความปลอดภัย</span><span data-l="en" lang="en">Heat, Thai weather and safety</span></span></a></nav>
+</main>
+<footer class="ftr">
+  <div class="ftr-in">
+    <div class="ftr-brand">
+      <p class="ftr-t">EV Lab <span>by Sukmart</span></p>
+      <p class="ftr-d"><span data-l="th" lang="th">ห้องเรียนออนไลน์เรื่องแบตเตอรี่รถยนต์ไฟฟ้า อธิบายได้ทั้งแบบเข้าใจง่ายและแบบวิชาการ พร้อมแหล่งอ้างอิงทุกตัวเลข</span><span data-l="en" lang="en">An open classroom on electric-vehicle batteries, explained simply or in full technical depth, with a source for every number.</span></p>
+    </div>
+    <ul class="ftr-links">
+      <li><a href="myths.html"><span data-l="th" lang="th">ความเชื่อผิดๆ</span><span data-l="en" lang="en">Myths</span></a></li>
+      <li><a href="lab.html"><span data-l="th" lang="th">เครื่องคำนวณ</span><span data-l="en" lang="en">Calculators</span></a></li>
+      <li><a href="glossary.html"><span data-l="th" lang="th">อภิธานศัพท์</span><span data-l="en" lang="en">Glossary</span></a></li>
+      <li><a href="sources.html"><span data-l="th" lang="th">แหล่งอ้างอิง</span><span data-l="en" lang="en">Sources</span></a></li>
+    </ul>
+    <p class="ftr-note"><span data-l="th" lang="th">ข้อมูลปรับปรุงล่าสุด ตุลาคม 2569 · เนื้อหาเพื่อการศึกษา ไม่ใช่คำแนะนำจากผู้ผลิตรถ ควรยึดคู่มือรถของคุณเป็นหลัก</span><span data-l="en" lang="en">Last updated October 2026 · For education, not a substitute for your carmaker's manual.</span></p>
+    <p class="ftr-copy">© 2026 Sukmart · ev.sukmart.com</p>
+  </div>
+</footer>
+<script type="module" src="assets/js/core.js?v=03578e45"></script>
+
+</body>
+</html>

@@ -30,8 +30,8 @@ const bi = (th, en, tag = 'span', cls = '') =>
 
 function renderMath(html) {
   const opts = (display) => ({ displayMode: display, throwOnError: false, output: 'html', strict: 'ignore', trust: false });
-  html = html.replace(/<kd>([\s\S]*?)<\/kd>/g, (_, tex) =>
-    `<div class="math-d" role="math">${katex.renderToString(unescapeHtml(tex.trim()), opts(true))}</div>`);
+  html = html.replace(/<kd([^>]*)>([\s\S]*?)<\/kd>/g, (_, attrs, tex) =>
+    `<div class="math-d" role="math"${attrs}>${katex.renderToString(unescapeHtml(tex.trim()), opts(true))}</div>`);
   html = html.replace(/<k>([\s\S]*?)<\/k>/g, (_, tex) => katex.renderToString(unescapeHtml(tex.trim()), opts(false)));
   return html;
 }

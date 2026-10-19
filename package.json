@@ -1,0 +1,12 @@
+{
+  "name": "ev-lab",
+  "private": true,
+  "type": "module",
+  "description": "Sukmart EV Lab - interactive EV battery knowledge site (TH/EN)",
+  "scripts": { "build": "node build/build.mjs" },
+  "devDependencies": {
+    "katex": "0.16.11",
+    "@fontsource/bai-jamjuree": "5.1.0",
+    "@fontsource/ibm-plex-sans-thai": "5.1.0"
+  }
+}

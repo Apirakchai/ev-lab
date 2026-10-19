@@ -1,0 +1,129 @@
+<!--meta {"slug":"basics"} -->
+<header class="ch-hero">
+  <div class="col">
+    <div class="ch-k"><span class="cbadge" style="--lvl:.09">01</span><span>[[บทที่ 1 จาก 11|Chapter 1 of 11]]</span></div>
+    <h1>[[แบตเตอรี่ทำงานอย่างไร|How a battery cell works]]</h1>
+    <p class="deck">[[ทุกอย่างในเว็บนี้ ตั้งแต่ทำไม 100% ถึงเสื่อม ไปจนถึงทำไมชาร์จช้าหลัง 80% ล้วนมาจากหลักการเดียว คือลิเทียมไอออนที่วิ่งไปมาระหว่างขั้วสองขั้ว บทนี้คือพื้นฐานที่ต้องรู้ก่อน|Everything else on this site, from why 100% wears a cell to why charging slows after 80%, comes back to one idea: lithium ions shuttling between two electrodes. This chapter is that foundation.]]</p>
+  </div>
+</header>
+
+<section class="sec" style="padding-top:0">
+  <div class="col">
+    <h2>[[เก้าอี้โยกของลิเทียม|Lithium's rocking chair]]</h2>
+    <p m-s>[[แบตลิเทียมไอออนมี “บ้าน” ให้ลิเทียมอยู่ 2 หลัง หลังหนึ่งคือ <b>ขั้วบวก</b> (แคโทด) อีกหลังคือ <b>ขั้วลบ</b> (แอโนด ซึ่งส่วนใหญ่ทำจากกราไฟต์ หรือคาร์บอนแบบเดียวกับไส้ดินสอ) เวลาเราชาร์จ ไฟจากที่ชาร์จจะ “ดัน” ลิเทียมให้ย้ายจากขั้วบวกไปอยู่ในขั้วลบ เวลาขับรถ ลิเทียมจะย้ายกลับไปที่ขั้วบวกเองโดยธรรมชาติ และระหว่างที่ย้ายกลับ มันปล่อยพลังงานออกมาขับมอเตอร์|A lithium-ion cell gives lithium two homes. One is the <b>positive electrode</b> (cathode); the other is the <b>negative electrode</b> (anode), usually graphite, the same carbon as a pencil lead. Charging pushes lithium out of the cathode and into the anode. Driving lets it move back on its own, and that return trip is what releases energy to the motor.]]</p>
+    <p m-s>[[จุดสำคัญคือ ลิเทียมเดินทางในรูป <b>ไอออน</b> (Li⁺ ที่ขาดอิเล็กตรอนไป 1 ตัว) ผ่านของเหลวด้านใน ส่วน <b>อิเล็กตรอน</b> ต้องเดินอ้อมผ่านสายไฟด้านนอก นั่นแหละคือกระแสไฟฟ้าที่เราเอามาใช้ ถ้าอิเล็กตรอนลัดผ่านด้านในได้ แบตจะลัดวงจร จึงต้องมี <b>แผ่นกั้น</b> บางๆ ที่ยอมให้แค่ไอออนผ่าน|The trick is that lithium travels inside the cell as an <b>ion</b> (Li⁺, missing one electron) through a liquid, while the <b>electron</b> has to take the long way round through the outside wire. That outside flow is the current we use. If electrons could cut through the inside, the cell would short-circuit, so a thin <b>separator</b> lets ions through but blocks electrons.]]</p>
+    <p m-d>[[เซลล์ลิเทียมไอออนเป็นระบบ <i>intercalation</i> ทั้งสองขั้ว ลิเทียมไม่ได้ละลายหรือตกตะกอนเป็นโลหะ แต่แทรกเข้าออกโครงผลึกที่เป็นโฮสต์ (host lattice) โดยโครงสร้างหลักไม่เปลี่ยน จึงเรียกว่า rocking-chair battery ระหว่างชาร์จ ขั้วบวกถูกออกซิไดซ์และปล่อย Li⁺ ออกสู่อิเล็กโทรไลต์ ขั้วลบถูกรีดิวซ์และรับ Li⁺ เข้าไปพร้อมอิเล็กตรอนจากวงจรภายนอก|A lithium-ion cell is an <i>intercalation</i> system on both sides: lithium neither dissolves nor plates as metal in normal operation, it slides in and out of host lattices whose framework stays intact, hence the "rocking-chair" name. On charge the cathode is oxidised and releases Li⁺ into the electrolyte; the anode is reduced, taking up Li⁺ plus an electron from the external circuit.]]</p>
+    <div m-d>
+      <p class="eq-l">[[ขั้วบวก NMC|NMC cathode]]</p>
+      <kd>\mathrm{LiMO_2 \;\rightleftharpoons\; Li_{1-x}MO_2 + x\,Li^+ + x\,e^-}</kd>
+      <p class="eq-l">[[ขั้วลบกราไฟต์|Graphite anode]]</p>
+      <kd>\mathrm{C_6 + x\,Li^+ + x\,e^- \;\rightleftharpoons\; Li_xC_6}</kd>
+      <p class="eq-l">[[ขั้วบวก LFP|LFP cathode]]</p>
+      <kd>\mathrm{LiFePO_4 \;\rightleftharpoons\; FePO_4 + Li^+ + e^-}</kd>
+      <p>[[ลูกศรไปทางขวาคือการชาร์จ (M คือโลหะทรานซิชัน Ni, Mn, Co) แรงดันวงจรเปิดของเซลล์มาจากผลต่างศักย์เคมีของลิเทียมในสองขั้ว|Left-to-right is charging (M is the transition metal: Ni, Mn, Co). The open-circuit voltage is set by the difference in lithium's chemical potential between the two electrodes:]]</p>
+      <kd>V_{oc} \;=\; -\frac{\mu_{Li}^{\,cathode} - \mu_{Li}^{\,anode}}{F}\;=\; U_{+}(x) - U_{-}(y)</kd>
+      <p>[[โดย <k>F</k> = 96,485 C/mol (ค่าคงที่ฟาราเดย์) <k>U_+</k> และ <k>U_-</k> คือศักย์ของแต่ละขั้วเทียบกับโลหะลิเทียม (V vs Li/Li⁺) ซึ่งขึ้นกับว่าขั้วนั้นมีลิเทียมอยู่มากแค่ไหน นี่คือเหตุผลที่แรงดันแบตเปลี่ยนตาม % แบต และเป็นกุญแจของบทที่ 3–5|where <k>F</k> = 96,485 C/mol (Faraday's constant) and <k>U_\pm</k> are each electrode's potential against lithium metal (V vs Li/Li⁺), each depending on how much lithium it holds. That is why voltage tracks state of charge, and it is the key to chapters 3–5.]]</p>
+    </div>
+  </div>
+
+  <figure class="fig">
+    <div class="inst" data-fig="basics:cell">
+      <div class="inst-h"><span class="inst-t">[[ภายในเซลล์ขณะชาร์จและใช้งาน|Inside a cell, charging and driving]]</span></div>
+    </div>
+    <figcaption class="figcap">[[<b>ลองเล่น:</b> สลับระหว่างชาร์จกับขับรถ แล้วเลื่อนกระแส จุดสีแดงคือลิเทียมไอออนที่วิ่งผ่านอิเล็กโทรไลต์ จุดสีฟ้าคืออิเล็กตรอนที่วิ่งผ่านสายไฟด้านนอก สังเกตว่าทั้งสองวิ่งไปทางเดียวกันเสมอ|<b>Try it:</b> switch between charging and driving and change the current. Red dots are lithium ions crossing the electrolyte; blue dots are electrons in the outside wire. They always travel in the same direction.]]</figcaption>
+  </figure>
+
+  <div class="col">
+    <h3>[[ชิ้นส่วนแต่ละชั้นทำหน้าที่อะไร|What each layer does]]</h3>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th>[[ชั้น|Layer]]</th><th>[[ทำจาก|Made of]]</th><th>[[หน้าที่|Job]]</th></tr></thead>
+      <tbody>
+        <tr><td><b>[[ตัวเก็บกระแสขั้วบวก|Cathode current collector]]</b></td><td>[[ฟอยล์อะลูมิเนียม หนาราว 10–15 µm|Aluminium foil, about 10–15 µm]]</td><td>[[นำอิเล็กตรอนเข้าออก (ใช้อะลูมิเนียมเพราะทนศักย์สูงของขั้วบวกได้)|Carries electrons; aluminium survives the cathode's high potential]]</td></tr>
+        <tr><td><b>[[ขั้วบวก (แคโทด)|Cathode]]</b></td><td>[[ผงโลหะออกไซด์หรือฟอสเฟต เช่น NMC, NCA, LFP ผสมคาร์บอนและสารยึด|Metal oxide or phosphate powder (NMC, NCA, LFP) with carbon and binder]]</td><td>[[เก็บลิเทียมตอนแบตว่าง เป็นตัวกำหนดแรงดันและความจุเป็นหลัก|Holds lithium when the cell is empty; largely sets voltage and capacity]]</td></tr>
+        <tr><td><b>[[อิเล็กโทรไลต์|Electrolyte]]</b></td><td>[[เกลือ LiPF₆ ละลายในตัวทำละลายคาร์บอเนต (EC, DMC, EMC)|LiPF₆ salt in carbonate solvents (EC, DMC, EMC)]]</td><td>[[ทางเดินของไอออน แต่ไม่นำอิเล็กตรอน|A highway for ions that blocks electrons]]</td></tr>
+        <tr><td><b>[[แผ่นกั้น (เซพาเรเตอร์)|Separator]]</b></td><td>[[ฟิล์มพลาสติกพรุน PE/PP หนาราว 10–25 µm มักเคลือบเซรามิก|Porous PE/PP film, about 10–25 µm, often ceramic-coated]]</td><td>[[กันขั้วบวกกับขั้วลบไม่ให้แตะกัน|Keeps the electrodes from touching]]</td></tr>
+        <tr><td><b>[[ขั้วลบ (แอโนด)|Anode]]</b></td><td>[[กราไฟต์ (บางรุ่นผสมซิลิคอน)|Graphite, sometimes blended with silicon]]</td><td>[[เก็บลิเทียมตอนแบตเต็ม|Holds lithium when the cell is full]]</td></tr>
+        <tr><td><b>[[ชั้น SEI|SEI layer]]</b></td><td>[[ฟิล์มบางระดับนาโนเมตรที่เกิดเองบนผิวกราไฟต์|A nanometre-thin film that forms on graphite by itself]]</td><td>[[ยอมให้ไอออนผ่าน แต่กันอิเล็กโทรไลต์ไม่ให้สลายต่อ เป็นตัวละครหลักของการเสื่อม|Lets ions pass but shields the electrolyte from further breakdown; the main character of ageing]]</td></tr>
+        <tr><td><b>[[ตัวเก็บกระแสขั้วลบ|Anode current collector]]</b></td><td>[[ฟอยล์ทองแดง หนาราว 6–10 µm|Copper foil, about 6–10 µm]]</td><td>[[นำอิเล็กตรอน (อะลูมิเนียมใช้ไม่ได้เพราะจะทำปฏิกิริยากับลิเทียมที่ศักย์ต่ำ)|Carries electrons; aluminium would alloy with lithium at low potential]]</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="analogy" m-s>
+      <p class="box-h">[[เปรียบเทียบง่ายๆ|Picture it like this]]</p>
+      <p>[[นึกถึงลานจอดรถ 2 ลานบนเขา ลานล่าง (ขั้วบวก) กับลานบน (ขั้วลบ) การชาร์จคือการขับรถ (ลิเทียม) ขึ้นเขาไปจอดลานบน ซึ่งต้องใช้พลังงาน ตอนใช้งาน รถไหลลงเขากลับมาลานล่างและปล่อยพลังงานออกมา ยิ่งเขาสูง (แรงดันสูง) และยิ่งมีรถมาก (ความจุมาก) ก็ยิ่งเก็บพลังงานได้มาก|Imagine two car parks on a hill: a lower one (the cathode) and an upper one (the anode). Charging drives cars (lithium) up into the upper car park, which takes energy. Driving lets them roll back down, giving the energy back. A taller hill (higher voltage) and more cars (more capacity) store more energy.]]</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[หน่วยที่ต้องแยกให้ออก|The units worth getting straight]]</h2>
+    <p>[[คนสับสนบ่อยที่สุดคือ <b>kWh</b> กับ <b>kW</b> ตัวแรกคือ “ปริมาณพลังงาน” ที่เก็บได้ (เหมือนขนาดถังน้ำมัน) ตัวหลังคือ “อัตรา” ที่พลังงานไหลเข้าออก (เหมือนความเร็วของหัวจ่าย) แบต 60 kWh ชาร์จด้วย 60 kW ในอุดมคติจะเต็มใน 1 ชั่วโมง|The classic mix-up is <b>kWh</b> versus <b>kW</b>. The first is an amount of energy (the size of the tank); the second is a rate (how fast the pump runs). In an ideal world a 60 kWh pack on a 60 kW charger fills in one hour.]]</p>
+    <div class="tblw"><table class="tbl">
+      <thead><tr><th>[[หน่วย|Unit]]</th><th>[[คืออะไร|What it is]]</th><th>[[ตัวอย่าง|Example]]</th></tr></thead>
+      <tbody>
+        <tr><td><b>V</b> [[(โวลต์)|(volt)]]</td><td>[[แรงดัน = แรงผลักต่ออิเล็กตรอน 1 ตัว (ความสูงของเขา)|Voltage: the push on each electron (height of the hill)]]</td><td>[[เซลล์ NMC 3.6–3.7 V, LFP 3.2 V, แพ็กรถ 350–800 V|NMC cell 3.6–3.7 V, LFP 3.2 V, car packs 350–800 V]]</td></tr>
+        <tr><td><b>Ah</b> [[(แอมแปร์-ชั่วโมง)|(amp-hour)]]</td><td>[[ปริมาณประจุ = จำนวน “รถ” ที่ขนได้|Charge: how many "cars" it can move]]</td><td>[[เซลล์ 2170 ราว 5 Ah, เซลล์ปริซึม LFP 150–300 Ah|2170 cell ~5 Ah, LFP prismatic 150–300 Ah]]</td></tr>
+        <tr><td><b>kWh</b></td><td>[[พลังงาน ≈ แรงดัน × ประจุ|Energy ≈ voltage × charge]]</td><td>[[350 V × 200 Ah = 70 kWh|350 V × 200 Ah = 70 kWh]]</td></tr>
+        <tr><td><b>kW</b></td><td>[[กำลัง = อัตราการไหลของพลังงาน = แรงดัน × กระแส|Power = rate of energy flow = voltage × current]]</td><td>[[400 V × 500 A = 200 kW|400 V × 500 A = 200 kW]]</td></tr>
+        <tr><td><b>C-rate</b></td><td>[[กระแสเทียบกับความจุ 1C คือเต็ม/หมดใน 1 ชม.|Current relative to capacity; 1C fills or empties it in an hour]]</td><td>[[แบต 75 kWh ชาร์จ 250 kW ≈ 3.3C|75 kWh pack at 250 kW ≈ 3.3C]]</td></tr>
+        <tr><td><b>Wh/km</b></td><td>[[อัตราสิ้นเปลือง ยิ่งต่ำยิ่งประหยัด|Consumption; lower is better]]</td><td>[[รถเก๋งไฟฟ้า 130–180 Wh/km|EV sedan 130–180 Wh/km]]</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <figure class="fig mid">
+    <div class="inst" data-fig="basics:units">
+      <div class="inst-h"><span class="inst-t">[[พลังงาน = แรงดัน × ประจุ|Energy = voltage × charge]]</span></div>
+    </div>
+    <figcaption class="figcap">[[พื้นที่ของสี่เหลี่ยมคือพลังงานที่เก็บได้ ความสูงคือแรงดัน ความกว้างคือความจุ (Ah) ลองเปลี่ยนแล้วดูระยะทางกับเวลาชาร์จในอุดมคติ (ของจริงช้ากว่านี้ อ่านเหตุผลในบทที่ 5)|The rectangle's area is the stored energy: height is voltage, width is capacity in Ah. Change them and watch the range and the ideal charging time (real charging is slower; chapter 5 explains why).]]</figcaption>
+  </figure>
+
+  <div class="col" m-d>
+    <div class="deepbox">
+      <p class="box-h">[[นิยามที่แม่นยำ|Precise definitions]]</p>
+      <p>[[พลังงานไม่ได้เท่ากับ V × Ah พอดี เพราะแรงดันเปลี่ยนตลอดการคายประจุ ค่าที่ถูกคือปริพันธ์ของแรงดันตามประจุ และขึ้นกับกระแสด้วยเพราะแรงดันตกคร่อมความต้านทานภายใน|Energy is not exactly V × Ah, because voltage changes throughout discharge. The exact value is the integral of voltage over charge, and it depends on current because of the drop across internal resistance:]]</p>
+      <kd>E = \int_{0}^{Q} V(q)\,dq \;\approx\; \bar V_{nom}\,Q, \qquad V_{term} = V_{oc}(SOC,T) - I\,R_{int}(SOC,T)</kd>
+      <kd>\text{C-rate} = \frac{I}{Q_{nom}} \;\;\Rightarrow\;\; \frac{P}{E_{nom}} \approx \text{C-rate}\quad (V \approx V_{nom})</kd>
+      <p>[[ความหนาแน่นพลังงานระดับเซลล์ (Wh/kg) สูงกว่าระดับแพ็กเสมอ เพราะแพ็กต้องมีโครงสร้าง ระบบระบายความร้อน สายไฟ และ BMS อัตราส่วนน้ำหนักเซลล์ต่อแพ็ก (cell-to-pack ratio) ของรถยุคใหม่อยู่ราว 60–75% และสูงขึ้นในแพ็กแบบ CTP/CTB ที่ตัดโมดูลออก (ดูบทที่ 2)|Cell-level energy density (Wh/kg) always exceeds pack level, because a pack adds structure, cooling, wiring and the BMS. Modern cell-to-pack mass ratios sit around 60–75%, higher in CTP/CTB packs that drop the modules (see chapter 2).]]</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[จากเซลล์เดียวเป็นแพ็กทั้งก้อน|From one cell to a whole pack]]</h2>
+    <p>[[เซลล์เดียวมีแรงดันแค่ 3–4 V แต่มอเตอร์รถต้องการหลายร้อยโวลต์ จึงต้อง <b>ต่ออนุกรม</b> (S) ให้แรงดันบวกกัน และ <b>ต่อขนาน</b> (P) ให้ความจุบวกกัน รถ Tesla Model 3 Long Range ใช้เซลล์ทรงกระบอก 2170 แบบ 96S46P รวม 4,416 เซลล์ ส่วนรถ LFP แบบเซลล์ปริซึมใหญ่หรือแบบใบมีด (Blade) ใช้เซลล์ใหญ่ร้อยกว่าก้อนต่ออนุกรมกันเส้นเดียว|A single cell gives only 3–4 V, while the motor wants hundreds of volts. Cells are wired in <b>series</b> (S) so voltages add, and in <b>parallel</b> (P) so capacities add. A Tesla Model 3 Long Range uses 2170 cylindrical cells as 96S46P, 4,416 cells in all; LFP packs with large prismatic or Blade cells often use just over a hundred big cells in a single series string.]]</p>
+  </div>
+  <figure class="fig">
+    <div class="inst" data-fig="basics:pack">
+      <div class="inst-h"><span class="inst-t">[[ต่อเซลล์ให้เป็นแพ็ก|Build a pack from cells]]</span></div>
+    </div>
+    <figcaption class="figcap">[[เลือกชนิดเซลล์ แล้วปรับจำนวนอนุกรม (S) กับขนาน (P) จุดแต่ละจุดคือหนึ่งเซลล์ สีเดียวกันในแนวตั้งคือกลุ่มขนานที่มีแรงดันเท่ากัน BMS ต้องวัดแรงดันทุกกลุ่ม (บทที่ 9)|Pick a cell, then set series (S) and parallel (P). Each dot is a cell; each vertical column is a parallel group sharing one voltage, and the BMS measures every one of them (chapter 9).]]</figcaption>
+  </figure>
+</section>
+
+<section class="sec">
+  <div class="col">
+    <h2>[[% แบต สุขภาพแบต และ “บัฟเฟอร์” ที่มองไม่เห็น|Charge level, battery health and the hidden buffers]]</h2>
+    <p>[[ตัวเลขบนหน้าจอคือ <b>SOC</b> (State of Charge) หรือ % พลังงานที่เหลือเทียบกับความจุตอนนั้น ส่วน <b>SOH</b> (State of Health) คือความจุตอนนี้เทียบกับตอนใหม่ แบตที่ SOH 90% ชาร์จ “เต็ม 100%” ก็ได้พลังงานแค่ 90% ของตอนป้ายแดง<br>นอกจากนี้ผู้ผลิตมักกันพลังงานส่วนหนึ่งไว้ไม่ให้ใช้ เรียกว่า <b>บัฟเฟอร์</b> 0% บนจอจึงยังไม่ใช่แบตหมดจริง และบางยี่ห้อ 100% บนจอก็ยังไม่ใช่ขีดสุดของเซลล์|The number on screen is the <b>SOC</b> (state of charge): energy left relative to the pack's current capacity. <b>SOH</b> (state of health) compares today's capacity with new. At 90% SOH, a "100%" charge holds only 90% of the energy it held when new.<br>Makers also keep some energy out of reach as a <b>buffer</b>, so 0% on screen is not truly empty, and for some brands 100% on screen is not the cell's absolute limit either.]]</p>
+  </div>
+  <figure class="fig mid">
+    <div class="inst" data-fig="basics:soc">
+      <div class="inst-h"><span class="inst-t">[[สิ่งที่หน้าจอบอก กับสิ่งที่เกิดขึ้นในเซลล์|What the screen says vs what the cells see]]</span></div>
+    </div>
+    <figcaption class="figcap">[[ค่าบัฟเฟอร์จริงต่างกันไปแต่ละรุ่นและผู้ผลิตไม่ค่อยเปิดเผย ตัวเลขในภาพเป็นค่าตัวอย่างเพื่ออธิบายหลักการ|Real buffer sizes vary by model and are rarely published; the numbers here only illustrate the principle.]]</figcaption>
+  </figure>
+  <div class="col">
+    <p>[[<b>DoD</b> (Depth of Discharge) คือความลึกของการใช้ในหนึ่งรอบ เช่น ใช้จาก 80% ลงไป 30% คือ DoD 50% ในบทที่ 4 เราจะเห็นว่ารอบตื้นๆ หลายรอบถนอมแบตกว่ารอบลึกๆ ไม่กี่รอบ แม้จะใช้พลังงานรวมเท่ากัน|<b>DoD</b> (depth of discharge) is how deep one cycle goes: from 80% down to 30% is 50% DoD. Chapter 4 shows why many shallow cycles are kinder than a few deep ones that move the same total energy.]]</p>
+    <div class="key">
+      <p class="key-h">[[สรุปบทนี้|Chapter summary]]</p>
+      <ul>
+        <li>[[ชาร์จ = ดันลิเทียมจากขั้วบวกไปเก็บในกราไฟต์ขั้วลบ ใช้งาน = ลิเทียมไหลกลับ ไอออนวิ่งด้านใน อิเล็กตรอนวิ่งด้านนอก|Charging pushes lithium from the cathode into the graphite anode; driving lets it flow back. Ions go through the inside, electrons through the outside wire.]]</li>
+        <li>[[kWh คือขนาดถัง kW คือความเร็วการเติม C-rate บอกว่าเติมเร็วแค่ไหนเทียบกับขนาดถัง|kWh is the tank size, kW the filling speed, and C-rate the speed relative to the tank.]]</li>
+        <li>[[แรงดันของเซลล์ขึ้นกับว่ามีลิเทียมอยู่ในแต่ละขั้วเท่าไร ศักย์ของขั้วลบที่ต่ำมากตอนเต็มคือที่มาของปัญหาหลายอย่างในบทถัดๆ ไป|Cell voltage depends on how much lithium each electrode holds. The anode's very low potential when full is the root of several problems in the chapters ahead.]]</li>
+        <li>[[ชั้น SEI เกิดขึ้นเองและจำเป็น แต่การโตของมันคือสาเหตุหลักที่ทำให้แบตเสื่อมตามเวลา|The SEI forms on its own and is essential, but its slow growth is the main reason batteries age with time.]]</li>
+      </ul>
+    </div>
+  </div>
+</section>

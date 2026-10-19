@@ -164,7 +164,7 @@ export function formats(inst) {
   const F = [
     { k: '18650', th: '18650', en: '18650', w: 18, h: 65, cyl: true, ah: '~3.5 Ah', note: { th: 'แล็ปท็อป, Tesla รุ่นแรก', en: 'Laptops, early Teslas' } },
     { k: '2170', th: '2170', en: '2170', w: 21, h: 70, cyl: true, ah: '~5 Ah', note: { th: 'Model 3/Y Long Range', en: 'Model 3/Y Long Range' } },
-    { k: '4680', th: '4680', en: '4680', w: 46, h: 80, cyl: true, ah: '~23–25 Ah', note: { th: 'Cybertruck, Model Y บางล็อต', en: 'Cybertruck, some Model Y' } },
+    { k: '4680', th: '4680', en: '4680', w: 46, h: 80, cyl: true, ah: '~22–25 Ah', note: { th: 'Cybertruck, Model Y บางล็อต', en: 'Cybertruck, some Model Y' } },
     { k: 'pri', th: 'ปริซึม', en: 'Prismatic', w: 220, h: 105, cyl: false, ah: '100–300 Ah', note: { th: 'LFP ส่วนใหญ่, หลายยี่ห้อ', en: 'Most LFP, many brands' } },
     { k: 'pouch', th: 'ซอง (pouch)', en: 'Pouch', w: 350, h: 100, cyl: false, thin: true, ah: '50–80 Ah', note: { th: 'Hyundai/Kia, GM', en: 'Hyundai/Kia, GM' } },
     { k: 'blade', th: 'ใบมีด (Blade)', en: 'Blade', w: 960, h: 90, cyl: false, thin: true, ah: '130–200 Ah', note: { th: 'BYD ทุกรุ่น', en: 'All BYD models' } },

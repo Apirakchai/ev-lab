@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="th" data-lang="th" data-mode="simple" data-page="404" data-title-th="ไม่พบหน้านี้ — EV Lab" data-title-en="Page not found — EV Lab" data-desc-en="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ไม่พบหน้านี้ — EV Lab</title>
+<meta name="description" content="">
+<meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11151a" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EV Lab by Sukmart">
+<meta property="og:title" content="ไม่พบหน้านี้ — EV Lab">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://ev.sukmart.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="canonical" href="https://ev.sukmart.com/404.html">
+<script>
+/* Apply saved language / reading level / theme before first paint */
+(function () {
+  var d = document.documentElement, q = new URLSearchParams(location.search), s = {};
+  function get(k) { try { return localStorage.getItem('evlab.' + k); } catch (e) { return null; } }
+  var langs = (navigator.languages || [navigator.language || 'th']).join(',').toLowerCase();
+  s.lang = q.get('lang') || get('lang') || (langs.indexOf('th') > -1 || !/^en/.test(langs) ? 'th' : 'en');
+  s.mode = q.get('mode') || get('mode') || 'simple';
+  s.theme = q.get('theme') || get('theme') || '';
+  if (s.lang !== 'en') s.lang = 'th';
+  if (s.mode !== 'deep') s.mode = 'simple';
+  d.dataset.lang = s.lang; d.lang = s.lang; d.dataset.mode = s.mode;
+  if (s.theme === 'light' || s.theme === 'dark') d.dataset.theme = s.theme;
+  if (s.lang === 'en') document.title = d.dataset.titleEn;
+})();
+</script>
+<link rel="preload" href="assets/fonts/plex-thai-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/bj-thai-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?v=195872af">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css?v=195872af">
+<link rel="stylesheet" href="assets/css/site.css?v=195872af">
+</head>
+<body>
+<a class="skip" href="#main"><span data-l="th" lang="th">ข้ามไปยังเนื้อหา</span><span data-l="en" lang="en">Skip to content</span></a>
+<div class="readbar" aria-hidden="true"><i></i></div>
+<header class="hdr" id="top">
+  <div class="hdr-in">
+    <a class="brand" href="index.html" aria-label="EV Lab home">
+      <svg class="brand-mark" viewBox="0 0 40 24" aria-hidden="true"><rect x="1.5" y="3" width="32" height="18" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="34.5" y="8.5" width="4" height="7" rx="1.5" fill="currentColor"/><rect class="brand-fill" x="5" y="6.5" width="17" height="11" rx="2"/><circle class="brand-ion" cx="27.5" cy="12" r="2.6"/></svg>
+      <span class="brand-t">EV Lab</span><span class="brand-s">by Sukmart</span>
+    </a>
+    <button class="hdr-menu" type="button" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <span class="hdr-menu-t"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></span>
+    </button>
+    <div class="hdr-tools">
+      <div class="seg" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span class="seg-ico" aria-hidden="true">●</span><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span class="seg-ico" aria-hidden="true">◆</span><span data-l="th" lang="th">เชิงลึก</span><span data-l="en" lang="en">Deep</span></button>
+      </div>
+      <label class="langsel"><span class="sr">Language</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.8 10h14.4M10 2.8c2.2 2.3 2.2 12.1 0 14.4M10 2.8c-2.2 2.3-2.2 12.1 0 14.4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <select id="langSel" aria-label="Language / ภาษา">
+          <option value="th">ไทย</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+      <button class="hdr-theme" type="button" aria-label="Toggle light or dark theme">
+        <svg class="i-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 1.8v2.1M10 16.1v2.1M1.8 10h2.1M16.1 10h2.1M4.2 4.2l1.5 1.5M14.3 14.3l1.5 1.5M4.2 15.8l1.5-1.5M14.3 5.7l1.5-1.5"/></g></svg>
+        <svg class="i-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.8 12.6A6.6 6.6 0 0 1 7.4 4.2a6.6 6.6 0 1 0 8.4 8.4z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <div class="menu-scrim" data-close-menu></div>
+  <nav class="menu-panel" aria-label="Site">
+    <div class="menu-top">
+      <a class="menu-home" href="index.html"><span data-l="th" lang="th">หน้าแรก</span><span data-l="en" lang="en">Home</span></a>
+      <button class="menu-x" type="button" data-close-menu aria-label="Close menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="menu-mode">
+      <p><span data-l="th" lang="th">ระดับเนื้อหา</span><span data-l="en" lang="en">Reading level</span></p>
+      <div class="seg seg-wide" role="radiogroup" aria-label="Reading level">
+        <button type="button" role="radio" data-set-mode="simple" aria-checked="true"><span data-l="th" lang="th">เข้าใจง่าย</span><span data-l="en" lang="en">Simple</span></button>
+        <button type="button" role="radio" data-set-mode="deep" aria-checked="false"><span data-l="th" lang="th">เชิงลึก (วิชาการ)</span><span data-l="en" lang="en">Deep (technical)</span></button>
+      </div>
+    </div>
+    <div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">บทเรียน</span><span data-l="en" lang="en">Chapters</span></p><ul class="menu-list"><li><a class="mi" href="basics.html"><span class="mi-num" aria-hidden="true">01</span><span class="mi-t"><span data-l="th" lang="th">แบตเตอรี่ทำงานอย่างไร</span><span data-l="en" lang="en">How a battery cell works</span></span><span class="mi-d"><span data-l="th" lang="th">ไอออน อิเล็กตรอน แรงดัน ความจุ และหน่วยที่ต้องรู้</span><span data-l="en" lang="en">Ions, electrons, voltage, capacity and the units that matter</span></span></a></li><li><a class="mi" href="chemistry.html"><span class="mi-num" aria-hidden="true">02</span><span class="mi-t"><span data-l="th" lang="th">เคมีแบตเตอรี่ทุกแบบ</span><span data-l="en" lang="en">Every battery chemistry</span></span><span class="mi-d"><span data-l="th" lang="th">LFP, NMC, NCA, LMFP, โซเดียมไอออน, โซลิดสเตต</span><span data-l="en" lang="en">LFP, NMC, NCA, LMFP, sodium-ion, solid-state</span></span></a></li><li><a class="mi" href="high-soc.html"><span class="mi-num" aria-hidden="true">03</span><span class="mi-t"><span data-l="th" lang="th">ทำไมชาร์จ 100% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why sitting at 100% wears a battery</span></span><span class="mi-d"><span data-l="th" lang="th">ศักย์ไฟฟ้าขั้วลบ ชั้น SEI และการเสื่อมตามเวลา</span><span data-l="en" lang="en">Anode potential, SEI growth and calendar ageing</span></span></a></li><li><a class="mi" href="low-soc.html"><span class="mi-num" aria-hidden="true">04</span><span class="mi-t"><span data-l="th" lang="th">ทำไมต่ำกว่า 10% แบตถึงเสื่อม</span><span data-l="en" lang="en">Why running below 10% hurts</span></span><span class="mi-d"><span data-l="th" lang="th">ความต้านทานภายใน ความลึกของการคายประจุ และการคายประจุเกิน</span><span data-l="en" lang="en">Internal resistance, depth of discharge and over-discharge</span></span></a></li><li><a class="mi" href="charging-curve.html"><span class="mi-num" aria-hidden="true">05</span><span class="mi-t"><span data-l="th" lang="th">ทำไมเกิน 80% ชาร์จช้าลง</span><span data-l="en" lang="en">Why charging slows after 80%</span></span><span class="mi-d"><span data-l="th" lang="th">CC-CV, ลิเทียมเพลตติ้ง, การบาลานซ์เซลล์ และระบบ 400V/800V</span><span data-l="en" lang="en">CC-CV, lithium plating, cell balancing and 400 V vs 800 V</span></span></a></li><li><a class="mi" href="fast-charging.html"><span class="mi-num" aria-hidden="true">06</span><span class="mi-t"><span data-l="th" lang="th">ชาร์จเร็ว DC บ่อยๆ แบตพังไหม</span><span data-l="en" lang="en">Does DC fast charging hurt?</span></span><span class="mi-d"><span data-l="th" lang="th">กลไก ข้อมูลจริงจากรถหลายหมื่นคัน และวิธีชาร์จให้ถนอมแบต</span><span data-l="en" lang="en">Mechanisms, real data from tens of thousands of cars, and good habits</span></span></a></li><li><a class="mi" href="heat.html"><span class="mi-num" aria-hidden="true">07</span><span class="mi-t"><span data-l="th" lang="th">ความร้อน อากาศไทย และความปลอดภัย</span><span data-l="en" lang="en">Heat, Thai weather and safety</span></span><span class="mi-d"><span data-l="th" lang="th">อุณหภูมิกับการเสื่อม ระบบระบายความร้อน ไฟไหม้ และน้ำท่วม</span><span data-l="en" lang="en">Temperature and ageing, cooling, fire and floods</span></span></a></li><li><a class="mi" href="v2l.html"><span class="mi-num" aria-hidden="true">08</span><span class="mi-t"><span data-l="th" lang="th">V2L, V2H และ V2G</span><span data-l="en" lang="en">V2L, V2H and V2G</span></span><span class="mi-d"><span data-l="th" lang="th">รถจ่ายไฟให้เครื่องใช้ไฟฟ้า บ้าน และกริดได้อย่างไร</span><span data-l="en" lang="en">How a car powers appliances, a home and the grid</span></span></a></li><li><a class="mi" href="bms.html"><span class="mi-num" aria-hidden="true">09</span><span class="mi-t"><span data-l="th" lang="th">BMS สมองของแบตเตอรี่</span><span data-l="en" lang="en">The BMS, the battery's brain</span></span><span class="mi-d"><span data-l="th" lang="th">การวัด % แบต การบาลานซ์เซลล์ บัฟเฟอร์ และสุขภาพแบต (SOH)</span><span data-l="en" lang="en">Measuring %, cell balancing, buffers and state of health</span></span></a></li><li><a class="mi" href="lifespan.html"><span class="mi-num" aria-hidden="true">10</span><span class="mi-t"><span data-l="th" lang="th">อายุแบต การรับประกัน และรีไซเคิล</span><span data-l="en" lang="en">Lifespan, warranty and recycling</span></span><span class="mi-d"><span data-l="th" lang="th">แบตอยู่ได้กี่ปีกี่กิโล ซื้อรถมือสองต้องดูอะไร</span><span data-l="en" lang="en">How many years and kilometres, and what to check on a used EV</span></span></a></li><li><a class="mi" href="guide.html"><span class="mi-num" aria-hidden="true">11</span><span class="mi-t"><span data-l="th" lang="th">คู่มือใช้รถไฟฟ้าในไทย</span><span data-l="en" lang="en">Owner's playbook for Thailand</span></span><span class="mi-d"><span data-l="th" lang="th">กฎการชาร์จประจำวัน ติดตั้งที่ชาร์จบ้าน ค่าไฟ TOU และเรื่องที่ควรรู้</span><span data-l="en" lang="en">Daily charging rules, home chargers, TOU tariffs and more</span></span></a></li></ul></div><div class="menu-group"><p class="menu-h"><span data-l="th" lang="th">เครื่องมือและข้อมูล</span><span data-l="en" lang="en">Tools & reference</span></p><ul class="menu-list"><li><a class="mi" href="myths.html"><span class="mi-num mi-ico" aria-hidden="true">?</span><span class="mi-t"><span data-l="th" lang="th">ความเชื่อผิดๆ เรื่องแบต</span><span data-l="en" lang="en">Battery myths, checked</span></span><span class="mi-d"><span data-l="th" lang="th">เรื่องที่คนชอบพูดต่อกัน จริงหรือไม่ พร้อมหลักฐาน</span><span data-l="en" lang="en">Things people repeat, with the evidence</span></span></a></li><li><a class="mi" href="lab.html"><span class="mi-num mi-ico" aria-hidden="true">∿</span><span class="mi-t"><span data-l="th" lang="th">ห้องแล็บเครื่องคำนวณ</span><span data-l="en" lang="en">Calculator lab</span></span><span class="mi-d"><span data-l="th" lang="th">จำลองการเสื่อม เวลาชาร์จ ค่าใช้จ่าย ระยะทาง และ V2L</span><span data-l="en" lang="en">Simulate ageing, charge time, cost, range and V2L</span></span></a></li><li><a class="mi" href="glossary.html"><span class="mi-num mi-ico" aria-hidden="true">Aa</span><span class="mi-t"><span data-l="th" lang="th">อภิธานศัพท์ ไทย–อังกฤษ</span><span data-l="en" lang="en">Glossary, Thai–English</span></span><span class="mi-d"><span data-l="th" lang="th">คำศัพท์ทุกคำในเว็บ พร้อมคำแปลและความหมาย</span><span data-l="en" lang="en">Every term on the site, translated and explained</span></span></a></li><li><a class="mi" href="sources.html"><span class="mi-num mi-ico" aria-hidden="true">§</span><span class="mi-t"><span data-l="th" lang="th">แหล่งอ้างอิงและวิธีคำนวณ</span><span data-l="en" lang="en">Sources and methods</span></span><span class="mi-d"><span data-l="th" lang="th">งานวิจัย ข้อมูลจริง และแบบจำลองที่ใช้ในเว็บนี้</span><span data-l="en" lang="en">Papers, field data and the models used on this site</span></span></a></li></ul></div>
+  </nav>
+</div>
+<main id="main" class="main">
+
+<header class="ch-hero">
+  <div class="col">
+    <h1><span data-l="th" lang="th">ไม่พบหน้านี้</span><span data-l="en" lang="en">Page not found</span></h1>
+    <p class="deck"><span data-l="th" lang="th">ลิงก์อาจพิมพ์ผิดหรือหน้าถูกย้าย ลองเริ่มจากหน้าแรกหรือเลือกบทเรียนจากเมนู</span><span data-l="en" lang="en">The link may be mistyped or the page moved. Start from the home page or pick a chapter from the menu.</span></p>
+    <p style="margin-top:24px"><a class="btn" href="index.html"><span data-l="th" lang="th">กลับหน้าแรก</span><span data-l="en" lang="en">Back to home</span></a></p>
+  </div>
+</header>
+
+
+</main>
+<footer class="ftr">
+  <div class="ftr-in">
+    <div class="ftr-brand">
+      <p class="ftr-t">EV Lab <span>by Sukmart</span></p>
+      <p class="ftr-d"><span data-l="th" lang="th">ห้องเรียนออนไลน์เรื่องแบตเตอรี่รถยนต์ไฟฟ้า อธิบายได้ทั้งแบบเข้าใจง่ายและแบบวิชาการ พร้อมแหล่งอ้างอิงทุกตัวเลข</span><span data-l="en" lang="en">An open classroom on electric-vehicle batteries, explained simply or in full technical depth, with a source for every number.</span></p>
+    </div>
+    <ul class="ftr-links">
+      <li><a href="myths.html"><span data-l="th" lang="th">ความเชื่อผิดๆ</span><span data-l="en" lang="en">Myths</span></a></li>
+      <li><a href="lab.html"><span data-l="th" lang="th">เครื่องคำนวณ</span><span data-l="en" lang="en">Calculators</span></a></li>
+      <li><a href="glossary.html"><span data-l="th" lang="th">อภิธานศัพท์</span><span data-l="en" lang="en">Glossary</span></a></li>
+      <li><a href="sources.html"><span data-l="th" lang="th">แหล่งอ้างอิง</span><span data-l="en" lang="en">Sources</span></a></li>
+    </ul>
+    <p class="ftr-note"><span data-l="th" lang="th">ข้อมูลปรับปรุงล่าสุด ตุลาคม 2569 · เนื้อหาเพื่อการศึกษา ไม่ใช่คำแนะนำจากผู้ผลิตรถ ควรยึดคู่มือรถของคุณเป็นหลัก</span><span data-l="en" lang="en">Last updated October 2026 · For education, not a substitute for your carmaker's manual.</span></p>
+    <p class="ftr-copy">© 2026 Sukmart · ev.sukmart.com</p>
+  </div>
+</footer>
+<script type="module" src="assets/js/core.js?v=195872af"></script>
+
+</body>
+</html>

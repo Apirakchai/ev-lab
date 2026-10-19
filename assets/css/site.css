@@ -534,3 +534,4 @@ html[data-mode="simple"] .lv[data-m="s"], html[data-mode="deep"] .lv[data-m="d"]
 .refs .ru { grid-column: 2; font-size: .86rem; color: var(--ink-3); word-break: break-word; }
 .refs .ru a { color: var(--e); }
 html .levels-demo .lv[data-m] { display: block !important; }
+.inst[data-fig]:not([data-booted]) { min-height: 340px; }

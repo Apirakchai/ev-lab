@@ -20,6 +20,9 @@ function apply(change = {}, persist = true) {
   if (md) { if (!md.dataset.th) md.dataset.th = md.content; md.content = p.lang === 'en' ? (root.dataset.descEn || md.dataset.th) : md.dataset.th; }
   document.querySelectorAll('#langSel').forEach((s) => { s.value = p.lang; });
   document.querySelectorAll('[data-set-mode]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.setMode === p.mode)));
+  document.querySelectorAll('[data-set-lang]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.setLang === p.lang)));
+  const th = effectiveTheme();
+  document.querySelectorAll('[data-set-theme]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.setTheme === th)));
   // keep the URL shareable without clutter
   const u = new URL(location.href);
   if (u.searchParams.has('lang') || u.searchParams.has('mode')) { u.searchParams.delete('lang'); u.searchParams.delete('mode'); history.replaceState(null, '', u); }
@@ -47,28 +50,17 @@ function initChrome() {
   }
 
   document.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-set-mode]');
-    if (b) { apply({ mode: b.dataset.setMode }); }
+    const m = e.target.closest('[data-set-mode]');
+    if (m) apply({ mode: m.dataset.setMode });
+    const l = e.target.closest('[data-set-lang]');
+    if (l) apply({ lang: l.dataset.setLang });
+    const t = e.target.closest('[data-set-theme]');
+    if (t) apply({ theme: t.dataset.setTheme });
   });
   document.querySelectorAll('#langSel').forEach((s) => s.addEventListener('change', () => apply({ lang: s.value })));
 
   const themeBtn = document.querySelector('.hdr-theme');
   if (themeBtn) themeBtn.addEventListener('click', () => apply({ theme: effectiveTheme() === 'dark' ? 'light' : 'dark' }));
-
-  // theme switch inside the menu for small screens
-  const mm = document.querySelector('.menu-mode');
-  if (mm && !mm.querySelector('.menu-theme')) {
-    const wrap = document.createElement('div');
-    wrap.className = 'menu-theme';
-    wrap.innerHTML = '<p><span data-l="th" lang="th">ธีม</span><span data-l="en" lang="en">Theme</span></p><div class="seg seg-wide" role="radiogroup" aria-label="Theme">' +
-      '<button type="button" role="radio" data-set-theme="light"><span data-l="th" lang="th">สว่าง</span><span data-l="en" lang="en">Light</span></button>' +
-      '<button type="button" role="radio" data-set-theme="dark"><span data-l="th" lang="th">มืด</span><span data-l="en" lang="en">Dark</span></button></div>';
-    wrap.style.marginTop = '12px';
-    mm.appendChild(wrap);
-    const sync = () => wrap.querySelectorAll('[data-set-theme]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.setTheme === effectiveTheme())));
-    wrap.addEventListener('click', (e) => { const b = e.target.closest('[data-set-theme]'); if (b) { apply({ theme: b.dataset.setTheme }); sync(); } });
-    window.addEventListener('evlab:prefs', sync); sync();
-  }
 
   // menu
   const menu = document.getElementById('menu');
@@ -81,6 +73,21 @@ function initChrome() {
     opener.addEventListener('click', () => (menu.hidden ? open() : close()));
     menu.addEventListener('click', (e) => { if (e.target.closest('[data-close-menu]')) close(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) close(); });
+  }
+
+  // the floating reading-level switch steps aside while you scroll down and over the footer
+  const fab = document.querySelector('.fab-mode');
+  if (fab) {
+    let lastY = scrollY, atFooter = false, ticking = false;
+    const upd = () => {
+      ticking = false;
+      const y = scrollY, d = y - lastY;
+      if (Math.abs(d) > 6) { fab.classList.toggle('fab-hide', atFooter || (d > 0 && y > 240)); lastY = y; }
+      if (atFooter) fab.classList.add('fab-hide');
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    const ftr = document.querySelector('.ftr');
+    if (ftr && 'IntersectionObserver' in window) new IntersectionObserver(([e]) => { atFooter = e.isIntersecting; fab.classList.toggle('fab-hide', atFooter); }).observe(ftr);
   }
 
   // reading progress

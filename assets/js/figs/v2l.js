@@ -17,7 +17,7 @@ const APPS = [
 ];
 
 export function flow(inst) {
-  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 7.6, ratioM: 0.9, minH: 320, maxH: 500 });
+  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 7.6, height: (w, m) => (m ? 372 : w / (16 / 7.6)), minH: 320, maxH: 500 });
   const s = { on: ['rice', 'fridge', 'fan', 'light', 'router'], lim: 3.3, kwh: 75, soc: 80, min: 20 };
   const box = ctrls();
   chips(box, { label: { th: 'เครื่องใช้ไฟฟ้าที่เปิด', en: 'Appliances switched on' }, multi: true, value: s.on, options: APPS.map((a) => ({ v: a.v, label: { th: `${a.th} ${fmt(a.w)} W`, en: `${a.en} ${fmt(a.w)} W` } })), onChange: (v) => { s.on = v; stage.request(); } });
@@ -73,10 +73,13 @@ export function flow(inst) {
     const lx = mx + mw * (s.lim / 7); c.strokeStyle = C.ink; c.lineWidth = 2; c.beginPath(); c.moveTo(lx, my - 5); c.lineTo(lx, my + 19); c.stroke();
     text(c, `${fmt(load / 1000, 2)} / ${s.lim} kW`, mx, my + 34, { size: 13, weight: 700, color: over ? C.bad : C.ink });
     if (over) text(c, T({ th: 'เกินพิกัด: รถจะตัดการจ่ายไฟ', en: 'Over the limit: the car will cut power' }), mx, my + 54, { size: 12, color: C.bad });
-    // appliance icons
-    if (!m) {
-      const ax = W * 0.62, ay = my + 80;
-      on.slice(0, 10).forEach((a, k) => { const xx = ax + (k % 5) * 46, yy = ay + Math.floor(k / 5) * 44; rr(c, xx, yy, 38, 38, 10); c.fillStyle = '#151d25'; c.fill(); c.font = '20px system-ui'; c.textAlign = 'center'; c.fillText(a.ico, xx + 19, yy + 27); });
+    // appliance icons (what is switched on)
+    {
+      const per = m ? Math.max(5, Math.floor((W - 40 + 8) / 48)) : 5;
+      const ax = m ? 20 : W * 0.62, ay = m ? my + (over ? 72 : 54) : my + 80;
+      if (m) text(c, T({ th: 'เปิดอยู่', en: 'Switched on' }), ax, ay - 8, { size: 11.5, color: C.ink3 });
+      on.slice(0, per * 2).forEach((a, k) => { const xx = ax + (k % per) * 48, yy = ay + Math.floor(k / per) * 46; rr(c, xx, yy, 40, 40, 10); c.fillStyle = '#151d25'; c.fill(); c.font = '20px system-ui'; c.textAlign = 'center'; c.fillText(a.ico, xx + 20, yy + 28); });
+      if (!on.length) text(c, T({ th: 'ยังไม่ได้เปิดเครื่องใช้ไฟฟ้า', en: 'Nothing switched on yet' }), ax, ay + 24, { size: 12, color: C.ink3 });
     }
     ro.set('load', `${fmt(load)}<small>W</small>`, over ? 'bad' : '');
     ro.set('time', over ? '–' : hrs > 48 ? `${fmt(hrs / 24, 1)}<small>${T({ th: 'วัน', en: 'days' })}</small>` : fmtDur(hrs * 60));

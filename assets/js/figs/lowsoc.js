@@ -1,5 +1,5 @@
 // Chapter 4 figures
-import { scaffold, slider, chips, readouts, legend, C, T, fmt, clamp, lerp, rr, text, glowDot, scale, axes, line, area, tip, nearestIdx, mix, withAlpha } from '../lib.js';
+import { scaffold, slider, chips, readouts, legend, C, T, fmt, clamp, lerp, rr, text, glowDot, scale, axes, line, area, tip, nearestIdx, mix, withAlpha, font } from '../lib.js';
 import { CHEM, rRel, AGING, simulateLife } from '../models.js';
 
 const linspace = (a, b, n) => Array.from({ length: n }, (_, i) => a + ((b - a) * i) / (n - 1));
@@ -80,17 +80,18 @@ export function dod(inst) {
     const wins = [[0, 100], [10, 90], [20, 80], [30, 70], [40, 60]];
     const res = wins.map(([a, b]) => ({ a, b, r: run(a, b) }));
     const mine = run(s.lo, s.hi);
-    const bx = { x: m ? 92 : 150, y: 70, w: W - (m ? 120 : 260), h: H - 110 };
+    const bx = { x: m ? 84 : 150, y: 70, w: W - (m ? 104 : 260), h: H - 110 };
     const all = [...res.map((x) => x.r.final), mine.final];
     const lo = Math.floor(Math.min(...all) * 100 / 5) * 5 - 5;
     const sx = scale(lo, 100, bx.x, bx.x + bx.w);
-    const rows = [...res.map((x) => ({ lab: `${x.a}–${x.b}%`, v: x.r.final, cal: x.r.qcal.at(-1), cyc: x.r.qcyc.at(-1), me: false })), { lab: T({ th: `ของคุณ ${s.lo}–${s.hi}%`, en: `yours ${s.lo}–${s.hi}%` }), v: mine.final, cal: mine.qcal.at(-1), cyc: mine.qcyc.at(-1), me: true }];
+    const rows = [...res.map((x) => ({ lab: `${x.a}–${x.b}%`, v: x.r.final, cal: x.r.qcal.at(-1), cyc: x.r.qcyc.at(-1), me: false })), { lab: m ? `${s.lo}–${s.hi}%` : T({ th: `ของคุณ ${s.lo}–${s.hi}%`, en: `yours ${s.lo}–${s.hi}%` }), top: m ? T({ th: 'ของคุณ', en: 'yours' }) : '', v: mine.final, cal: mine.qcal.at(-1), cyc: mine.qcyc.at(-1), me: true }];
     const rh = bx.h / rows.length;
     text(c, T({ th: 'สุขภาพแบตหลัง 10 ปี (%)', en: 'Battery health after 10 years (%)' }), bx.x, bx.y - 14, { size: 11.5, color: C.ink2 });
     for (const t of [lo, ...[80, 85, 90, 95, 100].filter((x) => x > lo)]) { const x = sx(t); c.strokeStyle = C.grid2; c.beginPath(); c.moveTo(x, bx.y); c.lineTo(x, bx.y + bx.h); c.stroke(); text(c, fmt(t), x, bx.y + bx.h + 16, { size: 10.5, color: C.ink3, align: 'center' }); }
     rows.forEach((r, i) => {
       const y = bx.y + i * rh + rh * 0.2, hh = rh * 0.6;
-      text(c, r.lab, bx.x - 10, y + hh / 2 + 4, { size: m ? 11 : 12, weight: r.me ? 700 : 500, color: r.me ? C.ink : C.ink2, align: 'right' });
+      if (r.top) { text(c, r.top, bx.x - 10, y + hh / 2 - 3, { size: 10.5, weight: 700, color: C.ink, align: 'right' }); text(c, r.lab, bx.x - 10, y + hh / 2 + 11, { size: 11, weight: 700, color: C.ink, align: 'right' }); }
+      else text(c, r.lab, bx.x - 10, y + hh / 2 + 4, { size: m ? 11 : 12, weight: r.me ? 700 : 500, color: r.me ? C.ink : C.ink2, align: 'right' });
       // bar from 100 down to value: show loss split cal / cyc
       const x100 = sx(100), xv = sx(r.v * 100), xc = sx(100 - r.cal * 100);
       rr(c, sx(lo), y, x100 - sx(lo), hh, 4); c.fillStyle = 'rgba(160,188,214,.07)'; c.fill();
@@ -124,19 +125,26 @@ export function over(inst) {
     const m = stage.mobile;
     const bx = { x: m ? 44 : 60, y: 70, w: W - (m ? 60 : 100), h: H - 118 };
     const sx = scale(30, -20, bx.x, bx.x + bx.w), sy = scale(0, 4.2, bx.y + bx.h, bx.y);
-    const zone = (a, b, col, lab) => { c.fillStyle = col; c.fillRect(sx(a), bx.y, sx(b) - sx(a), bx.h); text(c, T(lab), (sx(a) + sx(b)) / 2, bx.y + 14, { size: m ? 9.5 : 11, weight: 600, color: C.ink2, align: 'center', maxW: sx(b) - sx(a) - 6 }); };
-    zone(30, 4, 'rgba(47,208,176,.05)', { th: 'ใช้งานปกติ', en: 'normal use' });
-    zone(4, 0, 'rgba(155,140,255,.10)', { th: 'บัฟเฟอร์', en: 'buffer' });
-    zone(0, -12, 'rgba(255,155,47,.10)', { th: 'คายประจุเกิน: SEI สลาย, ทองแดงละลาย', en: 'over-discharge: SEI breaks, Cu dissolves' });
-    zone(-12, -20, 'rgba(255,91,79,.16)', { th: 'ทองแดงทะลุ → ลัดวงจรภายใน', en: 'Cu bridges → internal short' });
+    const zone = (a, b, col, lab, short) => {
+      c.fillStyle = col; c.fillRect(sx(a), bx.y, sx(b) - sx(a), bx.h);
+      const zw = sx(b) - sx(a), t = T(m ? short : lab);
+      if (!t) return;
+      c.font = font(m ? 10.5 : 11, 600);
+      if (c.measureText(t).width > zw - 6) return; // never squeeze a label
+      text(c, t, (sx(a) + sx(b)) / 2, bx.y + 15, { size: m ? 10.5 : 11, weight: 600, color: C.ink2, align: 'center' });
+    };
+    zone(30, 4, 'rgba(47,208,176,.05)', { th: 'ใช้งานปกติ', en: 'normal use' }, '');
+    zone(4, 0, 'rgba(155,140,255,.10)', { th: 'บัฟเฟอร์', en: 'buffer' }, '');
+    zone(0, -12, 'rgba(255,155,47,.10)', { th: 'คายประจุเกิน: SEI สลาย, ทองแดงละลาย', en: 'over-discharge: SEI breaks, Cu dissolves' }, { th: 'คายประจุเกิน', en: 'over-discharge' });
+    zone(-12, -20, 'rgba(255,91,79,.16)', { th: 'ทองแดงทะลุ → ลัดวงจรภายใน', en: 'Cu bridges → internal short' }, { th: 'ลัดวงจร', en: 'short' });
     axes(c, bx, sx, sy, { xt: [30, 20, 10, 0, -10, -20], fx: (v) => `${v}%`, xl: { th: 'ระดับประจุจริง (0% = จุดตัดของเซลล์)', en: 'true charge level (0% = cell cut-off)' }, yl: { th: 'ศักย์ (V vs Li)', en: 'potential (V vs Li)' }, ny: 4 });
     const xs = linspace(0.3, -0.2, 160);
     line(c, xs.map((x) => [sx(x * 100), sy(anode(x))]), { color: C.cu, width: 2.6 });
     line(c, xs.map((x) => [sx(x * 100), sy(cathode(x))]), { color: C.violet, width: 2.6 });
     c.strokeStyle = 'rgba(228,140,92,.6)'; c.setLineDash([5, 5]); c.beginPath(); c.moveTo(bx.x, sy(3.45)); c.lineTo(bx.x + bx.w, sy(3.45)); c.stroke(); c.setLineDash([]);
-    text(c, T({ th: 'ทองแดงเริ่มละลาย ~3.4–3.5 V', en: 'copper starts dissolving ~3.4–3.5 V' }), bx.x + 6, sy(3.45) - 6, { size: 11, color: C.cu });
-    text(c, T({ th: 'ขั้วบวก', en: 'cathode' }), sx(25), sy(cathode(0.25)) - 8, { size: 11.5, weight: 700, color: C.violet });
-    text(c, T({ th: 'ขั้วลบ (ทองแดงอยู่ที่นี่)', en: 'anode (on copper foil)' }), sx(25), sy(anode(0.25)) - 8, { size: 11.5, weight: 700, color: C.cu });
+    text(c, T({ th: 'ทองแดงเริ่มละลาย ~3.4–3.5 V', en: 'copper starts dissolving ~3.4–3.5 V' }), bx.x + 6, sy(3.45) + 16, { size: 11, color: C.cu });
+    text(c, T({ th: 'ขั้วบวก', en: 'cathode' }), sx(29), sy(cathode(0.25)) - 9, { size: 11.5, weight: 700, color: C.violet });
+    text(c, T(m ? { th: 'ขั้วลบ (ฟอยล์ทองแดง)', en: 'anode (Cu foil)' } : { th: 'ขั้วลบ (ทองแดงอยู่ที่นี่)', en: 'anode (on copper foil)' }), sx(29), sy(anode(0.25)) - 9, { size: 11.5, weight: 700, color: C.cu });
     const x = s.soc; c.strokeStyle = 'rgba(231,237,243,.5)'; c.beginPath(); c.moveTo(sx(x * 100), bx.y); c.lineTo(sx(x * 100), bx.y + bx.h); c.stroke();
     glowDot(c, sx(x * 100), sy(anode(x)), 6, C.cu); glowDot(c, sx(x * 100), sy(cathode(x)), 6, C.violet);
     let z, w, cls;
@@ -163,7 +171,7 @@ export function drain(inst) {
     const sx = scale(0, s.days, bx.x, bx.x + bx.w), sy = scale(-10, 100, bx.y + bx.h, bx.y);
     c.fillStyle = 'rgba(255,191,60,.08)'; c.fillRect(bx.x, sy(10), bx.w, sy(0) - sy(10));
     c.fillStyle = 'rgba(255,91,79,.14)'; c.fillRect(bx.x, sy(0), bx.w, sy(-10) - sy(0));
-    text(c, T({ th: 'ใต้ 0% บนจอ: กำลังกินบัฟเฟอร์ เสี่ยงคายประจุเกิน', en: 'below screen 0%: eating the buffer, over-discharge risk' }), bx.x + 8, sy(-5) + 4, { size: 11, color: '#ffb3ad' });
+    text(c, T(m ? { th: 'ใต้ 0% บนจอ: เสี่ยงคายประจุเกิน', en: 'below screen 0%: over-discharge risk' } : { th: 'ใต้ 0% บนจอ: กำลังกินบัฟเฟอร์ เสี่ยงคายประจุเกิน', en: 'below screen 0%: eating the buffer, over-discharge risk' }), bx.x + bx.w - 8, sy(-5) + 4, { size: 11, weight: 600, color: '#ffb3ad', align: 'right' });
     axes(c, bx, sx, sy, { xl: { th: 'วันที่จอด', en: 'days parked' }, yl: { th: '% บนจอ', en: 'screen %' }, yt: [0, 20, 40, 60, 80, 100] });
     const pts = []; for (let d = 0; d <= s.days; d += s.days / 200) pts.push([sx(d), sy(Math.max(-10, s.start - s.rate * d))]);
     line(c, pts, { color: C.ok, width: 2.6 });

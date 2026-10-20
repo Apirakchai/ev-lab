@@ -1,5 +1,5 @@
 // Chapter 1 figures
-import { scaffold, slider, select, chips, readouts, legend, note, C, T, fmt, clamp, lerp, rr, text, glowDot, dot, withAlpha, lang, arrow, line } from '../lib.js';
+import { scaffold, slider, select, chips, readouts, legend, note, C, T, fmt, clamp, lerp, rr, text, glowDot, dot, withAlpha, lang, arrow, line, font } from '../lib.js';
 import { CHEM } from '../models.js';
 
 const hash = (i) => { const x = Math.sin(i * 91.7 + 13.1) * 43758.5453; return x - Math.floor(x); };
@@ -120,7 +120,7 @@ export function cell(inst) {
 
 // ---------------------------------------------------------------- units
 export function units(inst) {
-  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 7, ratioM: 1.05, minH: 260, maxH: 460 });
+  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 7, ratioM: 1.22, minH: 260, maxH: 460 });
   const s = { v: 380, ah: 200, wh: 150, kw: 150 };
   const box = ctrls();
   slider(box, { label: { th: 'แรงดันแพ็ก', en: 'Pack voltage' }, min: 300, max: 900, step: 10, value: s.v, fmt: (v) => `${fmt(v)} V`, color: C.violet, onInput: (v) => { s.v = v; stage.request(); } });
@@ -131,12 +131,22 @@ export function units(inst) {
   stage.draw((c, W, H) => {
     const kwh = (s.v * s.ah) / 1000, range = (kwh * 1000) / s.wh, crate = s.kw / kwh, mins = (0.7 * kwh) / s.kw * 60;
     const m = stage.mobile;
-    const ox = m ? 52 : 70, oy = H - (m ? 30 : 34), maxW = (m ? W - 70 : W * 0.58), maxH = H - (m ? 92 : 90);
+    const ox = m ? 50 : 70, oy = H - (m ? 30 : 34), maxW = (m ? W - ox - 22 : W * 0.58), maxH = H - (m ? 82 : 90);
     const wpx = (s.ah / 300) * maxW, hpx = (s.v / 900) * maxH;
-    // axes
+    // axes with light reference ticks (the empty space is where the pack can grow)
     c.strokeStyle = C.line; c.lineWidth = 1; c.beginPath(); c.moveTo(ox, oy - maxH - 6); c.lineTo(ox, oy); c.lineTo(ox + maxW + 6, oy); c.stroke();
+    c.strokeStyle = 'rgba(160,188,214,.12)'; c.setLineDash([3, 4]);
+    for (const v of [300, 600, 900]) {
+      const yy = oy - (v / 900) * maxH; c.beginPath(); c.moveTo(ox, yy); c.lineTo(ox + maxW, yy); c.stroke();
+      if (Math.abs(yy - (oy - hpx)) > 16) text(c, `${v}`, ox - 8, yy + 4, { size: 10.5, color: C.ink3, align: 'right' });
+    }
+    for (const a of [100, 200, 300]) {
+      const xx = ox + (a / 300) * maxW; c.beginPath(); c.moveTo(xx, oy); c.lineTo(xx, oy - maxH); c.stroke();
+      if (Math.abs(xx - (ox + wpx)) > 34) text(c, `${a}`, xx, oy + 17, { size: 10.5, color: C.ink3, align: 'center' });
+    }
+    c.setLineDash([]);
     text(c, `${fmt(s.v)} V`, ox - 8, oy - hpx + 4, { size: 11.5, color: C.violet, align: 'right', weight: 600 });
-    text(c, `${fmt(s.ah)} Ah`, ox + wpx, oy + 18, { size: 11.5, color: C.ok, align: 'center', weight: 600 });
+    text(c, `${fmt(s.ah)} Ah`, ox + wpx, oy + 17, { size: 11.5, color: C.ok, align: 'center', weight: 600 });
     // rectangle (energy)
     const grd = c.createLinearGradient(ox, oy - hpx, ox + wpx, oy);
     grd.addColorStop(0, 'rgba(155,140,255,.55)'); grd.addColorStop(1, 'rgba(47,208,176,.45)');
@@ -190,7 +200,7 @@ export function pack(inst) {
   const ro = readouts(inst, [{ key: 'v', label: { th: 'แรงดันระบุ', en: 'Nominal voltage' } }, { key: 'ah', label: { th: 'ความจุ', en: 'Capacity' } }, { key: 'e', label: { th: 'พลังงาน', en: 'Energy' } }, { key: 'n', label: { th: 'จำนวนเซลล์', en: 'Cells' } }, { key: 'm', label: { th: 'น้ำหนักเฉพาะเซลล์', en: 'Cell mass only' } }]);
   stage.draw((c, W, H) => {
     const ce = CELLS[s.cell];
-    const top = 54, left = 20, right = W - 20, bottom = H - 40;
+    const top = 76, left = 20, right = W - 20, bottom = H - 24;
     const gw = right - left, gh = bottom - top;
     // grid: S along x, P along y. Wrap S into rows if very long to keep it legible.
     const wrap = s.S > 120 && stage.mobile ? 3 : s.S > 150 ? 2 : 1;
@@ -212,8 +222,8 @@ export function pack(inst) {
       }
     }
     // series arrow
-    text(c, `${s.S} S → ${fmt(s.S * ce.v)} V`, left, top - 16, { size: 12, weight: 600, color: C.violet });
-    text(c, `${s.P} P → ${fmt(s.P * ce.ah)} Ah`, right, top - 16, { size: 12, weight: 600, color: C.ok, align: 'right' });
+    text(c, `${s.S} S → ${fmt(s.S * ce.v)} V`, left, top - 14, { size: 12, weight: 600, color: C.violet });
+    text(c, `${s.P} P → ${fmt(s.P * ce.ah)} Ah`, right, top - 14, { size: 12, weight: 600, color: C.ok, align: 'right' });
     const kwh = (s.S * ce.v * s.P * ce.ah) / 1000;
     ro.set('v', `${fmt(s.S * ce.v)}<small>V</small>`);
     ro.set('ah', `${fmt(s.P * ce.ah)}<small>Ah</small>`);
@@ -226,7 +236,7 @@ export function pack(inst) {
 
 // ---------------------------------------------------------------- SOC / SOH / buffers
 export function soc(inst) {
-  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 6.4, ratioM: 1.1, minH: 260, maxH: 420 });
+  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 5.2, ratioM: 1.22, minH: 260, maxH: 360 });
   const s = { soh: 92, bb: 4, tb: 2, disp: 80, kwh: 75 };
   const box = ctrls();
   slider(box, { label: { th: '% บนหน้าจอ', en: 'Displayed %' }, min: 0, max: 100, step: 1, value: s.disp, fmt: (v) => `${v}%`, color: C.ok, onInput: (v) => { s.disp = v; stage.request(); } });
@@ -236,7 +246,8 @@ export function soc(inst) {
   const ro = readouts(inst, [{ key: 'kwh', label: { th: 'พลังงานที่ใช้ได้ตอนนี้', en: 'Usable energy now' } }, { key: 'left', label: { th: 'เหลือในแบต (ใช้ได้)', en: 'Left (usable)' } }, { key: 'cell', label: { th: 'ระดับจริงของเซลล์', en: 'True cell level' } }]);
   stage.draw((c, W, H) => {
     const m = stage.mobile;
-    const x0 = m ? 18 : 40, x1 = W - (m ? 30 : 60), y = m ? 110 : 96, hh = m ? 64 : 76;
+    const x0 = m ? 18 : 40, x1 = W - (m ? 30 : 60), hh = m ? 70 : 78;
+    const legH = m ? 46 : 26, y = Math.round(58 + (H - 58 - legH - 34 - hh) / 2 + 14);
     const full = x1 - x0; // new-battery capacity
     const cap = full * (s.soh / 100);
     // new capacity ghost
@@ -259,8 +270,25 @@ export function soc(inst) {
     const tick = (x, lab, col) => { c.strokeStyle = col; c.lineWidth = 1.5; c.beginPath(); c.moveTo(x, y - 6); c.lineTo(x, y + hh + 6); c.stroke(); text(c, lab, x, y + hh + 22, { size: 11.5, weight: 600, color: col, align: 'center' }); };
     tick(x0 + bbW, T({ th: 'จอ 0%', en: 'screen 0%' }), C.ink2);
     tick(x0 + cap - tbW, T({ th: 'จอ 100%', en: 'screen 100%' }), C.ink2);
-    if (s.soh < 100) { c.strokeStyle = C.heat; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(x0 + cap, y - 4); c.lineTo(x0 + cap, y + hh + 4); c.stroke(); c.setLineDash([]); text(c, T({ th: 'สูญเสียจากการเสื่อม', en: 'lost to ageing' }), x0 + (cap + full) / 2, y + hh / 2 + 4, { size: 11, color: C.heat, align: 'center', maxW: full - cap - 6 }); }
-    if (bbW > 18) text(c, T({ th: 'บัฟเฟอร์', en: 'buffer' }), x0 + bbW / 2, y - 10, { size: 10.5, color: C.violet, align: 'center' });
+    if (s.soh < 100) {
+      c.strokeStyle = C.heat; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(x0 + cap, y - 4); c.lineTo(x0 + cap, y + hh + 4); c.stroke(); c.setLineDash([]);
+      c.fillStyle = 'rgba(255,155,47,.10)'; c.fillRect(x0 + cap + 1, y + 1, full - cap - 2, hh - 2);
+    }
+    // legend (explains every colour in the bar, so nothing has to be squeezed inside it)
+    const items = [
+      { k: 'rgba(47,208,176,.9)', t: { th: 'พลังงานที่ใช้ได้', en: 'usable energy' } },
+      { k: 'rgba(155,140,255,.55)', t: { th: 'บัฟเฟอร์ที่ล็อกไว้', en: 'locked buffers' } },
+      { k: 'rgba(255,155,47,.55)', t: { th: 'ที่หายไปจากการเสื่อม', en: 'lost to ageing' } },
+    ];
+    c.font = font(11.5, 500);
+    let lx = x0, ly = H - (m ? 40 : 18);
+    for (const it of items) {
+      const tw = c.measureText(T(it.t)).width + 30;
+      if (lx + tw > x1 + 20) { lx = x0; ly += 22; }
+      rr(c, lx, ly - 9, 12, 10, 2.5); c.fillStyle = it.k; c.fill();
+      text(c, T(it.t), lx + 18, ly, { size: 11.5, color: C.ink2 });
+      lx += tw;
+    }
     const usableKwh = (s.kwh * s.soh / 100) * (1 - (s.bb + s.tb) / 100);
     ro.set('kwh', `${fmt(usableKwh, 1)}<small>kWh</small>`);
     ro.set('left', `${fmt(usableKwh * s.disp / 100, 1)}<small>kWh</small>`);

@@ -169,7 +169,9 @@ export function formats(inst) {
     { k: 'pouch', th: 'ซอง (pouch)', en: 'Pouch', w: 350, h: 100, cyl: false, thin: true, ah: '50–80 Ah', note: { th: 'Hyundai/Kia, GM', en: 'Hyundai/Kia, GM' } },
     { k: 'blade', th: 'ใบมีด (Blade)', en: 'Blade', w: 960, h: 90, cyl: false, thin: true, ah: '130–200 Ah', note: { th: 'BYD ทุกรุ่น', en: 'All BYD models' } },
   ];
-  const { stage } = scaffold(inst, { height: (w, m) => (m ? 580 : 450), minH: 300, maxH: 640, maxVH: 2 });
+  // phones: height follows the content so there is no empty band at the bottom
+  const mobileH = (w) => { const k2 = (w - 40) / 980, kk = Math.min(k2 * 2.2, 2.4); return Math.round(70 + 80 * kk + 56 + F.slice(3).reduce((a, f) => a + f.h * k2 + 40, 0) + 22); };
+  const { stage } = scaffold(inst, { height: (w, m) => (m ? mobileH(w) : 450), minH: 300, maxH: 640, maxVH: 2 });
   stage.draw((c, W, H) => {
     const m = stage.mobile;
     // scale: blade length (960 mm) spans most of the width
@@ -200,10 +202,22 @@ export function formats(inst) {
       const kk = Math.min(k2 * 2.2, 2.4);
       // small cells enlarged ×2.2 on mobile for legibility (noted)
       let x = x0;
-      for (const f of F.slice(0, 3)) { const w = f.w * kk, h = f.h * kk; draw(f, x, yy + 80 * kk - h, w, h); text(c, T(f), x + w / 2, yy + 80 * kk + 16, { size: 11, weight: 700, color: C.ink, align: 'center' }); text(c, f.ah, x + w / 2, yy + 80 * kk + 30, { size: 10.5, color: C.ink2, align: 'center' }); x += w + 26; }
+      for (const f of F.slice(0, 3)) { const w = f.w * kk, h = f.h * kk; draw(f, x, yy + 80 * kk - h, w, h); text(c, T(f), x + w / 2, yy + 80 * kk + 16, { size: 11, weight: 700, color: C.ink, align: 'center' }); text(c, f.ah, x + w / 2, yy + 80 * kk + 30, { size: 10.5, color: C.ink2, align: 'center' }); x += Math.max(w, 34) + 22; }
+      // where each cylinder is used, beside the cells
+      const nx = x + 4, nw = W - 20 - nx;
+      F.slice(0, 3).forEach((f, i) => {
+        const ny = yy + 8 + i * 30;
+        text(c, T(f), nx, ny, { size: 10.5, weight: 700, color: C.ink2 });
+        text(c, T(f.note), nx, ny + 14, { size: 10.5, color: C.ink3, maxW: nw });
+      });
       yy += 80 * kk + 56;
-      for (const f of F.slice(3)) { const w = f.w * k2, h = f.h * k2; draw(f, x0, yy, w, h); text(c, `${T(f)} · ${f.ah}`, x0, yy - 8, { size: 11, weight: 700, color: C.ink }); yy += h + 40; }
-      text(c, T({ th: 'เซลล์ทรงกระบอกขยาย 2 เท่าเพื่อให้เห็นชัด', en: 'Cylindrical cells shown 2× larger for legibility' }), x0, H - 16, { size: 10.5, color: C.ink3 });
+      for (const f of F.slice(3)) {
+        const w = f.w * k2, h = f.h * k2; draw(f, x0, yy, w, h);
+        text(c, `${T(f)} · ${f.ah}`, x0, yy - 8, { size: 11, weight: 700, color: C.ink });
+        text(c, T(f.note), W - 20, yy - 8, { size: 10.5, color: C.ink3, align: 'right' });
+        yy += h + 40;
+      }
+      text(c, T({ th: 'เซลล์ทรงกระบอกขยาย 2 เท่าเพื่อให้เห็นชัด', en: 'Cylindrical cells shown 2× larger for legibility' }), x0, H - 12, { size: 10.5, color: C.ink3 });
     }
     function draw(f, x, yTop, w, h) {
       if (f.cyl) {

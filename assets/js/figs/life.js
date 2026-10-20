@@ -38,7 +38,7 @@ export function curve(inst) {
 }
 
 export function km(inst) {
-  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 6, ratioM: 1.2, minH: 260, maxH: 400 });
+  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 4.6, height: (w, m) => (m ? 262 : w / (16 / 4.6)), minH: 250, maxH: 330 });
   const s = { kwh: 75, wh: 160, cyc: 1500, rate: 2, kmy: 20000 };
   const box = ctrls();
   slider(box, { label: { th: 'แบต', en: 'Battery' }, min: 40, max: 110, step: 1, value: 75, fmt: (v) => `${v} kWh`, color: C.ok, onInput: (v) => { s.kwh = v; stage.request(); } });
@@ -62,6 +62,9 @@ export function km(inst) {
       text(c, r[1] > 40 ? '> 40' : fmt(r[1], 1), Math.min(x1 - 4, sx(Math.min(40, r[1])) + 8), y + 20, { size: 12, weight: 700, color: C.ink, align: r[1] > 36 ? 'right' : 'left' });
     });
     text(c, T({ th: 'ปีจนเหลือ 80%', en: 'years until 80%' }), x1, 60, { size: 11, color: C.ink3, align: 'right' });
+    const ty = 76 + 3 * (m ? 46 : 52) + 4;
+    c.strokeStyle = 'rgba(160,188,214,.18)'; c.lineWidth = 1; c.beginPath(); c.moveTo(x0, ty); c.lineTo(x1, ty); c.stroke();
+    for (const yv of [0, 10, 20, 30, 40]) { const xx = sx(yv); c.beginPath(); c.moveTo(xx, ty); c.lineTo(xx, ty + 5); c.stroke(); text(c, `${yv}`, xx, ty + 19, { size: 10.5, color: C.ink3, align: yv === 0 ? 'left' : yv === 40 ? 'right' : 'center' }); }
     ro.set('kmc', `${fmt(kmc / 1000)}k<small>km</small>`);
     ro.set('yc', fmt(yc, 1)); ro.set('yt', fmt(yt, 1));
     ro.set('lim', yc < yt ? T({ th: 'รอบชาร์จ (ขับเยอะ)', en: 'cycles (high mileage)' }) : T({ th: 'เวลา (อายุแบต)', en: 'time (calendar)' }));

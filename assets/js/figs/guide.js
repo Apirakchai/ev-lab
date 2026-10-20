@@ -1,5 +1,5 @@
 // Chapter 11 figures (also used by the lab)
-import { scaffold, slider, chips, readouts, C, T, fmt, rr, text, scale } from '../lib.js';
+import { scaffold, slider, chips, readouts, C, T, fmt, rr, text, scale, wrapLines } from '../lib.js';
 
 const FT = 0.1623, VAT = 1.07;
 export function billNormal(kwh) {
@@ -9,7 +9,7 @@ export function billNormal(kwh) {
 export function billTou(on, off) { return (on * 5.7982 + off * 2.6369 + (on + off) * FT + 24.62) * VAT; }
 
 export function tou(inst) {
-  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 5.6, ratioM: 1.15, minH: 240, maxH: 380 });
+  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 5.6, height: (w, m) => (m ? 236 : w / (16 / 5.6)), minH: 220, maxH: 320 });
   const s = { house: 500, houseOff: 40, km: 1500, evOff: 100 };
   const box = ctrls();
   slider(box, { label: { th: 'ไฟบ้าน (ไม่รวมรถ) ต่อเดือน', en: 'Home use (excluding car) per month' }, min: 100, max: 2000, step: 10, value: 500, fmt: (v) => `${fmt(v)} kWh`, color: C.violet, onInput: (v) => { s.house = v; stage.request(); } });
@@ -22,10 +22,10 @@ export function tou(inst) {
     const ev = (s.km * 0.16) / 0.93;
     const on = s.house * (1 - s.houseOff / 100) + ev * (1 - s.evOff / 100), off = s.house * (s.houseOff / 100) + ev * (s.evOff / 100);
     const n = billNormal(s.house + ev), t = billTou(on, off);
-    const x0 = m ? 20 : 40, x1 = W - (m ? 20 : 40), max = Math.max(n, t) * 1.1;
-    const sx = scale(0, max, x0, x1);
+    const x0 = m ? 20 : 40, x1 = W - (m ? 20 : 40), max = Math.max(n, t);
+    const sx = scale(0, max, x0, x1 - 78); // room for the baht label after the longest bar
     [[{ th: 'อัตราปกติ (ก้าวหน้า)', en: 'Normal (progressive)' }, n, '#b9c4cf'], [{ th: 'TOU', en: 'TOU' }, t, t < n ? C.ok : C.bad]].forEach((r, i) => {
-      const y = 70 + i * (m ? 56 : 64);
+      const y = 74 + i * (m ? 62 : 70);
       text(c, T(r[0]), x0, y, { size: 12.5, weight: 600, color: C.ink2 });
       rr(c, x0, y + 8, Math.max(8, sx(r[1]) - x0), 22, 6); c.fillStyle = r[2]; c.fill();
       text(c, `${fmt(r[1])} ฿`, sx(r[1]) + 8, y + 24, { size: 13, weight: 700, color: C.ink });
@@ -60,7 +60,8 @@ export function cost(inst) {
     text(c, m ? T({ th: 'บาท/กม.', en: 'THB/km' }) : T({ th: 'บาท/กม. · บาท/ปี', en: 'THB/km · THB/year' }), W - (m ? 14 : 30), 62, { size: 11, color: C.ink3, align: 'right' });
     rows.forEach((r, i) => {
       const y = 76 + i * rh;
-      text(c, T(r.l), x0 - 10, y + rh / 2, { size: m ? 10.5 : 12, color: C.ink2, align: 'right', maxW: labW - 12 });
+      const ls = wrapLines(c, T(r.l), labW - 12, m ? 10.5 : 12);
+      ls.forEach((ln, j) => text(c, ln, x0 - 10, y + rh / 2 + (j - (ls.length - 1) / 2) * 13, { size: m ? 10.5 : 12, color: C.ink2, align: 'right' }));
       rr(c, x0, y + rh / 2 - 13, Math.max(6, sx(r.v) - x0), 18, 5); c.fillStyle = r.k; c.fill();
       text(c, `${fmt(r.v, 2)}`, sx(r.v) + 8, y + rh / 2 + 1, { size: 12.5, weight: 700, color: C.ink });
       if (!m) text(c, `${fmt(r.v * s.kmy)} ฿`, W - 30, y + rh / 2 + 1, { size: 12, color: C.ink2, align: 'right' });

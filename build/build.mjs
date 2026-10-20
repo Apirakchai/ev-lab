@@ -28,6 +28,61 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const bi = (th, en, tag = 'span', cls = '') =>
   `<${tag}${cls ? ` class="${cls}"` : ''} data-l="th" lang="th">${th}</${tag}><${tag}${cls ? ` class="${cls}"` : ''} data-l="en" lang="en">${en}</${tag}>`;
 
+// ---------- Thai line breaking ----------
+// Browsers break Thai with a dictionary that doesn't know words like "แบต", so short display text
+// (headings, menu, titles) can split mid-word. Wrap each space-separated Thai phrase in an
+// inline-block so lines only break between phrases (a phrase wider than the line still wraps).
+const THAI = /[฀-๿]/;
+const NUMTOK = /^[(]?[\d][\d.,]*(?:[–\-→/][\d.,]+)*(?:%|°C|x|×)?[)]?$/;
+function wrapPhrases(inner) {
+  if (!THAI.test(inner) || inner.includes('class="katex')) return inner;
+  return inner.split(/(<[^>]+>)/).map((part) => {
+    if (part.startsWith('<') || !THAI.test(part)) return part;
+    // numbers stay with the Thai word that follows them ("10 องศา", "100% แบต…")
+    const toks = part.split(/([ \t\n\r]+)/);
+    for (let i = 0; i + 2 < toks.length; i += 2) {
+      if (NUMTOK.test(toks[i]) && THAI.test(toks[i + 2])) { toks[i + 2] = toks[i] + '\u00a0' + toks[i + 2]; toks[i] = ''; toks[i + 1] = ''; }
+    }
+    return toks.map((tok) => (THAI.test(tok) ? `<span class="ph">${tok}</span>` : tok)).join('');
+  }).join('');
+}
+const wp = (s) => wrapPhrases(String(s));
+function wrapDisplayText(html) {
+  // headings and summaries
+  html = html.replace(/<(h[1-4]|summary)(\s[^>]*)?>([\s\S]*?)<\/\1>/g, (_, tag, attrs = '', inner) => `<${tag}${attrs}>${wrapPhrases(inner)}</${tag}>`);
+  // short display classes
+  html = html.replace(/<(p|div|span|b|strong|li)(\s[^>]*class="[^"]*\b(?:hero-k|key-h|box-h|lv-k|ph-wrap)\b[^"]*"[^>]*)>([\s\S]*?)<\/\1>/g,
+    (_, tag, attrs, inner) => `<${tag}${attrs}>${wrapPhrases(inner)}</${tag}>`);
+  return html;
+}
+
+// ---------- tables: label every cell with its column header (phones show rows as cards) ----------
+function labelTables(html) {
+  const strip = (h, drop) => h.replace(new RegExp(`<span[^>]*data-l="${drop}"[^>]*>[\\s\\S]*?<\\/span>`, 'g'), '')
+    .replace(/<br\s*\/?>/g, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().replace(/"/g, '&quot;');
+  return html.replace(/<table class="tbl([^"]*)"([^>]*)>([\s\S]*?)<\/table>/g, (whole, cls, attrs, inner) => {
+    const thead = inner.match(/<thead>([\s\S]*?)<\/thead>/);
+    if (!thead) return whole;
+    const labs = [...thead[1].matchAll(/<th[^>]*>([\s\S]*?)<\/th>/g)].map((m) => ({ th: strip(m[1], 'en'), en: strip(m[1], 'th') }));
+    const body = inner.replace(/<tbody>([\s\S]*?)<\/tbody>/, (_, rows) => '<tbody>' + rows.replace(/<tr([^>]*)>([\s\S]*?)<\/tr>/g, (__, ta, cells) => {
+      let i = 0;
+      return `<tr${ta}>` + cells.replace(/<td([^>]*)>/g, (___, a) => { const L = labs[i++] || { th: '', en: '' }; return `<td${a} data-th="${L.th}" data-en="${L.en}">`; }) + '</tr>';
+    }) + '</tbody>');
+    return `<table class="tbl${cls}"${attrs}>${body}</table>`;
+  });
+}
+
+// ---------- icons for the menu and tool cards ----------
+const ICON = {
+  index: '<path d="M3.4 9.3 10 3.7l6.6 5.6v6.9a.9.9 0 0 1-.9.9h-3.5v-4.8H7.8v4.8H4.3a.9.9 0 0 1-.9-.9z"/>',
+  myths: '<path d="M4.2 4.2h11.6c.9 0 1.6.7 1.6 1.6v6.4c0 .9-.7 1.6-1.6 1.6H9.4l-3.7 2.9v-2.9H4.2c-.9 0-1.6-.7-1.6-1.6V5.8c0-.9.7-1.6 1.6-1.6z"/><path d="M10 6.9v3.2M10 12.1v.1"/>',
+  lab: '<path d="M7.4 2.9h5.2M8.3 2.9v4.7l-4.2 7.6a1.4 1.4 0 0 0 1.2 2.1h9.4a1.4 1.4 0 0 0 1.2-2.1l-4.2-7.6V2.9"/><path d="M5.9 12.3h8.2"/>',
+  glossary: '<path d="M10 5.3C8.4 4.1 6.2 3.7 3.1 3.9v11.5c3.1-.2 5.3.2 6.9 1.4 1.6-1.2 3.8-1.6 6.9-1.4V3.9c-3.1-.2-5.3.2-6.9 1.4zM10 5.3v11.5"/>',
+  sources: '<path d="M5.6 2.9h6l3.6 3.6v10.2c0 .3-.2.5-.5.5H5.6c-.3 0-.5-.2-.5-.5V3.4c0-.3.2-.5.5-.5z"/><path d="M11.4 2.9v3.8h3.8M7.7 10.2h4.8M7.7 13.1h4.8"/>',
+  chev: '<path d="M7.5 4.5 13 10l-5.5 5.5"/>',
+};
+const icon = (k, cls = '') => `<svg class="${cls}" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICON[k] || ''}</svg>`;
+
 function renderMath(html) {
   const opts = (display) => ({ displayMode: display, throwOnError: false, output: 'html', strict: 'ignore', trust: false });
   html = html.replace(/<kd([^>]*)>([\s\S]*?)<\/kd>/g, (_, attrs, tex) =>
@@ -48,35 +103,34 @@ function expand(html) {
 }
 
 function navHtml(activeSlug) {
-  const groups = [
-    { key: 'learn', th: 'บทเรียน', en: 'Chapters' },
-    { key: 'tools', th: 'เครื่องมือและข้อมูล', en: 'Tools & reference' },
-  ];
-  return groups.map((g) => {
-    const items = CHAPTERS.filter((c) => c.group === g.key).map((c) => {
-      const num = c.num ? `<span class="mi-num" aria-hidden="true">${String(c.num).padStart(2, '0')}</span>` : `<span class="mi-num mi-ico" aria-hidden="true">${c.icon || '•'}</span>`;
-      const cur = c.slug === activeSlug ? ' aria-current="page"' : '';
-      return `<li><a class="mi" href="${c.file}"${cur}>${num}<span class="mi-t">${bi(c.th, c.en)}</span><span class="mi-d">${bi(c.dth, c.den)}</span></a></li>`;
-    }).join('');
-    return `<div class="menu-group"><p class="menu-h">${bi(g.th, g.en)}</p><ul class="menu-list">${items}</ul></div>`;
-  }).join('');
+  const home = CHAPTERS.find((c) => c.slug === 'index');
+  const learn = CHAPTERS.filter((c) => c.group === 'learn');
+  const tools = CHAPTERS.filter((c) => c.group === 'tools');
+  const cur = (c) => (c.slug === activeSlug ? ' aria-current="page"' : '');
+  const rows = learn.map((c) => `<li><a class="mi" href="${c.file}"${cur(c)}><span class="mi-num">${String(c.num).padStart(2, '0')}</span><span class="mi-b"><span class="mi-t">${bi(wp(c.th), c.en)}</span><span class="mi-d">${bi(wp(c.dth), c.den)}</span></span>${icon('chev', 'mi-go')}</a></li>`).join('');
+  const tiles = tools.map((c) => `<li><a class="mt" href="${c.file}"${cur(c)}><span class="mt-ico">${icon(c.slug)}</span><span class="mt-t">${bi(wp(c.th), c.en)}</span><span class="mt-d">${bi(wp(c.dth), c.den)}</span></a></li>`).join('');
+  return `<div class="menu-group"><p class="menu-h"><span>${bi('บทเรียน', 'Chapters')}</span><span class="menu-c">${bi(`${learn.length} บท`, `${learn.length} chapters`)}</span></p><ol class="menu-list">${rows}</ol></div>
+<div class="menu-group"><p class="menu-h"><span>${bi('เครื่องมือและข้อมูล', 'Tools & reference')}</span></p><ul class="menu-tools">${tiles}</ul></div>`;
 }
 
 function pathHtml() {
   const learn = CHAPTERS.filter((c) => c.group === 'learn');
   const tools = CHAPTERS.filter((c) => c.group === 'tools');
   const n = learn.length;
-  const items = learn.map((c) => `<li><a class="path-i" href="${c.file}"><span class="cbadge" style="--lvl:${(c.num / n).toFixed(3)}">${String(c.num).padStart(2, '0')}</span><span class="path-t">${bi(c.th, c.en)}</span><span class="path-d">${bi(c.dth, c.den)}</span></a></li>`).join('');
-  const t = tools.map((c) => `<li><a class="tool-i" href="${c.file}"><span class="tool-ico" aria-hidden="true">${c.icon}</span><span class="path-t">${bi(c.th, c.en)}</span><span class="path-d">${bi(c.dth, c.den)}</span></a></li>`).join('');
-  return `<ol class="path">${items}</ol><ul class="tools">${t}</ul>`;
+  const items = learn.map((c) => `<li><a class="path-i" href="${c.file}"><span class="cbadge" style="--lvl:${(c.num / n).toFixed(3)}">${String(c.num).padStart(2, '0')}</span><span class="path-t">${bi(wp(c.th), c.en)}</span><span class="path-d">${bi(wp(c.dth), c.den)}</span></a></li>`).join('');
+  const t = tools.map((c) => `<li><a class="tool-i" href="${c.file}"><span class="tool-ico">${icon(c.slug)}</span><span class="path-t">${bi(wp(c.th), c.en)}</span><span class="path-d">${bi(wp(c.dth), c.den)}</span></a></li>`).join('');
+  // an odd number of chapters leaves an empty cell in the two-column grid: fill it with a start card
+  const first = learn[0];
+  const cta = n % 2 ? `<li class="path-cta" aria-hidden="true"><a class="path-start" href="${first.file}" tabindex="-1"><span class="path-start-k">${bi('ไม่รู้จะเริ่มตรงไหน', 'Not sure where to start?')}</span><span class="path-start-t">${bi(wp('เริ่มจากบทที่ 1 แล้วอ่านตามลำดับ'), 'Begin with chapter 1 and read in order')}</span></a></li>` : '';
+  return `<ol class="path">${items}${cta}</ol><ul class="tools">${t}</ul>`;
 }
 
 function pagerHtml(slug) {
   const seq = CHAPTERS.filter((c) => c.group === 'learn' || c.slug === 'index');
   const i = seq.findIndex((c) => c.slug === slug);
   if (i < 0) return '';
-  const prev = seq[i - 1], next = seq[i + 1];
-  const card = (c, dir) => c ? `<a class="pager-a pager-${dir}" href="${c.file}"><span class="pager-k">${dir === 'prev' ? bi('ก่อนหน้า', 'Previous') : bi('บทถัดไป', 'Next chapter')}</span><span class="pager-t">${bi(c.th, c.en)}</span></a>` : '<span></span>';
+  const prev = seq[i - 1], next = seq[i + 1] || (slug !== 'index' ? CHAPTERS.find((c) => c.group === 'tools') : null);
+  const card = (c, dir) => c ? `<a class="pager-a pager-${dir}" href="${c.file}"><span class="pager-k">${dir === 'prev' ? bi('ก่อนหน้า', 'Previous') : c.group === 'learn' ? bi('บทถัดไป', 'Next chapter') : bi('อ่านต่อ', 'Up next')}</span><span class="pager-t">${bi(wp(c.th), c.en)}</span></a>` : '<span></span>';
   return `<nav class="pager" aria-label="Chapters">${card(prev, 'prev')}${card(next, 'next')}</nav>`;
 }
 
@@ -96,7 +150,7 @@ for (const file of pages) {
   const m = raw.match(/^<!--meta\s*([\s\S]*?)-->/);
   if (!m) throw new Error(`missing meta in ${file}`);
   const meta = JSON.parse(m[1]);
-  const body = numberCites(expand(raw.slice(m[0].length).replace('{{CHAPTER_PATH}}', pathHtml())));
+  const body = wrapDisplayText(labelTables(numberCites(expand(raw.slice(m[0].length).replace('{{CHAPTER_PATH}}', pathHtml())))));
   const ch = CHAPTERS.find((c) => c.slug === meta.slug) || {};
   const titleTh = meta.title_th || ch.th, titleEn = meta.title_en || ch.en;
   const descTh = meta.desc_th || ch.dth || '', descEn = meta.desc_en || ch.den || '';

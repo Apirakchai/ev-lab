@@ -213,9 +213,10 @@ export function hero(section) {
     const mobile = W < 900;
     c.save(); c.globalAlpha = alpha;
     const zoom = lerp(0.85, 1, smooth(seg(prog, 0, 0.3)));
-    const gw = Math.min(mobile ? W * 0.86 : W * 0.46, 700) * zoom, rows = 5;
+    // phones: keep room on the left for the SEI film and on the right for the spacing marker
+    const gw = (mobile ? W - 96 : Math.min(W * 0.46, 700)) * zoom, rows = 5;
     const gap = Math.min(mobile ? 58 : 74, (H * 0.6) / rows) * zoom;
-    const x0 = cx - gw / 2, y0 = cy - (gap * (rows - 1)) / 2;
+    const x0 = mobile ? 60 + (W - 96 - gw) / 2 : cx - gw / 2, y0 = cy - (gap * (rows - 1)) / 2;
     const fill = clamp(prog * 1.35, 0, 1); // how far lithium has slid in
     const a = gap * 0.42; // atom spacing
     // SEI film on the left edge

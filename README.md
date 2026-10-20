@@ -24,5 +24,14 @@ node build/build.mjs
 ```
 Writes the `*.html` pages to the repository root (served by GitHub Pages from `main`).
 
+## Fonts
+Thai text is always looped (มีหัว): **IBM Plex Sans Thai Looped** (400–700, self-hosted Thai + Latin subsets) for body, headings and canvas labels.
+**Bai Jamjuree** ships its Latin subset only, for English display text and instrument numbers, so any Thai inside those still falls back to the looped face.
+
+Short display text (headings, menu, titles, summaries) is wrapped phrase by phrase at build time, so Thai lines break between phrases instead of mid-word.
+Use a no-break space (U+00A0) in `src/chapters.json` or a page to keep a term together.
+
 ## Custom domain
-Cloudflare DNS: `CNAME ev → apirakchai.github.io` (DNS only), then add a `CNAME` file containing `ev.sukmart.com` and enable "Enforce HTTPS" in Settings → Pages.
+Live on https://ev.sukmart.com. Cloudflare DNS has `CNAME ev → apirakchai.github.io` (DNS only, grey cloud);
+the `CNAME` file in the repository root holds `ev.sukmart.com`, and "Enforce HTTPS" is on in Settings → Pages.
+The build does not write `CNAME`, so keep that file when cleaning the root.

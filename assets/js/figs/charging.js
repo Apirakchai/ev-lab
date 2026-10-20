@@ -45,11 +45,12 @@ export function sim(inst) {
     const xs = s.view === 'soc' ? R.soc.map((v) => v * 100) : R.t;
     const sx = s.view === 'soc' ? scale(0, 100, bx.x, bx.x + bx.w) : scale(0, Math.max(5, R.minutes * 1.04), bx.x, bx.x + bx.w);
     const sy = scale(0, pmax, bx.y + bx.h, bx.y);
-    if (s.view === 'soc') { c.fillStyle = 'rgba(255,191,60,.06)'; c.fillRect(sx(80), bx.y, sx(100) - sx(80), bx.h); text(c, T({ th: '20% สุดท้าย', en: 'last 20%' }), sx(90), bx.y + 14, { size: 11, color: C.warn, align: 'center' }); }
+    if (s.view === 'soc') { c.fillStyle = 'rgba(255,191,60,.06)'; c.fillRect(sx(80), bx.y, sx(100) - sx(80), bx.h); text(c, T({ th: '20% สุดท้าย', en: 'last 20%' }), sx(90), bx.y + bx.h * 0.42, { size: 11, weight: 600, color: C.warn, align: 'center' }); }
     axes(c, bx, sx, sy, { xl: s.view === 'soc' ? { th: '% แบต', en: 'charge %' } : { th: 'นาที', en: 'minutes' }, yl: { th: 'กำลังชาร์จ (kW)', en: 'charging power (kW)' } });
     // charger ceiling
     c.strokeStyle = 'rgba(78,162,255,.35)'; c.setLineDash([5, 5]); c.beginPath(); c.moveTo(bx.x, sy(ch.kw)); c.lineTo(bx.x + bx.w, sy(ch.kw)); c.stroke(); c.setLineDash([]);
-    text(c, `${T(ch)}`, bx.x + bx.w - 4, sy(ch.kw) - 6, { size: 11, color: 'rgba(78,162,255,.9)', align: 'right' });
+    // the charger is named in the selector below; on wide screens also label its ceiling
+    if (!m) text(c, `${T(ch)}`, bx.x + bx.w * 0.78, sy(ch.kw) - 6, { size: 11, color: 'rgba(78,162,255,.9)', align: 'right' });
     // area + coloured segments
     area(c, xs.map((x, i) => [sx(x), sy(R.p[i])]), sy(0), 'rgba(160,188,214,.07)');
     for (let i = 1; i < xs.length; i++) {
@@ -103,7 +104,7 @@ export function cccv(inst) {
     axes(c, b1, sx, sy1, { yl: { th: 'แรงดันที่ขั้ว (V)', en: 'terminal voltage (V)' }, fx: () => '', ny: 4, fy: (v) => fmt(v, 1) });
     axes(c, b2, sx, sy2, { yl: { th: 'กระแส (C)', en: 'current (C)' }, xl: { th: 'นาที', en: 'minutes' }, ny: 4, fy: (v) => fmt(v, 1) });
     c.strokeStyle = 'rgba(255,91,79,.6)'; c.setLineDash([5, 5]); c.beginPath(); c.moveTo(b1.x, sy1(VMAX)); c.lineTo(b1.x + b1.w, sy1(VMAX)); c.stroke(); c.setLineDash([]);
-    text(c, T({ th: 'เพดาน 4.2 V', en: 'ceiling 4.2 V' }), b1.x + b1.w - 4, sy1(VMAX) - 6, { size: 11, color: C.bad, align: 'right' });
+    text(c, T({ th: 'เพดาน 4.2 V', en: 'ceiling 4.2 V' }), b1.x + 6, sy1(VMAX) - 6, { size: 11, color: C.bad });
     line(c, r.t.map((t, i) => [sx(t), sy1(r.v[i])]), { color: C.violet, width: 2.4 });
     line(c, r.t.map((t, i) => [sx(t), sy2(r.i[i])]), { color: C.e, width: 2.4 });
     // CV boundary
@@ -111,8 +112,8 @@ export function cccv(inst) {
     if (iCv > 0) {
       const x = sx(r.t[iCv]);
       c.fillStyle = 'rgba(255,191,60,.07)'; c.fillRect(x, b1.y, b1.x + b1.w - x, b1.h); c.fillRect(x, b2.y, b2.x + b2.w - x, b2.h);
-      text(c, 'CC', (b1.x + x) / 2, b1.y + 16, { size: 12, weight: 700, color: C.ink2, align: 'center' });
-      text(c, 'CV', (x + b1.x + b1.w) / 2, b1.y + 16, { size: 12, weight: 700, color: C.warn, align: 'center' });
+      text(c, 'CC', (b1.x + x) / 2, sy1(VMAX) + 22, { size: 12, weight: 700, color: C.ink2, align: 'center' });
+      text(c, 'CV', (x + b1.x + b1.w) / 2, sy1(VMAX) + 22, { size: 12, weight: 700, color: C.warn, align: 'center' });
     }
     ro.set('cv', r.cvSoc === null ? '–' : `${fmt(r.cvSoc * 100)}<small>%</small>`);
     ro.set('t80', fmtDur(r.t80));
@@ -148,10 +149,11 @@ export function plating(inst) {
     axes(c, bx, sx, sy, { xl: { th: '% แบต', en: 'charge %' }, yl: { th: 'กระแสสูงสุดที่ปลอดภัย (C)', en: 'max safe current (C)' }, fy: (v) => fmt(v, 0) });
     for (const [tc, col] of [[10, '#4ea2ff'], [25, '#2fd0b0'], [40, '#ff9b2f']]) {
       line(c, xs.map((x) => [sx(x * 100), sy(Math.min(5.5, cmaxPlating(x, tc)))]), { color: col, width: 1.4, alpha: 0.55, dash: [4, 4] });
-      const y = sy(Math.min(5.5, cmaxPlating(0.3, tc))); text(c, `${tc}°C`, sx(30), y - 6, { size: 11, color: col });
+      const at = tc === 40 ? 0.62 : tc === 25 ? 0.45 : 0.3;
+      const y = sy(Math.min(5.5, cmaxPlating(at, tc))); text(c, `${tc}°C`, sx(at * 100) + 4, y - 7, { size: 11, weight: 600, color: col });
     }
     line(c, cur, { color: C.ink, width: 2.8 });
-    text(c, T({ th: 'เขตลิเทียมเพลตติ้ง', en: 'plating zone' }), sx(80), sy(4.6), { size: 12.5, weight: 700, color: '#ffb3ad', align: 'center' });
+    text(c, T({ th: 'เขตลิเทียมเพลตติ้ง', en: 'plating zone' }), sx(m ? 74 : 80), sy(4.9), { size: 12.5, weight: 700, color: '#ffb3ad', align: 'center' });
     // requested current line
     c.strokeStyle = C.e; c.setLineDash([6, 4]); c.lineWidth = 1.6; c.beginPath(); c.moveTo(bx.x, sy(s.c)); c.lineTo(bx.x + bx.w, sy(s.c)); c.stroke(); c.setLineDash([]);
     let lim = null; for (const x of xs) if (cmaxPlating(x, s.temp) < s.c) { lim = x; break; }

@@ -1,5 +1,5 @@
 // Chapter 3 figures
-import { scaffold, slider, chips, readouts, legend, note, C, T, fmt, clamp, lerp, rr, text, glowDot, withAlpha, scale, axes, line, area, tip, nearestIdx, mix } from '../lib.js';
+import { scaffold, slider, chips, readouts, legend, note, C, T, fmt, clamp, lerp, rr, text, glowDot, withAlpha, scale, axes, line, area, tip, nearestIdx, mix, wrapLines } from '../lib.js';
 import { CHEM, Ua, Uc, AGING, simulateLife, dayProfile, K } from '../models.js';
 
 // ---------------------------------------------------------------- potential ladder
@@ -16,7 +16,7 @@ export function ladder(inst) {
     const ua = Ua(s.soc), uc = Uc(s.chem, s.soc), v = CHEM[s.chem].ocv(s.soc);
     const top = 70, bot = H - 40;
     // two gauges
-    const gw = m ? (W - 70) / 2 : 120, gap = m ? 24 : 160;
+    const gw = m ? (W - 70) / 2 : 120, gap = m ? 24 : 250;
     const gx1 = m ? 40 : W * 0.5 - gw - gap / 2, gx2 = gx1 + gw + gap;
     const sa = scale(0, 0.8, bot, top);       // anode gauge 0–0.8 V
     const sc = scale(3.2, 4.6, bot, top);     // cathode gauge 3.2–4.6 V
@@ -24,7 +24,8 @@ export function ladder(inst) {
       rr(c, x, top, gw, bot - top, 10); c.fillStyle = 'rgba(21,29,37,.85)'; c.fill(); c.strokeStyle = C.line; c.stroke();
       c.save(); rr(c, x, top, gw, bot - top, 10); c.clip();
       for (const z of zones) { c.fillStyle = z.fill; const y1 = sy(Math.min(hi, z.to)), y0 = sy(Math.max(lo, z.from)); c.fillRect(x, y1, gw, y0 - y1);
-        text(c, T(z.label), x + gw / 2, (y0 + y1) / 2 + 4, { size: m ? 9.5 : 10.5, weight: 600, color: z.ink, align: 'center', maxW: gw - 8 }); }
+        const zl = z.label ? wrapLines(c, T(z.label), gw - 12, m ? 10 : 10.5, 600) : [];
+        zl.forEach((ln, j) => text(c, ln, x + gw / 2, (y0 + y1) / 2 + 4 + (j - (zl.length - 1) / 2) * 13, { size: m ? 10 : 10.5, weight: 600, color: z.ink, align: 'center' })); }
       c.restore();
       for (let t = lo; t <= hi + 1e-9; t += (hi - lo) / 7) { const y = sy(t); c.strokeStyle = C.grid2; c.beginPath(); c.moveTo(x - 5, y); c.lineTo(x, y); c.stroke(); text(c, fmt(t, 2), x - 8, y + 4, { size: 10, color: C.ink3, align: 'right' }); }
       text(c, T(title), x + gw / 2, top - 12, { size: 12, weight: 600, color: C.ink, align: 'center' });
@@ -47,7 +48,11 @@ export function ladder(inst) {
     // connector showing cell voltage
     if (!m) {
       c.strokeStyle = 'rgba(231,237,243,.35)'; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(gx1 + gw + 70, ya); c.bezierCurveTo(gx1 + gw + 110, ya, gx2 - 50, yc, gx2 - 8, yc); c.stroke(); c.setLineDash([]);
-      text(c, T({ th: `แรงดันเซลล์ = ${fmt(uc, 2)} − ${fmt(ua, 2)} = ${fmt(v, 2)} V`, en: `cell voltage = ${fmt(uc, 2)} − ${fmt(ua, 2)} = ${fmt(v, 2)} V` }), (gx1 + gx2 + gw) / 2, (ya + yc) / 2 - 10, { size: 12, color: C.ink2, align: 'center' });
+      // label sits in the free space between the anode's value and the cathode's scale, on two lines
+      const lx = (gx1 + gw + 72 + gx2 - 42) / 2, ly = (ya + yc) / 2;
+      c.fillStyle = 'rgba(10,14,18,.85)'; rr(c, lx - 66, ly - 30, 132, 44, 8); c.fill();
+      text(c, T({ th: 'แรงดันเซลล์', en: 'cell voltage' }), lx, ly - 12, { size: 11.5, color: C.ink3, align: 'center' });
+      text(c, `${fmt(uc, 2)} − ${fmt(ua, 2)} = ${fmt(v, 2)} V`, lx, ly + 6, { size: 12, weight: 600, color: C.ink2, align: 'center' });
       // SEI meter on far right
       const mx = gx2 + gw + 110, mw = Math.min(160, W - mx - 30);
       if (mw > 80) {

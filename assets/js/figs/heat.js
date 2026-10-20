@@ -1,5 +1,5 @@
 // Chapter 7 figures
-import { scaffold, slider, chips, readouts, legend, C, T, fmt, clamp, lerp, rr, text, scale, axes, line, glowDot, withAlpha, mix } from '../lib.js';
+import { scaffold, slider, chips, readouts, legend, C, T, fmt, clamp, lerp, rr, text, scale, axes, line, glowDot, withAlpha, mix, wrapLines } from '../lib.js';
 import { calendarLoss, AGING } from '../models.js';
 
 const R = 8.314;
@@ -68,7 +68,7 @@ export function parking(inst) {
 
 // ---------------------------------------------------------------- thermal runaway ladder
 export function runaway(inst) {
-  const { stage, ctrls } = scaffold(inst, { height: (w, m) => (m ? 600 : 470), minH: 420, maxH: 660, maxVH: 2 });
+  const { stage, ctrls } = scaffold(inst, { height: (w, m) => (m ? 660 : 400), minH: 380, maxH: 700, maxVH: 2 });
   const s = { t: 60 };
   slider(ctrls(), { label: { th: 'อุณหภูมิเซลล์', en: 'Cell temperature' }, min: 25, max: 700, step: 1, value: 60, fmt: (v) => `${v}°C`, color: C.bad, onInput: (v) => { s.t = v; stage.request(); } });
   const NMC = { name: 'NMC811 (100%)', onset: 90, sep: 117, vent: 165, runaway: 190, peak: 615,
@@ -101,11 +101,14 @@ export function runaway(inst) {
       // event list
       const lx = x0 + 24 + cw + 30, lw = colW - (lx - x0) - 14;
       text(c, `${T(stateText[st])}`, lx, y0 + 50, { size: 15, weight: 700, color: [C.ok, C.warn, C.heat, C.bad][st], disp: true });
-      X.ev.forEach((e, k) => {
+      const fs = m ? 11 : 12, lh = fs + 4;
+      let y = y0 + 80;
+      X.ev.forEach((e) => {
         const active = s.t >= e[0];
-        const y = y0 + 80 + k * (m ? 22 : 26);
         c.beginPath(); c.arc(lx + 5, y - 4, 4, 0, 7); c.fillStyle = active ? C.heat : 'rgba(160,188,214,.25)'; c.fill();
-        text(c, `${e[0]}°C+  ${T(e[2])}`, lx + 16, y, { size: m ? 10.5 : 12, color: active ? C.ink : C.ink3, maxW: lw - 16 });
+        const lines = wrapLines(c, `${e[0]}°C+  ${T(e[2])}`, lw - 16, fs);
+        lines.forEach((ln, j) => text(c, ln, lx + 16, y + j * lh, { size: fs, color: active ? C.ink : C.ink3 }));
+        y += (m ? 21 : 26) + (lines.length - 1) * lh;
       });
       text(c, T({ th: `อุณหภูมิสูงสุดเมื่อเกิดเหตุ ~${X.peak}°C`, en: `peak during runaway ~${X.peak} °C` }), lx, y0 + h - 14, { size: 11, color: C.ink3 });
     });

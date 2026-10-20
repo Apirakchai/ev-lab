@@ -15,9 +15,18 @@ export const C = {
   violet: '#9b8cff', na: '#f5c518', lime: '#a3d95b',
   series: ['#3987e5', '#e0703c', '#1fb383', '#d6a21e', '#e0628f', '#3fb13f', '#9a8ff0', '#e66767'],
 };
-export const FONT_BODY = '"IBM Plex Sans Thai", "Noto Sans Thai", system-ui, -apple-system, "Segoe UI", sans-serif';
-export const FONT_DISP = '"Bai Jamjuree", "IBM Plex Sans Thai", system-ui, sans-serif';
+// Thai text is always the looped IBM Plex Sans Thai Looped; "display" numbers and Latin use Bai Jamjuree
+// (its Latin subset only, so any Thai inside a display label still falls back to the looped face).
+export const FONT_BODY = '"IBM Plex Sans Thai Looped", "Noto Sans Thai Looped", Thonburi, Tahoma, system-ui, -apple-system, "Segoe UI", sans-serif';
+export const FONT_DISP = '"Bai Jamjuree", ' + FONT_BODY;
 export const font = (size, weight = 500, disp = false) => `${weight} ${size}px ${disp ? FONT_DISP : FONT_BODY}`;
+// canvas text never triggers a web-font download by itself, so ask for every face the figures use
+export const fontsReady = (document.fonts && document.fonts.load)
+  ? Promise.all([
+      ...[400, 500, 600, 700].flatMap((w) => [document.fonts.load(`${w} 16px "IBM Plex Sans Thai Looped"`, 'กขคง'), document.fonts.load(`${w} 16px "IBM Plex Sans Thai Looped"`, 'Ab1')]),
+      ...[500, 600, 700].map((w) => document.fonts.load(`${w} 16px "Bai Jamjuree"`, '0123')),
+    ]).catch(() => {})
+  : Promise.resolve();
 
 // ---------- small utils ----------
 export const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -53,6 +62,11 @@ export class Stage {
     host.appendChild(this.canvas);
     this.ctx = this.canvas.getContext('2d');
     this.w = 0; this.h = 0; this.dpr = 1; this.t = 0; this.visible = false; this.mobile = false;
+    // the figure title overlays the top of the canvas; when it wraps to more lines than one,
+    // push the drawing down by the extra lines so nothing is drawn underneath it
+    this.extra = 0;
+    this.hdr = host.parentElement ? host.parentElement.querySelector(':scope > .inst-h') : null;
+    if (this.hdr) new ResizeObserver(() => this.resize()).observe(this.hdr);
     this.pointer = { x: -1, y: -1, inside: false, down: false };
     this._draw = null; this._loop = null; this._raf = 0; this._pending = false;
     new ResizeObserver(() => this.resize()).observe(host);
@@ -64,16 +78,36 @@ export class Stage {
     window.addEventListener('pointerup', (e) => { if (this.pointer.down) { this.pointer.down = false; this.onPointer?.('up', this.pointer, e); this.request(); } });
     this.canvas.addEventListener('pointerleave', (e) => { this.pointer.inside = false; this.onPointer?.('leave', this.pointer, e); this.request(); });
     onPrefs(() => { if (opts.alt) this.canvas.setAttribute('aria-label', T(opts.alt)); this.request(); });
+    fontsReady.then(() => this.request());
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.request());
     this.resize();
+  }
+  headerExtra() {
+    if (!this.hdr) return 0;
+    let extra = 0;
+    for (const k of this.hdr.children) {
+      if (!k.offsetParent) continue;
+      const lh = parseFloat(getComputedStyle(k).lineHeight) || 22;
+      const lines = Math.round(k.getBoundingClientRect().height / lh);
+      extra = Math.max(extra, (lines - 1) * lh);
+    }
+    return Math.round(extra);
   }
   resize() {
     const w = this.host.clientWidth; if (!w) return;
     this.mobile = w < this.o.mBreak;
     let h = this.o.height ? this.o.height(w, this.mobile) : w / (this.mobile ? this.o.ratioM : this.o.ratio);
     h = Math.round(clamp(h, this.o.minH, Math.min(this.o.maxH, Math.max(this.o.minH, innerHeight * this.o.maxVH))));
+    const extra = this.headerExtra();
+    if (extra !== this.extra) {
+      this.extra = extra;
+      this.host.style.height = (this.h ? this.h : h) + extra + 'px';
+      this.canvas.style.top = extra + 'px';
+    }
     if (h !== this.h || w !== this.w) {
-      this.host.style.height = h + 'px';
+      this.host.style.height = h + this.extra + 'px';
+      this.canvas.style.top = this.extra + 'px';
+      this.canvas.style.height = h + 'px';
       this.dpr = Math.min(2, window.devicePixelRatio || 1);
       this.canvas.width = Math.round(w * this.dpr); this.canvas.height = Math.round(h * this.dpr);
       this.w = w; this.h = h;
@@ -218,6 +252,17 @@ export function rr(c, x, y, w, h, r) {
 export function text(c, s, x, y, { size = 12, weight = 500, color = C.ink2, align = 'left', base = 'alphabetic', disp = false, maxW } = {}) {
   c.font = font(size, weight, disp); c.fillStyle = color; c.textAlign = align; c.textBaseline = base;
   if (maxW) c.fillText(s, x, y, maxW); else c.fillText(s, x, y);
+}
+// split a label into lines that fit maxW (breaks at spaces, so Thai phrases stay whole)
+export function wrapLines(c, s, maxW, size = 12, weight = 500) {
+  c.font = font(size, weight);
+  const words = String(s).split(' '); const out = []; let cur = '';
+  for (const w of words) {
+    const t = cur ? cur + ' ' + w : w;
+    if (c.measureText(t).width <= maxW || !cur) cur = t; else { out.push(cur); cur = w; }
+  }
+  if (cur) out.push(cur);
+  return out;
 }
 export function line(c, pts, { color = C.e, width = 2, dash = null, alpha = 1 } = {}) {
   if (pts.length < 2) return;

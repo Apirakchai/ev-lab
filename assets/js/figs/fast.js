@@ -1,5 +1,5 @@
 // Chapter 6 figures
-import { scaffold, slider, select, chips, readouts, C, T, fmt, clamp, rr, text, scale, axes, line, withAlpha, mix, glowDot } from '../lib.js';
+import { scaffold, slider, select, chips, readouts, C, T, fmt, clamp, rr, text, scale, axes, line, withAlpha, mix, glowDot, wrapLines } from '../lib.js';
 import { PACKS, tempFactor, CHEM } from '../models.js';
 import { cmaxPlating } from './charging.js';
 
@@ -57,19 +57,22 @@ export function evidence(inst) {
     let y = 64;
     const gh = (H - 120) / groups.length;
     for (const g of groups) {
-      text(c, `${T(g.t)} · ${T(g.u)}`, lx, y, { size: 12.5, weight: 600, color: C.ink, maxW: W - 40 });
+      text(c, `${T(g.t)} · ${T(g.u)}`, lx, y, { size: m ? 12 : 12.5, weight: 600, color: C.ink });
       const sx = scale(0, g.max, x0, x1);
       const rh = Math.min(26, (gh - 30) / g.rows.length);
       g.rows.forEach((r, i) => {
         const yy = y + 14 + i * rh;
-        text(c, T(r.l), x0 - 10, yy + rh / 2 + 4, { size: m ? 10.5 : 11.5, color: C.ink2, align: 'right', maxW: labW - 14 });
+        const ls = wrapLines(c, T(r.l), labW - 14, m ? 10.5 : 11.5);
+        ls.forEach((ln, j) => text(c, ln, x0 - 10, yy + rh / 2 + 4 + (j - (ls.length - 1) / 2) * 13, { size: m ? 10.5 : 11.5, color: C.ink2, align: 'right' }));
         rr(c, x0, yy + 4, Math.max(6, sx(r.v) - x0), rh - 8, 4); c.fillStyle = r.k; c.fill();
         text(c, fmt(r.v, g.max > 10 ? 0 : 1), sx(r.v) + 8, yy + rh / 2 + 4, { size: 12, weight: 700, color: C.ink });
       });
       y += gh;
     }
-    rr(c, lx, y - 6, W - lx * 2, 44, 10); c.fillStyle = 'rgba(78,162,255,.10)'; c.fill();
-    text(c, T({ th: 'Recurrent: Tesla ชาร์จเร็ว ≥90% vs <10% ของเวลา → ไม่ต่างอย่างมีนัยสำคัญ', en: 'Recurrent: Teslas fast-charging ≥90% vs <10% of the time → no significant difference' }), lx + 12, y + 20, { size: m ? 10.5 : 12.5, weight: 600, color: C.ink, maxW: W - lx * 2 - 20 });
+    const rl = wrapLines(c, T({ th: 'Recurrent: Tesla ชาร์จเร็ว ≥90% vs <10% ของเวลา → ไม่ต่างอย่างมีนัยสำคัญ', en: 'Recurrent: Teslas fast-charging ≥90% vs <10% of the time → no significant difference' }), W - lx * 2 - 24, m ? 11.5 : 12.5, 600);
+    const bh = 20 + rl.length * 17;
+    rr(c, lx, y - 6, W - lx * 2, bh, 10); c.fillStyle = 'rgba(78,162,255,.10)'; c.fill();
+    rl.forEach((ln, j) => text(c, ln, lx + 12, y + 14 + j * 17, { size: m ? 11.5 : 12.5, weight: 600, color: C.ink }));
   });
 }
 
@@ -77,7 +80,7 @@ export function evidence(inst) {
 export function mixEst(inst) { return mixFn(inst); }
 export { mixFn as mix };
 function mixFn(inst) {
-  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 4.4, ratioM: 1.5, minH: 200, maxH: 300 });
+  const { stage, ctrls } = scaffold(inst, { ratio: 16 / 4.4, height: (w, m) => (m ? 214 : w / (16 / 4.4)), minH: 200, maxH: 300 });
   const s = { dc: 20, hp: 50, hot: true, ext: 40 };
   const box = ctrls();
   slider(box, { label: { th: 'สัดส่วนครั้งที่ชาร์จ DC', en: 'Share of sessions that are DC' }, min: 0, max: 100, step: 1, value: 20, fmt: (v) => `${v}%`, color: C.heat, onInput: (v) => { s.dc = v; stage.request(); } });
@@ -93,7 +96,8 @@ function mixFn(inst) {
     const yr = clamp(base + extAdj + clim, 0.8, 4.5);
     const y8 = 100 - yr * 8;
     // gauge: 8-year projection bar
-    const x0 = m ? 20 : 40, x1 = W - (m ? 20 : 40), y = Math.max(96, H * 0.45);
+    // the content block (headline, bar, scale, warranty note) is ~108 px tall: centre it below the title
+    const x0 = m ? 20 : 40, x1 = W - (m ? 20 : 40), y = Math.round(44 + 48 + Math.max(0, (H - 12 - 44 - 108) / 2));
     const sx = scale(60, 100, x0, x1);
     rr(c, x0, y, x1 - x0, 18, 9); c.fillStyle = 'rgba(160,188,214,.12)'; c.fill();
     const g = c.createLinearGradient(x0, 0, x1, 0); g.addColorStop(0, '#ff5b4f'); g.addColorStop(0.5, '#ffbf3c'); g.addColorStop(1, '#2fd0b0');

@@ -145,6 +145,8 @@ p { margin: 0 0 1em; }
 p, li, .figcap, .deck { text-wrap: pretty; }
 /* a Thai phrase (between spaces) in display text: lines break between phrases, never mid-word */
 .ph { display: inline-block; max-width: 100%; }
+/* a Thai loanword the browser's dictionary doesn't know: keep it on one line (break points added at build time) */
+.nw { white-space: nowrap; }
 strong, b { font-weight: 600; }
 
 /* ---------- reading progress ---------- */

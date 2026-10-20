@@ -56,6 +56,51 @@ function wrapDisplayText(html) {
   return html;
 }
 
+// ---------- Thai word breaks in running text ----------
+// Browsers find Thai line breaks with a dictionary that doesn't know loanwords such as "แบต" or
+// "กราไฟต์", and an unknown word also throws off its neighbours ("แบ|ตอ|ยู่", "อุณห|ภู|มิ").
+// For each word in src/thai-words.json we add a break opportunity on both sides (<wbr> also makes the
+// browser segment the neighbours on their own) and keep the word itself on one line.
+const THAI_WORDS = JSON.parse(read(path.join(SRC, 'thai-words.json'))).sort((a, b) => b.length - a.length);
+const TW_RE = new RegExp(THAI_WORDS.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'g');
+const LEAD = /[เ-ไ]/, FOLLOW = /[ะ-ฺๅ-๎]/;
+function breakThaiRun(run) {
+  let out = '', last = 0;
+  for (const m of run.matchAll(TW_RE)) {
+    const a = m.index, b = a + m[0].length;
+    // never cut inside a syllable: a leading vowel before, or a vowel / tone mark after the match
+    if ((a > 0 && LEAD.test(run[a - 1])) || (b < run.length && FOLLOW.test(run[b]))) continue;
+    if (a < last) continue;
+    out += run.slice(last, a) + (a > 0 ? '<wbr>' : '') + `<span class="nw">${m[0]}</span>` + (b < run.length ? '<wbr>' : '');
+    last = b;
+  }
+  return out + run.slice(last);
+}
+const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
+const SKIP = new Set(['head', 'script', 'style', 'title', 'option', 'select', 'textarea', 'svg', 'code', 'pre']);
+function thaiBreaks(html) {
+  const parts = html.split(/(<[^>]+>)/);
+  let skip = null; // { tag, depth }
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    if (!p) continue;
+    if (p[0] === '<') {
+      const m = p.match(/^<(\/?)([a-zA-Z][\w-]*)/);
+      if (!m) continue;
+      const close = m[1] === '/', tag = m[2].toLowerCase();
+      if (skip) {
+        if (tag === skip.tag && !VOID.has(tag) && !p.endsWith('/>')) skip.depth += close ? -1 : 1;
+        if (skip.depth === 0) skip = null;
+      } else if (!close && (SKIP.has(tag) || (tag === 'span' && /class="[^"]*\bkatex\b/.test(p)))) {
+        if (!VOID.has(tag) && !p.endsWith('/>')) skip = { tag, depth: 1 };
+      }
+      continue;
+    }
+    if (!skip) parts[i] = p.replace(/[฀-๿]+/g, breakThaiRun);
+  }
+  return parts.join('');
+}
+
 // ---------- tables: label every cell with its column header (phones show rows as cards) ----------
 function labelTables(html) {
   const strip = (h, drop) => h.replace(new RegExp(`<span[^>]*data-l="${drop}"[^>]*>[\\s\\S]*?<\\/span>`, 'g'), '')
@@ -172,7 +217,7 @@ for (const file of pages) {
     .replace('{{SCRIPTS}}', scripts)
     .replace('{{BODY}}', body);
   const outName = meta.slug === 'index' ? 'index.html' : `${meta.slug}.html`;
-  fs.writeFileSync(path.join(ROOT, outName), out);
+  fs.writeFileSync(path.join(ROOT, outName), thaiBreaks(out));
   built.push(outName);
 }
 

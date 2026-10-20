@@ -31,6 +31,11 @@ Thai text is always looped (มีหัว): **IBM Plex Sans Thai Looped** (400
 Short display text (headings, menu, titles, summaries) is wrapped phrase by phrase at build time, so Thai lines break between phrases instead of mid-word.
 Use a no-break space (U+00A0) in `src/chapters.json` or a page to keep a term together.
 
+Running text: browsers break Thai lines with a dictionary that doesn't know loanwords such as "แบต" or "กราไฟต์",
+and an unknown word also throws off its neighbours ("แบ|ตอ|ยู่"). `src/thai-words.json` lists those words; the build
+puts a `<wbr>` on each side of every occurrence (so the browser segments the neighbours on their own) and keeps the
+word on one line. Add a word there when you see a line break in the middle of a word.
+
 ## Custom domain
 Live on https://ev.sukmart.com. Cloudflare DNS has `CNAME ev → apirakchai.github.io` (DNS only, grey cloud);
 the `CNAME` file in the repository root holds `ev.sukmart.com`, and "Enforce HTTPS" is on in Settings → Pages.
